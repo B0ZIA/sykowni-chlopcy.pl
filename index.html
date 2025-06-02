@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sykowni Chłopcy – Prace Budowlane</title>
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Google Font: Montserrat -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     /* Reset & Base */
     *, *::before, *::after {
@@ -14,12 +14,13 @@
       padding: 0;
     }
     html {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       scroll-behavior: smooth;
     }
     body {
       color: #333;
       line-height: 1.6;
+      background-color: #f5f5f5;
     }
     a {
       text-decoration: none;
@@ -50,10 +51,10 @@
       justify-content: space-between;
       padding: 15px 20px;
     }
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #005fa3;
+    .logo img {
+      display: block;
+      width: 280px;
+      height: auto;
     }
     nav ul {
       display: flex;
@@ -66,25 +67,15 @@
       font-weight: 500;
       color: #333;
       padding: 5px;
+      transition: color 0.2s;
     }
     nav ul li a:hover {
-      color: #005fa3;
+      color: #233A56;
     }
     .header-right {
       display: flex;
       align-items: center;
       gap: 15px;
-    }
-    .header-right .phones {
-      display: flex;
-      gap: 10px;
-    }
-    .header-right .phones a {
-      color: #005fa3;
-      font-weight: 500;
-    }
-    .header-right .phones a:hover {
-      text-decoration: underline;
     }
     .lang-switch {
       display: flex;
@@ -92,18 +83,19 @@
     }
     .lang-switch button {
       background: transparent;
-      border: 2px solid #005fa3;
-      color: #005fa3;
+      border: 2px solid #233A56;
+      color: #233A56;
       padding: 5px 10px;
       font-weight: 500;
       cursor: pointer;
       border-radius: 3px;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
     .lang-switch button:hover,
     .lang-switch button.active {
-      background: #005fa3;
+      background: #233A56;
       color: #fff;
+      border-color: #1C2C45;
     }
 
     /* Hero Section */
@@ -133,6 +125,7 @@
       font-size: 2.5rem;
       margin-bottom: 15px;
       font-weight: 700;
+      letter-spacing: 1px;
     }
     .hero-content p {
       font-size: 1.1rem;
@@ -142,13 +135,15 @@
     /* Services Section */
     .section {
       padding: 60px 20px;
+      background-color: #fff;
     }
     .section-title {
       text-align: center;
       font-size: 2rem;
       margin-bottom: 40px;
-      color: #005fa3;
+      color: #233A56;
       font-weight: 700;
+      letter-spacing: 1px;
     }
     .services-grid {
       display: grid;
@@ -178,11 +173,13 @@
     .service-content h3 {
       font-size: 1.25rem;
       margin-bottom: 10px;
-      color: #005fa3;
+      color: #233A56;
+      font-weight: 700;
     }
     .service-content p {
       font-size: 0.95rem;
       color: #555;
+      line-height: 1.4;
     }
 
     /* Gallery Section */
@@ -213,13 +210,14 @@
     .contact-info h4 {
       font-size: 1.2rem;
       margin-bottom: 15px;
-      color: #005fa3;
+      color: #233A56;
       font-weight: 500;
     }
     .contact-info p, .contact-info a {
       font-size: 0.95rem;
       margin-bottom: 8px;
       color: #333;
+      line-height: 1.4;
     }
     .contact-info a:hover {
       text-decoration: underline;
@@ -250,22 +248,23 @@
     }
     .contact-form form button {
       margin-top: 20px;
-      background-color: #005fa3;
+      background-color: #233A56;
       color: #fff;
       border: none;
       padding: 12px 20px;
       font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
     }
     .contact-form form button:hover {
-      background-color: #004080;
+      background-color: #1C2C45;
+      transform: translateY(-2px);
     }
 
     /* Footer */
     footer {
-      background: #005fa3;
+      background: #233A56;
       color: #fff;
       text-align: center;
       padding: 20px;
@@ -273,6 +272,7 @@
     }
     footer p {
       font-size: 0.9rem;
+      line-height: 1.4;
     }
 
     /* Language-specific elements */
@@ -308,13 +308,11 @@
   </style>
 </head>
 <body>
-  <!-- Header / Navigation (połączony z telefonami i przełącznikiem języka) -->
+  <!-- Header / Navigation -->
   <header>
     <div class="nav-container">
       <div class="logo">
-	    <img src="baner.png" alt="Moje logo" width="300" height="50">
-        <!--<span class="lang pl">Sykowni Chłopcy</span>-->
-        <!--<span class="lang sk hidden">Sykowni Chłopcy</span>-->
+        <img src="baner.png" alt="Logo Sykowni Chłopcy">
       </div>
       <nav>
         <ul>
@@ -449,7 +447,7 @@
           <span class="lang sk hidden">Telefón:</span>
           <a href="tel:+48574977131">+48 574 977 131</a>
         </p>
-        <p>Email: <a href="mailto:pietroraczek@wp.pl">grygieltomek99@gmail.com</a></p>
+        <p>Email: <a href="mailto:grygieltomek99@gmail.com">grygieltomek99@gmail.com</a></p>
         <div style="margin-top: 15px;">
           <p class="lang pl"><strong>O firmie:</strong></p>
           <p class="lang pl">Młoda i prężnie rozwijająca się firma; konkurencyjne ceny; indywidualne podejście; szybka i profesjonalna realizacja, krótkie terminy.</p>
@@ -460,20 +458,19 @@
       <!-- Contact Form -->
       <div class="contact-form">
         <form action="#" method="POST">
-		  
-		  <h3 class="lang pl">Wycena pracy</h3>
-          <h3 class="lang sk hidden">Cenová ponuka prác</h3></br></br>
-		
-		  <p class="lang pl"><strong>Imię:</strong></p>
-		  <p class="lang sk hidden"><strong>Meno:</strong></p>
+          <h3 class="lang pl">Wycena pracy</h3>
+          <h3 class="lang sk hidden">Cenová ponuka prác</h3>
+          <br><br>
+          <p class="lang pl"><strong>Imię:</strong></p>
+          <p class="lang sk hidden"><strong>Meno:</strong></p>
           <input type="text" id="name" name="name" required>
-		  
-		  <p class="lang pl"><strong>Telefon:</strong></p>
-		  <p class="lang sk hidden"><strong>Telefón:</strong></p>
+
+          <p class="lang pl"><strong>Telefon:</strong></p>
+          <p class="lang sk hidden"><strong>Telefón:</strong></p>
           <input type="text" id="phone" name="phone" required>
-		  
-		  <p class="lang pl"><strong>Email:</strong></p>
-		  <p class="lang sk hidden"><strong>Email:</strong></p>
+
+          <p class="lang pl"><strong>Email:</strong></p>
+          <p class="lang sk hidden"><strong>Email:</strong></p>
           <input type="email" id="email" name="email" required>
 
           <button type="submit" class="lang pl">Wyślij</button>
