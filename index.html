@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sykowni Chłopcy – Prace Budowlane</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      font-family: 'Roboto', sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      color: #333;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    ul {
+      list-style: none;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Header / Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #005fa3;
+    }
+    nav ul {
+      display: flex;
+      gap: 25px;
+    }
+    nav ul li {
+      position: relative;
+    }
+    nav ul li a {
+      font-weight: 500;
+      color: #333;
+      padding: 5px;
+    }
+    nav ul li a:hover {
+      color: #005fa3;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .header-right .phones {
+      display: flex;
+      gap: 10px;
+    }
+    .header-right .phones a {
+      color: #005fa3;
+      font-weight: 500;
+    }
+    .header-right .phones a:hover {
+      text-decoration: underline;
+    }
+    .lang-switch {
+      display: flex;
+      gap: 10px;
+    }
+    .lang-switch button {
+      background: transparent;
+      border: 2px solid #005fa3;
+      color: #005fa3;
+      padding: 5px 10px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-switch button:hover,
+    .lang-switch button.active {
+      background: #005fa3;
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 60vh;
+      background: url('https://via.placeholder.com/1600x900') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .hero-content h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+    .hero-content p {
+      font-size: 1.1rem;
+      font-weight: 400;
+    }
+
+    /* Services Section */
+    .section {
+      padding: 60px 20px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+      color: #005fa3;
+      font-weight: 700;
+    }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .service-card {
+      background: #f9f9f9;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+    .service-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .service-content {
+      padding: 20px;
+    }
+    .service-content h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+      color: #005fa3;
+    }
+    .service-content p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* Gallery Section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: flex-start;
+    }
+    .contact-info {
+      flex: 1 1 320px;
+      background: #eef7fc;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .contact-info h4 {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #005fa3;
+      font-weight: 500;
+    }
+    .contact-info p, .contact-info a {
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+    .contact-form {
+      flex: 1 1 400px;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .contact-form form label {
+      display: block;
+      font-size: 0.95rem;
+      margin-top: 15px;
+      color: #333;
+      font-weight: 500;
+    }
+    .contact-form form input, 
+    .contact-form form textarea {
+      width: 100%;
+      margin-top: 5px;
+      padding: 10px;
+      font-size: 0.95rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      resize: vertical;
+    }
+    .contact-form form button {
+      margin-top: 20px;
+      background-color: #005fa3;
+      color: #fff;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .contact-form form button:hover {
+      background-color: #004080;
+    }
+
+    /* Footer */
+    footer {
+      background: #005fa3;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    /* Language-specific elements */
+    .lang {
+      display: none;
+    }
+    .lang.pl:not(.hidden) {
+      display: inline;
+    }
+    .lang.sk:not(.hidden) {
+      display: inline;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      .hero {
+        height: 50vh;
+      }
+      .contact-container {
+        flex-direction: column;
+      }
+      nav ul {
+        gap: 15px;
+      }
+      .header-right {
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header / Navigation (połączony z telefonami i przełącznikiem języka) -->
+  <header>
+    <div class="nav-container">
+      <div class="logo">
+        <span class="lang pl">Sykowni Chłopcy</span>
+        <span class="lang sk hidden">Sykowni Chłopcy</span>
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="#hero" class="lang pl">Strona Główna</a>
+            <a href="#hero" class="lang sk hidden">Domov</a>
+          </li>
+          <li>
+            <a href="#services" class="lang pl">Usługi</a>
+            <a href="#services" class="lang sk hidden">Služby</a>
+          </li>
+          <li>
+            <a href="#gallery" class="lang pl">Galeria</a>
+            <a href="#gallery" class="lang sk hidden">Galéria</a>
+          </li>
+          <li>
+            <a href="#contact" class="lang pl">Kontakt</a>
+            <a href="#contact" class="lang sk hidden">Kontakt</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="header-right">
+        <div class="lang-switch">
+          <button id="btn-pl" class="active" onclick="setLanguage('pl')">PL</button>
+          <button id="btn-sk" onclick="setLanguage('sk')">SK</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-content">
+      <h1 class="lang pl">Profesjonalne Prace Budowlane</h1>
+      <h1 class="lang sk hidden">Profesionálne Stavebné Práce</h1>
+      <p class="lang pl">Ocieplenia • Obróbki Blacharskie • Montaż Parapetów i Rynien • Podbitki • Tynk Zewnętrzny</p>
+      <p class="lang sk hidden">Zateplenie • Plechárske Práce • Montáž Parapetov a Odkvapov • Podbitie • Exteriérová Omietka</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <h2 class="section-title">
+      <span class="lang pl">Nasze Usługi</span>
+      <span class="lang sk hidden">Naše Služby</span>
+    </h2>
+    <div class="services-grid">
+      <!-- Ocieplenia -->
+      <div class="service-card">
+        <img src="https://via.placeholder.com/400x250" alt="Ocieplenia">
+        <div class="service-content">
+          <h3 class="lang pl">Ocieplenia</h3>
+          <h3 class="lang sk hidden">Zateplenie Budov</h3>
+          <p class="lang pl">Wykonujemy nowoczesne ocieplenia budynków jednorodzinnych i wielorodzinnych z gwarancją najwyższej jakości izolacji.</p>
+          <p class="lang sk hidden">Vykonávame moderné zateplenie rodinných a bytových domov s garantovanou kvalitou izolácie.</p>
+        </div>
+      </div>
+      <!-- Obróbki Blacharskie -->
+      <div class="service-card">
+        <img src="https://via.placeholder.com/400x250" alt="Obróbki Blacharskie">
+        <div class="service-content">
+          <h3 class="lang pl">Obróbki Blacharskie</h3>
+          <h3 class="lang sk hidden">Plechárske Práce</h3>
+          <p class="lang pl">Profesjonalne obróbki dachów i elementów budynku. Zabezpieczamy przed wilgocią i wydłużamy żywotność konstrukcji.</p>
+          <p class="lang sk hidden">Profesionálne plechárske práce strechy a prvkov budovy. Chránime pred vlhkosťou a predlžujeme životnosť konštrukcie.</p>
+        </div>
+      </div>
+      <!-- Montaż Parapetów i Rynien -->
+      <div class="service-card">
+        <img src="https://via.placeholder.com/400x250" alt="Montaż Parapetów i Rynien">
+        <div class="service-content">
+          <h3 class="lang pl">Montaż Parapetów i Rynien</h3>
+          <h3 class="lang sk hidden">Montáž Parapetov a Odkvapov</h3>
+          <p class="lang pl">Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych, zapewniających estetykę i trwałość.</p>
+          <p class="lang sk hidden">Montáž vonkajších a vnútorných parapetov a odkvapových systémov, ktoré zabezpečia estetiku a odolnosť.</p>
+        </div>
+      </div>
+      <!-- Podbitki -->
+      <div class="service-card">
+        <img src="https://via.placeholder.com/400x250" alt="Podbitki">
+        <div class="service-content">
+          <h3 class="lang pl">Podbitki</h3>
+          <h3 class="lang sk hidden">Podbitie Strechy</h3>
+          <p class="lang pl">Wykonujemy podbitki dachów, chroniące elementy drewniane i poprawiające estetykę elewacji.</p>
+          <p class="lang sk hidden">Vykonávame podbitie strechy, ktoré chráni drevené prvky a vylepšuje estetiku fasády.</p>
+        </div>
+      </div>
+      <!-- Tynk Zewnętrzny -->
+      <div class="service-card">
+        <img src="https://via.placeholder.com/400x250" alt="Tynk Zewnętrzny">
+        <div class="service-content">
+          <h3 class="lang pl">Tynk Zewnętrzny</h3>
+          <h3 class="lang sk hidden">Exteriérová Omietka</h3>
+          <p class="lang pl">Nakładamy tynki zewnętrzne, które zabezpieczają mury i nadają nowoczesny wygląd każdej elewacji.</p>
+          <p class="lang sk hidden">Nanášame exteriérové omietky, ktoré chránia steny a dodávajú moderný vzhľad každej fasáde.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+  <section id="gallery" class="section">
+    <h2 class="section-title">
+      <span class="lang pl">Galeria Realizacji</span>
+      <span class="lang sk hidden">Galéria Realizácií</span>
+    </h2>
+    <div class="gallery-grid">
+      <img src="https://via.placeholder.com/300x200" alt="Realizacja 1">
+      <img src="https://via.placeholder.com/300x200" alt="Realizacja 2">
+      <img src="https://via.placeholder.com/300x200" alt="Realizacja 3">
+      <img src="https://via.placeholder.com/300x200" alt="Realizacja 4">
+      <img src="https://via.placeholder.com/300x200" alt="Realizacja 5">
+      <img src="https://via.placeholder.com/300x200" alt="Realizacja 6">
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section">
+    <h2 class="section-title">
+      <span class="lang pl">Kontakt</span>
+      <span class="lang sk hidden">Kontakt</span>
+    </h2>
+    <div class="contact-container">
+      <!-- Contact Info -->
+      <div class="contact-info">
+        <h4 class="lang pl">Dane Kontaktowe</h4>
+        <h4 class="lang sk hidden">Kontaktné Údaje</h4>
+        <p>Tomasz Grygiel</p>
+        <p>Biała Niżna</p>
+        <p>
+          <span class="lang pl">Telefon:</span>
+          <span class="lang sk hidden">Telefón:</span>
+          <a href="tel:+48574977131">+48 574 977 131</a>
+        </p>
+        <p>Email: <a href="mailto:pietroraczek@wp.pl">grygieltomek99@gmail.com</a></p>
+        <div style="margin-top: 15px;">
+          <p class="lang pl"><strong>O firmie:</strong></p>
+          <p class="lang pl">Młoda i prężnie rozwijająca się firma; konkurencyjne ceny; indywidualne podejście; szybka i profesjonalna realizacja, krótkie terminy.</p>
+          <p class="lang sk hidden"><strong>O firme:</strong></p>
+          <p class="lang sk hidden">Mladá a dynamicky sa rozvíjajúca spoločnosť; konkurenčné ceny; individuálny prístup; rýchla a profesionálna realizácia, krátke termíny.</p>
+        </div>
+      </div>
+      <!-- Contact Form -->
+      <div class="contact-form">
+        <form action="#" method="POST">
+		  
+		  <h3 class="lang pl">Wycena pracy</h3>
+          <h3 class="lang sk hidden">Cenová ponuka prác</h3></br></br>
+		
+		  <p class="lang pl"><strong>Imię:</strong></p>
+		  <p class="lang sk hidden"><strong>Meno:</strong></p>
+          <input type="text" id="name" name="name" required>
+		  
+		  <p class="lang pl"><strong>Telefon:</strong></p>
+		  <p class="lang sk hidden"><strong>Telefón:</strong></p>
+          <input type="text" id="phone" name="phone" required>
+		  
+		  <p class="lang pl"><strong>Email:</strong></p>
+		  <p class="lang sk hidden"><strong>Email:</strong></p>
+          <input type="email" id="email" name="email" required>
+
+          <button type="submit" class="lang pl">Wyślij</button>
+          <button type="submit" class="lang sk hidden">Odoslať</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> 
+      <span class="lang pl">Sykowni Chłopcy. Wszelkie prawa zastrzeżone.</span>
+      <span class="lang sk hidden">Sykowni Chłopcy. Všetky práva vyhradené.</span>
+    </p>
+  </footer>
+
+  <!-- JavaScript for Language Switching & Footer Year -->
+  <script>
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang').forEach(el => {
+        el.classList.add('hidden');
+      });
+      document.querySelectorAll('.lang.' + lang).forEach(el => {
+        el.classList.remove('hidden');
+      });
+      document.querySelectorAll('.lang-switch button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById('btn-' + lang).classList.add('active');
+    }
+
+    // Ustaw domyślnie język polski przy załadowaniu
+    setLanguage('pl');
+
+    // Aktualny rok w stopce
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
