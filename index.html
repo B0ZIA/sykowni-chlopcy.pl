@@ -55,10 +55,33 @@
       display: block;
       width: 280px;
       height: auto;
+      transition: width 0.2s;
+    }
+
+    /* Przycisk hamburger (ukryty desktopowo) */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 22px;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      background-color: #333;
+      border-radius: 2px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    nav {
+      position: relative;
     }
     nav ul {
       display: flex;
       gap: 25px;
+      transition: max-height 0.3s ease;
     }
     nav ul li {
       position: relative;
@@ -126,10 +149,12 @@
       margin-bottom: 15px;
       font-weight: 700;
       letter-spacing: 1px;
+      transition: font-size 0.2s;
     }
     .hero-content p {
       font-size: 1.1rem;
       font-weight: 400;
+      transition: font-size 0.2s;
     }
 
     /* Services Section */
@@ -144,6 +169,7 @@
       color: #233A56;
       font-weight: 700;
       letter-spacing: 1px;
+      transition: font-size 0.2s;
     }
     .services-grid {
       display: grid;
@@ -175,11 +201,13 @@
       margin-bottom: 10px;
       color: #233A56;
       font-weight: 700;
+      transition: font-size 0.2s;
     }
     .service-content p {
       font-size: 0.95rem;
       color: #555;
       line-height: 1.4;
+      transition: font-size 0.2s;
     }
 
     /* Gallery Section */
@@ -199,6 +227,7 @@
       max-width: 1200px;
       margin: 0 auto;
       align-items: flex-start;
+      transition: flex-direction 0.2s;
     }
     .contact-info {
       flex: 1 1 320px;
@@ -206,18 +235,21 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: padding 0.2s;
     }
     .contact-info h4 {
       font-size: 1.2rem;
       margin-bottom: 15px;
       color: #233A56;
       font-weight: 500;
+      transition: font-size 0.2s;
     }
     .contact-info p, .contact-info a {
       font-size: 0.95rem;
       margin-bottom: 8px;
       color: #333;
       line-height: 1.4;
+      transition: font-size 0.2s;
     }
     .contact-info a:hover {
       text-decoration: underline;
@@ -228,6 +260,7 @@
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: padding 0.2s;
     }
     .contact-form form label {
       display: block;
@@ -235,6 +268,7 @@
       margin-top: 15px;
       color: #333;
       font-weight: 500;
+      transition: font-size 0.2s;
     }
     .contact-form form input, 
     .contact-form form textarea {
@@ -245,6 +279,7 @@
       border: 1px solid #ccc;
       border-radius: 4px;
       resize: vertical;
+      transition: font-size 0.2s;
     }
     .contact-form form button {
       margin-top: 20px;
@@ -269,6 +304,7 @@
       text-align: center;
       padding: 20px;
       margin-top: 40px;
+      transition: font-size 0.2s;
     }
     footer p {
       font-size: 0.9rem;
@@ -286,23 +322,117 @@
       display: inline;
     }
 
-    /* Responsive tweaks */
+    /* Responsive styles */
+    @media (max-width: 1024px) {
+      .logo img {
+        width: 200px;
+      }
+    }
+
     @media (max-width: 768px) {
+      /* Logo mniejsze */
+      .logo img {
+        width: 180px;
+      }
+
+      /* Pokaż hamburgera, ukryj domyślnie menu */
+      .menu-toggle {
+        display: flex;
+      }
+      nav ul {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        width: 80vw;
+        max-width: 280px;
+        max-height: 0;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      }
+      nav ul.open {
+        max-height: 500px; /* wystarczająco duże, by pokazać wszystkie linki */
+      }
+      nav ul li {
+        border-bottom: 1px solid #eee;
+      }
+      nav ul li a {
+        display: block;
+        padding: 12px 20px;
+      }
+      .header-right {
+        flex-direction: row-reverse;
+      }
+
+      .hero {
+        height: 50vh;
+      }
       .hero-content h1 {
         font-size: 2rem;
       }
-      .hero {
-        height: 50vh;
+      .hero-content p {
+        font-size: 1rem;
       }
       .contact-container {
         flex-direction: column;
       }
       nav ul {
-        gap: 15px;
+        gap: 0;
       }
       .header-right {
-        flex-direction: column;
         gap: 10px;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+      .service-content h3 {
+        font-size: 1.1rem;
+      }
+      .service-content p {
+        font-size: 0.9rem;
+      }
+      .contact-info, .contact-form {
+        padding: 15px;
+      }
+      .contact-info h4 {
+        font-size: 1.1rem;
+      }
+      .contact-info p, .contact-info a,
+      .contact-form form label,
+      .contact-form form input,
+      .contact-form form textarea {
+        font-size: 0.9rem;
+      }
+      footer p {
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .logo img {
+        width: 140px;
+      }
+      .hero-content h1 {
+        font-size: 1.75rem;
+      }
+      .hero-content p {
+        font-size: 0.9rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
+      }
+      .services-grid {
+        gap: 20px;
+      }
+      .service-content h3 {
+        font-size: 1rem;
+      }
+      .service-content p {
+        font-size: 0.85rem;
+      }
+      .contact-info, .contact-form {
+        width: 100%;
       }
     }
   </style>
@@ -314,8 +444,16 @@
       <div class="logo">
         <img src="baner.png" alt="Logo Sykowni Chłopcy">
       </div>
+
+      <!-- Przycisk hamburgera (tylko na telefonach) -->
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
       <nav>
-        <ul>
+        <ul id="nav-list">
           <li>
             <a href="#hero" class="lang pl">Strona Główna</a>
             <a href="#hero" class="lang sk hidden">Domov</a>
@@ -334,6 +472,7 @@
           </li>
         </ul>
       </nav>
+
       <div class="header-right">
         <div class="lang-switch">
           <button id="btn-pl" class="active" onclick="setLanguage('pl')">PL</button>
@@ -488,8 +627,9 @@
     </p>
   </footer>
 
-  <!-- JavaScript for Language Switching & Footer Year -->
+  <!-- JavaScript for Hamburger, Language Switching & Footer Year -->
   <script>
+    // Przełącznik języka
     function setLanguage(lang) {
       document.querySelectorAll('.lang').forEach(el => {
         el.classList.add('hidden');
@@ -502,12 +642,19 @@
       });
       document.getElementById('btn-' + lang).classList.add('active');
     }
-
-    // Ustaw domyślnie język polski przy załadowaniu
     setLanguage('pl');
 
     // Aktualny rok w stopce
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Obsługa menu hamburger
+    const menuToggle = document.getElementById('menu-toggle');
+    const navList = document.getElementById('nav-list');
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('open');
+      // Prosta animacja ikonki:
+      menuToggle.classList.toggle('open');
+    });
   </script>
 </body>
 </html>
