@@ -85,6 +85,10 @@
 }
     .lang-switch {
       margin-left: 20px;
+      display: flex;
+      flex-direction: row;
+      gap: 8px;
+      flex-wrap: nowrap;
     }
     .lang-switch button {
       background: none;
@@ -126,6 +130,9 @@
       transform: translateY(-8px) rotate(-45deg);
     }
     /* Hero section */
+	body.noscroll {
+      overflow: hidden;
+    }
     #hero {
       background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mian_background.jpg') center center no-repeat;
       background-size: cover;
@@ -232,7 +239,7 @@
       opacity: 0.8;
     }
     /* Lightbox overlay */
-    #lightbox-overlay {
+      #lightbox-overlay {
       position: fixed;
       top: 0;
       left: 0;
@@ -243,6 +250,9 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      z-index: 2000; /* dodane */
+      padding-top: 80px; /* dodane: wysokość paska nawigacji */
+      box-sizing: border-box; /* dodane dla bezpieczeństwa */
     }
     #lightbox-overlay img {
       max-width: 90%;
@@ -256,6 +266,23 @@
       color: #fff;
       cursor: pointer;
     }
+	.lightbox-arrow {
+      position: absolute;
+      top: 50%;
+      font-size: 3rem;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      padding: 10px;
+      transform: translateY(-50%);
+      z-index: 2100;
+      transition: opacity 0.3s;
+    }
+#lightbox-prev { left: 20px; }
+#lightbox-next { right: 20px; }
+.lightbox-arrow:hover {
+  opacity: 0.7;
+}
     /* Contact section */
 	#contact-section {
   background-color: #f2f2f2;
@@ -362,6 +389,7 @@
   font-size: 18px;
   flex-shrink: 0;
 }
+
 
 .contact-info p {
   margin: 0;
@@ -584,6 +612,10 @@
     <img src="galery_2.jpg" alt="Realizacja 2" data-aos="zoom-in" />
     <img src="rynny.jpg" alt="Realizacja 3" data-aos="zoom-in" />
     <img src="mian_background.jpg" alt="Realizacja 4" data-aos="zoom-in" />
+	<img src="ocieplenia.jpg" alt="Realizacja 4" data-aos="zoom-in" />
+	<img src="tynk.jpg" alt="Realizacja 4" data-aos="zoom-in" />
+	<img src="podbitki.jpg" alt="Realizacja 4" data-aos="zoom-in" />
+	<img src="cos.jpg" alt="Realizacja 4" data-aos="zoom-in" />
   </div>
 </section>
 
@@ -600,21 +632,21 @@
   <div class="contact-box">
     <h3 class="contact-header" data-pl="Zapytaj o wycenę" data-sk="Požiadaj o cenovú ponuku">Zapytaj o wycenę</h3>
     <form id="contact-form">
-      <div class="form-group">
-        <label for="name">Imię:</label>
-        <input type="text" id="name" name="name" placeholder="Imię" required />
-      </div>
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" placeholder="E-mail" required />
-      </div>
-      <div class="form-group">
-        <label for="message">Wiadomość:</label>
-        <textarea id="message" name="message" placeholder="Wiadomość" rows="5" required></textarea>
-      </div>
-      <button type="submit" class="btn">Wyślij</button>
-      <p id="form-message" class="form-message"></p>
-    </form>
+  <div class="form-group">
+    <label for="name" data-pl="Imię:" data-sk="Meno:">Imię:</label>
+    <input type="text" id="name" name="name" placeholder="Imię" required data-pl-ph="Imię" data-sk-ph="Meno" />
+  </div>
+  <div class="form-group">
+    <label for="email" data-pl="E-mail:" data-sk="E-mail:">E-mail:</label>
+    <input type="email" id="email" name="email" placeholder="E-mail" required data-pl-ph="E-mail" data-sk-ph="E-mail" />
+  </div>
+  <div class="form-group">
+    <label for="message" data-pl="Wiadomość:" data-sk="Správa:">Wiadomość:</label>
+    <textarea id="message" name="message" placeholder="Wiadomość" rows="5" required data-pl-ph="Wiadomość" data-sk-ph="Správa"></textarea>
+  </div>
+  <button type="submit" class="btn" data-pl="Wyślij" data-sk="Odoslať">Wyślij</button>
+  <p id="form-message" class="form-message"></p>
+</form>
   </div>
 
   <!-- Prawy blok: dane kontaktowe -->
@@ -645,7 +677,9 @@
 
 <!-- Lightbox overlay for gallery images -->
 <div id="lightbox-overlay">
+  <span id="lightbox-prev" class="lightbox-arrow">&#10094;</span>
   <img id="lightbox-img" src="#" alt="Large view" />
+  <span id="lightbox-next" class="lightbox-arrow">&#10095;</span>
   <span id="lightbox-close">&times;</span>
 </div>
 
@@ -659,14 +693,21 @@
   function switchLanguage(lang) {
     currentLang = lang;
     document.querySelectorAll('[data-pl]').forEach(el => {
-      if(el.tagName.toLowerCase() === 'input' || el.tagName.toLowerCase() === 'textarea') return;
-      const text = el.getAttribute('data-' + lang);
-      if(text) el.textContent = text;
-    });
-    document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el => {
-      const ph = el.getAttribute('data-' + lang + '-ph');
-      if(ph) el.placeholder = ph;
-    });
+  const tag = el.tagName.toLowerCase();
+  const text = el.getAttribute('data-' + lang);
+  if (!text) return;
+  if (tag === 'input' || tag === 'textarea' || tag === 'button') {
+    if (el.hasAttribute('placeholder')) el.placeholder = text;
+    if (tag === 'button') el.textContent = text;
+  } else {
+    el.textContent = text;
+  }
+});
+
+document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el => {
+  const ph = el.getAttribute('data-' + lang + '-ph');
+  if(ph) el.placeholder = ph;
+});
     if(lang === 'pl') {
       langSwitchPL.classList.add('active');
       langSwitchSK.classList.remove('active');
@@ -690,18 +731,58 @@
   const lightboxOverlay = document.getElementById('lightbox-overlay');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.getElementById('lightbox-close');
-  document.querySelectorAll('.gallery-grid img').forEach(img => {
-    img.addEventListener('click', () => {
-      lightboxImg.src = img.src;
-      lightboxOverlay.style.display = 'flex';
-    });
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
+  let currentIndex = 0;
+
+  function showImage(index) {
+  currentIndex = (index + galleryImages.length) % galleryImages.length;
+  lightboxImg.src = galleryImages[currentIndex].src;
+  lightboxOverlay.style.display = 'flex';
+  document.body.classList.add('noscroll'); // zablokuj scroll
+}
+
+  galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => showImage(index));
   });
+
   lightboxClose.addEventListener('click', () => {
-    lightboxOverlay.style.display = 'none';
-  });
+  lightboxOverlay.style.display = 'none';
+  document.body.classList.remove('noscroll'); // odblokuj scroll
+});
+
   lightboxOverlay.addEventListener('click', e => {
-    if(e.target === lightboxOverlay) {
-      lightboxOverlay.style.display = 'none';
+  if (e.target === lightboxOverlay) {
+    lightboxOverlay.style.display = 'none';
+    document.body.classList.remove('noscroll'); // odblokuj scroll
+  }
+});
+
+  lightboxPrev.addEventListener('click', () => showImage(currentIndex - 1));
+  lightboxNext.addEventListener('click', () => showImage(currentIndex + 1));
+
+  // Scroll (mouse wheel)
+  lightboxOverlay.addEventListener('wheel', e => {
+    if (e.deltaY < 0) {
+      showImage(currentIndex - 1);
+    } else {
+      showImage(currentIndex + 1);
+    }
+  });
+
+  // Touch gestures for mobile
+  let touchStartX = 0;
+  lightboxOverlay.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  });
+
+  lightboxOverlay.addEventListener('touchend', e => {
+    const touchEndX = e.changedTouches[0].clientX;
+    if (touchStartX - touchEndX > 50) {
+      showImage(currentIndex + 1); // swipe left
+    } else if (touchEndX - touchStartX > 50) {
+      showImage(currentIndex - 1); // swipe right
     }
   });
   // Form validation and submission simulation
