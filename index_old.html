@@ -40,7 +40,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background-color: #ffffff;
+      background-color: #fff;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .nav-container {
@@ -88,12 +88,12 @@
     }
     nav ul li a {
       font-weight: 500;
-      color: #281706;
+      color: #333;
       padding: 5px;
       transition: color 0.2s;
     }
     nav ul li a:hover {
-      color: #7a7772;
+      color: #233A56;
     }
     .header-right {
       display: flex;
@@ -106,8 +106,8 @@
     }
     .lang-switch button {
       background: transparent;
-      border: 2px solid #14213D;
-      color: #14213D;
+      border: 2px solid #233A56;
+      color: #233A56;
       padding: 5px 10px;
       font-weight: 500;
       cursor: pointer;
@@ -116,21 +116,21 @@
     }
     .lang-switch button:hover,
     .lang-switch button.active {
-      background: #FCA311;
-      color: #ffffff;
-      border-color: #14213D;
+      background: #233A56;
+      color: #fff;
+      border-color: #1C2C45;
     }
 
     /* Hero Section */
     .hero {
       position: relative;
-      height: 75vh;
+      height: 60vh;
       background: url('mian_background.jpg') center/cover no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      color: #ffffff;
+      color: #fff;
     }
     .hero::after {
       content: '';
@@ -141,7 +141,7 @@
     .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 1000px;
+      max-width: 800px;
       padding: 0 20px;
     }
     .hero-content h1 {
@@ -179,7 +179,7 @@
       margin: 0 auto;
     }
     .service-card {
-      background: #ffffff;
+      background: #f9f9f9;
       border-radius: 8px;
       overflow: hidden;
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -199,13 +199,13 @@
     .service-content h3 {
       font-size: 1.25rem;
       margin-bottom: 10px;
-      color: #FCA311;
+      color: #233A56;
       font-weight: 700;
       transition: font-size 0.2s;
     }
     .service-content p {
       font-size: 0.95rem;
-      color: #14213D;
+      color: #555;
       line-height: 1.4;
       transition: font-size 0.2s;
     }
@@ -231,7 +231,7 @@
     }
     .contact-info {
       flex: 1 1 320px;
-      background: #ffffff;
+      background: #eef7fc;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -240,14 +240,14 @@
     .contact-info h4 {
       font-size: 1.2rem;
       margin-bottom: 15px;
-      color: #FCA311;
+      color: #233A56;
       font-weight: 500;
       transition: font-size 0.2s;
     }
     .contact-info p, .contact-info a {
       font-size: 0.95rem;
       margin-bottom: 8px;
-      color: #14213D;
+      color: #333;
       line-height: 1.4;
       transition: font-size 0.2s;
     }
@@ -256,7 +256,7 @@
     }
     .contact-form {
       flex: 1 1 400px;
-      background: #FCA311;
+      background: #f9f9f9;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
@@ -299,10 +299,11 @@
 
     /* Footer */
     footer {
-      background: #14213D;
+      background: #233A56;
       color: #fff;
       text-align: center;
       padding: 20px;
+      margin-top: 40px;
       transition: font-size 0.2s;
     }
     footer p {
@@ -614,21 +615,21 @@
   <!-- Hero Section -->
   <section id="hero" class="hero">
     <div class="hero-content">
-      <h1 class="lang pl" style="color: #ffffff;">Profesjonalne Prace Budowlane</h1>
+      <h1 class="lang pl">Profesjonalne Prace Budowlane</h1>
       <h1 class="lang sk hidden">Profesionálne Stavebné Práce</h1></br>
-      <p class="lang pl" style="color: #E5E5E5;">Ocieplenia • Obróbki Blacharskie • Montaż Parapetów i Rynien • Podbitki • Tynk Zewnętrzny</p>
+      <p class="lang pl">Ocieplenia • Obróbki Blacharskie • Montaż Parapetów i Rynien • Podbitki • Tynk Zewnętrzny</p>
       <p class="lang sk hidden">Zateplenie • Plechárske Práce • Montáž Parapetov a Odkvapov • Podbitie • Exteriérová Omietka</p>
     </div>
   </section>
   
   <!-- About Section -->
-  <section id="about" class="section" style="background-color: #ffffff;">
+  <section id="about" class="section" style="background-color: #f5f5f5;">
   <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-    <h2 class="section-title" style="color: #14213D;">
+    <h2 class="section-title">
       <span class="lang pl">O nas</span>
       <span class="lang sk hidden">O nás</span>
     </h2>
-	<p class="lang pl" style="color: #14213D;">Jesteśmy młodą, dynamicznie rozwijającą się firmą, która stawia na jakość i zadowolenie klienta.
+	<p class="lang pl">Jesteśmy młodą, dynamicznie rozwijającą się firmą, która stawia na jakość i zadowolenie klienta.
       Oferujemy konkurencyjne ceny, indywidualne podejście do każdego zlecenia oraz szybką i profesjonalną realizację prac.
       Dzięki elastyczności i zaangażowaniu zapewniamy krótkie terminy wykonania, nie rezygnując przy tym z wysokiego standardu usług.</p>
           <p class="lang sk hidden">Sme mladá, dynamicky sa rozvíjajúca firma, ktorá kladie dôraz na kvalitu a spokojnosť zákazníka.
@@ -638,7 +639,7 @@
 </section>
 
   <!-- Services Section -->
-  <section id="services" class="section" style="background-color: #E5E5E5;">
+  <section id="services" class="section">
     <h2 class="section-title">
       <span class="lang pl">Nasze Usługi</span>
       <span class="lang sk hidden">Naše Služby</span>
@@ -661,7 +662,6 @@
         <div class="service-content">
           <h3 class="lang pl">Tynk Zewnętrzny</h3>
           <h3 class="lang sk hidden">Exteriérová Omietka</h3>
-		  </br>
           <p class="lang pl">Nakładamy tynki zewnętrzne, które zabezpieczają mury i nadają nowoczesny wygląd każdej elewacji.</p>
           <p class="lang sk hidden">Nanášame exteriérové omietky, ktoré chránia steny a dodávajú moderný vzhľad každej fasáde.</p>
         </div>
@@ -672,7 +672,6 @@
         <div class="service-content">
           <h3 class="lang pl">Obróbki Blacharskie</h3>
           <h3 class="lang sk hidden">Plechárske Práce</h3>
-		  </br>
           <p class="lang pl">Profesjonalne obróbki dachów i elementów budynku. Zabezpieczamy przed wilgocią i wydłużamy żywotność konstrukcji.</p>
           <p class="lang sk hidden">Profesionálne plechárske práce strechy a prvkov budovy. Chránime pred vlhkosťou a predlžujeme životnosť konštrukcie.</p>
         </div>
@@ -683,7 +682,6 @@
         <div class="service-content">
           <h3 class="lang pl">Montaż Parapetów i Rynien</h3>
           <h3 class="lang sk hidden">Montáž Parapetov a Odkvapov</h3>
-		  </br>
           <p class="lang pl">Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych, zapewniających estetykę i trwałość.</p>
           <p class="lang sk hidden">Montáž vonkajších a vnútorných parapetov a odkvapových systémov, ktoré zabezpečia estetiku a odolnosť.</p>
         </div>
@@ -694,7 +692,6 @@
         <div class="service-content">
           <h3 class="lang pl">Podbitki</h3>
           <h3 class="lang sk hidden">Podbitie Strechy</h3>
-		  </br>
           <p class="lang pl">Wykonujemy podbitki dachów, chroniące elementy drewniane i poprawiające estetykę elewacji.</p>
           <p class="lang sk hidden">Vykonávame podbitie strechy, ktoré chráni drevené prvky a vylepšuje estetiku fasády.</p>
         </div>
@@ -702,7 +699,7 @@
     </div>
   </section>
 
-<section id="galeria" class="section" style="background-color: #FCA311;">
+<section id="galeria" class="section" style="background-color: #f5f5f5;">
  <h2 class="section-title">
  </br>
       <span class="lang pl">Galeria</span>
@@ -787,9 +784,9 @@
 
 
   <!-- Contact Section -->
-  <section id="contact" class="section" style="background-color: #E5E5E5;">
+  <section id="contact" class="section">
     <h2 class="section-title">
-      <span class="lang pl" >Kontakt</span>
+      <span class="lang pl">Kontakt</span>
       <span class="lang sk hidden">Kontakt</span>
     </h2>
     <div class="contact-container">
@@ -797,7 +794,6 @@
       <div class="contact-info">
         <h4 class="lang pl">Dane Kontaktowe</h4>
         <h4 class="lang sk hidden">Kontaktné Údaje</h4>
-		</br></br>
         <p>Tomasz Grygiel</p>
         <p>Biała Niżna</p>
         <p>
@@ -808,9 +804,9 @@
         <p>Email: <a href="mailto:grygieltomek99@gmail.com">grygieltomek99@gmail.com</a></p>
       </div>
       <!-- Contact Form -->
-      <div class="contact-form" style="color: #ffffff;">
+      <div class="contact-form">
         <form action="#" method="POST">
-          <h3 class="lang pl" style="color: #14213D;">Wycena pracy</h3>
+          <h3 class="lang pl">Wycena pracy</h3>
           <h3 class="lang sk hidden">Cenová ponuka prác</h3>
           <br><br>
           <p class="lang pl"><strong>Imię:</strong></p>

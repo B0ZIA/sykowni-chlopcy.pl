@@ -1,869 +1,1131 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sykowni Chłopcy – Prace Budowlane</title>
-  <!-- Google Font: Montserrat -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sykowni Chłopcy - Strona Główna</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <!-- AOS for scroll animations -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    /* Reset & Base */
-    *, *::before, *::after {
+    :root {
+      --primary-color: #002C60;
+      --secondary-color: #FF8C00;
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --light-color: #ffffff;
+    }
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    html {
-      font-family: 'Montserrat', sans-serif;
-      scroll-behavior: smooth;
-    }
     body {
-      color: #333;
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text-color);
+      background: var(--bg-color);
       line-height: 1.6;
-      background-color: #f5f5f5;
     }
-    a {
-      text-decoration: none;
-      color: inherit;
+	h1, h2, h3, h4, h5 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
     }
-    ul {
-      list-style: none;
-    }
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
+    /* Navbar */
+.navbar {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background 0.3s, box-shadow 0.3s;
+}
 
-    /* Header / Navigation */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background-color: #fff;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 20px;
-    }
-    .logo img {
-      display: block;
-      width: 280px;
-      height: auto;
-      transition: width 0.2s;
-    }
+.nav-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
 
-    /* Przycisk hamburger (ukryty desktopowo) */
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 28px;
-      height: 22px;
-      cursor: pointer;
-    }
-    .menu-toggle span {
-      display: block;
-      height: 3px;
-      background-color: #333;
-      border-radius: 2px;
-      transition: transform 0.3s, opacity 0.3s;
-    }
+.nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+}
 
-    nav {
-      position: relative;
-    }
-    nav ul {
-      display: flex;
-      gap: 25px;
-      transition: max-height 0.3s ease;
-    }
-    nav ul li {
-      position: relative;
-    }
-    nav ul li a {
-      font-weight: 500;
-      color: #333;
-      padding: 5px;
-      transition: color 0.2s;
-    }
-    nav ul li a:hover {
-      color: #233A56;
-    }
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-    }
-    .lang-switch {
-      display: flex;
-      gap: 10px;
-    }
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-links li {
+  margin: 0 15px;
+}
+
+.nav-links a {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-decoration: none;
+  position: relative;
+  padding: 8px 12px;
+  font-size: 0.95em;
+  transition: all 0.3s ease;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  width: 0%;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: width 0.3s ease, left 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+  left: 50%;
+}
+
+.nav-links a.active {
+  color: var(--secondary-color);
+  font-weight: 700;
+}
+.nav-links a.active::after {
+  width: 100%;
+}
+.nav-links a:hover {
+  color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.hero-logo {
+  max-height: 60px;
+}
     .lang-switch button {
-      background: transparent;
-      border: 2px solid #233A56;
-      color: #233A56;
-      padding: 5px 10px;
-      font-weight: 500;
-      cursor: pointer;
-      border-radius: 3px;
-      transition: background 0.2s, color 0.2s, border-color 0.2s;
-    }
-    .lang-switch button:hover,
-    .lang-switch button.active {
-      background: #233A56;
-      color: #fff;
-      border-color: #1C2C45;
-    }
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9em;
+  text-transform: uppercase;
+}
 
-    /* Hero Section */
-    .hero {
-      position: relative;
-      height: 60vh;
-      background: url('mian_background.jpg') center/cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+.lang-switch button:hover {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  transform: scale(1.05);
+}
+
+.lang-switch button.active {
+  background-color: var(--secondary-color);
+  color: var(--light-color);
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 0 4px rgba(255, 140, 0, 0.2);
+}
+    .hamburger {
+      display: block;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px;
+      background: var(--light-color);
+      transition: transform 0.3s;
+    }
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+    /* Hero section */
+	body.noscroll {
+      overflow: hidden;
+    }
+    #hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('mian_background.jpg') center center no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      color: var(--light-color);
       text-align: center;
-      color: #fff;
+	  height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
+    #hero .hero-content {
+      padding: 100px 20px 150px 20px; /* space for nav and some top/bottom padding */
     }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      padding: 0 20px;
+	.hero-content p {
+      font-size: 1.3em;
+	  font-weight: 400;
+      margin-bottom: 25px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+	.hero-logo {
+      max-width: 250px;
     }
     .hero-content h1 {
-      font-size: 2.5rem;
+      font-size: 3em;
       margin-bottom: 15px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      transition: font-size 0.2s;
+      text-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
-    .hero-content p {
-      font-size: 1.1rem;
-      font-weight: 400;
-      transition: font-size 0.2s;
+    .hero-content .cta {
+      display: inline-block;
+      background: var(--secondary-color);
+      color: var(--light-color);
+      text-decoration: none;
+      padding: 15px 30px;
+      font-weight: bold;
+      border-radius: 5px;
+      transition: background 0.3s;
     }
-
-    /* Services Section */
-    .section {
+    .hero-content .cta:hover {
+      background: #e67600; /* slightly darker orange */
+    }
+    /* Sections */
+    section {
       padding: 60px 20px;
-      background-color: #fff;
     }
-    .section-title {
+    section h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
       text-align: center;
-      font-size: 2rem;
-      margin-bottom: 40px;
-      color: #233A56;
-      font-weight: 700;
-      letter-spacing: 1px;
-      transition: font-size 0.2s;
+      color: var(--primary-color);
     }
+    /* About section */
+    #about p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1em;
+	  text-align: center;
+    }
+.about-wrapper {
+  max-width: 1000px;
+  margin: 40px auto 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 20px;
+}
+
+.about-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.about-icon {
+  width: 60px;
+  height: 60px;
+  background-color: var(--secondary-color); /* żółte tło */
+  color: #fff; /* biała ikona */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.about-block:hover .about-icon {
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.about-text h3 {
+  margin: 0 0 8px;
+  font-size: 1.3em;
+  color: var(--primary-color);
+}
+
+.about-text p {
+  margin: 0;
+  color: #555;
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .about-block {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-icon {
+    margin-bottom: 15px;
+  }
+}
+    /* Services section */
+	#services{
+		background: #E5E5E5;
+	}
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
-    .service-card {
-      background: #f9f9f9;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s;
-    }
-    .service-card:hover {
-      transform: translateY(-5px);
-    }
-    .service-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .service-content {
-      padding: 20px;
-    }
-    .service-content h3 {
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-      color: #233A56;
-      font-weight: 700;
-      transition: font-size 0.2s;
-    }
-    .service-content p {
-      font-size: 0.95rem;
-      color: #555;
-      line-height: 1.4;
-      transition: font-size 0.2s;
-    }
-
-    /* Gallery Section */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
-      gap: 15px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    /* Contact Section */
-    .contact-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-      align-items: flex-start;
-      transition: flex-direction 0.2s;
-    }
-    .contact-info {
-      flex: 1 1 320px;
-      background: #eef7fc;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: padding 0.2s;
-    }
-    .contact-info h4 {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
-      color: #233A56;
-      font-weight: 500;
-      transition: font-size 0.2s;
-    }
-    .contact-info p, .contact-info a {
-      font-size: 0.95rem;
-      margin-bottom: 8px;
-      color: #333;
-      line-height: 1.4;
-      transition: font-size 0.2s;
-    }
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-    .contact-form {
-      flex: 1 1 400px;
+    .service-item {
       background: #f9f9f9;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      transition: padding 0.2s;
-    }
-    .contact-form form label {
-      display: block;
-      font-size: 0.95rem;
-      margin-top: 15px;
-      color: #333;
-      font-weight: 500;
-      transition: font-size 0.2s;
-    }
-    .contact-form form input, 
-    .contact-form form textarea {
-      width: 100%;
-      margin-top: 5px;
-      padding: 10px;
-      font-size: 0.95rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      resize: vertical;
-      transition: font-size 0.2s;
-    }
-    .contact-form form button {
-      margin-top: 20px;
-      background-color: #233A56;
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .contact-form form button:hover {
-      background-color: #1C2C45;
-      transform: translateY(-2px);
-    }
-
-    /* Footer */
-    footer {
-      background: #233A56;
-      color: #fff;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-      transition: font-size 0.2s;
+      border-radius: 5px;
+      transition: transform 0.3s;
     }
-    footer p {
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    /* Language-specific elements */
-    .lang {
-      display: none;
-    }
-    .lang.pl:not(.hidden) {
-      display: inline;
-    }
-    .lang.sk:not(.hidden) {
-      display: inline;
+    .service-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-    /* Responsive styles */
-    @media (max-width: 1024px) {
-      .logo img {
-        width: 200px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      /* Logo mniejsze */
-      .logo img {
-        width: 280px;
-      }
-
-      /* Pokaż hamburgera, ukryj domyślnie menu */
-      .menu-toggle {
-        display: flex;
-      }
-      nav ul {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: #fff;
-        flex-direction: column;
-        width: 80vw;
-        max-width: 280px;
-        max-height: 0;
-        overflow: hidden;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      }
-      nav ul.open {
-        max-height: 500px; /* wystarczająco duże, by pokazać wszystkie linki */
-      }
-      nav ul li {
-        border-bottom: 1px solid #eee;
-      }
-      nav ul li a {
-        display: block;
-        padding: 12px 20px;
-      }
-      .header-right {
-        flex-direction: row-reverse;
-      }
-
-      .hero {
-        height: 50vh;
-      }
-      .hero-content h1 {
-        font-size: 2rem;
-      }
-      .hero-content p {
-        font-size: 1rem;
-      }
-      .contact-container {
-        flex-direction: column;
-      }
-      nav ul {
-        gap: 0;
-      }
-      .header-right {
-        gap: 10px;
-      }
-      .section-title {
-        font-size: 1.75rem;
-      }
-      .service-content h3 {
-        font-size: 1.1rem;
-      }
-      .service-content p {
-        font-size: 0.9rem;
-      }
-      .contact-info, .contact-form {
-        padding: 15px;
-      }
-      .contact-info h4 {
-        font-size: 1.1rem;
-      }
-      .contact-info p, .contact-info a,
-      .contact-form form label,
-      .contact-form form input,
-      .contact-form form textarea {
-        font-size: 0.9rem;
-      }
-      footer p {
-        font-size: 0.8rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .logo img {
-        width: 140px;
-      }
-      .hero-content h1 {
-        font-size: 1.75rem;
-      }
-      .hero-content p {
-        font-size: 0.9rem;
-      }
-      .section-title {
-        font-size: 1.5rem;
-      }
-      .services-grid {
-        gap: 20px;
-      }
-      .service-content h3 {
-        font-size: 1rem;
-      }
-      .service-content p {
-        font-size: 0.85rem;
-      }
-      .contact-info, .contact-form {
-        width: 100%;
-      }
-    }
-	.gallery {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-      width: 100%;
-      max-width: 1400px;
-	  margin: 0 auto;
-      justify-content: center;
-    }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
-      cursor: pointer;
+    .service-item:hover i {
+      transform: scale(1.2) rotate(5deg);
       transition: transform 0.3s ease;
     }
-
-    .gallery-item:hover {
+    .service-item i {
+      font-size: 40px;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+	  transition: transform 0.3s ease;
+    }
+    .service-item h3 {
+      font-size: 1.3em;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+    .service-item p {
+      font-size: 0.95em;
+    }
+    /* Gallery section */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .gallery-grid img {
+      width: 100%;
+      display: block;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .gallery-grid img:hover {
       transform: scale(1.03);
+      opacity: 0.8;
+    }
+	.gallery-item {
+      overflow: hidden;
+      border-radius: 5px;
+      position: relative;
     }
 
     .gallery-item img {
       width: 100%;
       height: auto;
       display: block;
-      border-radius: 10px;
-      transition: transform 0.3s ease;
+      transition: transform 0.4s ease;
     }
 
-    .gallery-item:hover img {
-      transform: scale(1.08);
-    }
-
-    .caption {
-      position: absolute;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      width: 100%;
-      padding: 1rem;
-      text-align: center;
-      font-size: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .gallery-item:hover .caption {
-      opacity: 1;
-    }
-
-    .modal {
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+    /* Lightbox overlay */
+      #lightbox-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
+      background: rgba(0,0,0,0.8);
+      display: none;
       align-items: center;
       justify-content: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease;
-      z-index: 1000;
+      flex-direction: column;
+      z-index: 2000; /* dodane */
+      padding-top: 80px; /* dodane: wysokość paska nawigacji */
+      box-sizing: border-box; /* dodane dla bezpieczeństwa */
     }
-
-    .modal.active {
-      opacity: 1;
-      visibility: visible;
+    #lightbox-overlay img {
+      max-width: 90%;
+      max-height: 80%;
+      margin-bottom: 20px;
+      border: 5px solid #fff;
+      border-radius: 5px;
     }
-
-    .modal-content {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      max-width: 800px;
-      width: 90%;
-      text-align: center;
-      position: relative;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .modal-content img {
-      width: 100%;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-    }
-
-    .modal-content .description {
-      font-size: 1.2rem;
-      color: #333;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: #ff5c5c;
+    #lightbox-close {
+      font-size: 2em;
       color: #fff;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-size: 1.2rem;
       cursor: pointer;
     }
-
-    .arrow {
+	.lightbox-arrow {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.7);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 1.5rem;
+      font-size: 3rem;
+      color: #fff;
       cursor: pointer;
-      z-index: 1001;
+      user-select: none;
+      padding: 10px;
+      transform: translateY(-50%);
+      z-index: 2100;
+      transition: opacity 0.3s;
+    }
+#lightbox-prev { left: 20px; }
+#lightbox-next { right: 20px; }
+.lightbox-arrow:hover {
+  opacity: 0.7;
+}
+    /* Contact section */
+	#contact-section {
+  background-color: #f2f2f2;
+  padding: 60px 20px;
+}
+
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: stretch; /* domyślne, ale dodajmy dla pewności */
+}
+
+.contact-header {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #002C60;
+  border-left: 4px solid var(--secondary-color);
+  padding-left: 12px;
+}
+
+.contact-box {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  flex: 1;
+}
+
+.contact-box form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.contact-box button.btn {
+  padding: 12px;
+  background-color: #002C60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.contact-box button.btn:hover {
+  background-color: #004080;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info-title {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #002C60;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+.icon-circle i {
+  transition: transform 0.3s ease;
+}
+.icon-circle {
+  transition: transform 0.3s ease;
+}
+
+.info-item:hover .icon-circle {
+  transform: scale(1.15);
+}
+.info-item:hover .icon-circle i {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.info-item:hover {
+  transform: translateY(-3px);
+}
+
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  background-color: #002C60; /* ciemnoniebieskie tło */
+  color: #fff;               /* biała ikona */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+
+.contact-info p {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.contact-info i {
+  color: var(--secondary-color);
+}
+.contact-lead {
+    text-align: center;
+    font-size: 1.15em;
+    margin: 10px auto 30px auto;
+    color: var(--text-color);
+    max-width: 700px;
     }
 
-    .arrow.left { left: 1rem; }
-    .arrow.right { right: 1rem; }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1); }
+@media (min-width: 768px) {
+  .contact-wrapper {
+    flex-direction: row;
+	align-items: flex-start;
+  }
+}
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
     }
+    .form-group label {
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    .form-group input,
+    .form-group textarea {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .btn {
+      background: var(--primary-color);
+      color: var(--light-color);
+      border: none;
+      padding: 10px 20px;
+      font-size: 1em;
+      font-weight: bold;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-top: 5px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #001b40; /* darker primary */
+    }
+    .form-message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .form-message.success {
+      color: green;
+    }
+    .form-message.error {
+      color: red;
+    }
+    /* Footer */
+    .footer {
+  background-color: #002C60;
+  color: #ffffff;
+  padding: 30px 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  background-color: var(--primary-color);
+  height: 3px;
+  width: 100%;
+  margin: 3px 0;
+  transition: 0.3s ease;
+}
+
+.footer-copy {
+  opacity: 0.8;
+}
+    /* Responsive adjustments */
+    @media (min-width: 768px) {
+      .nav-links {
+        display: flex;
+      }
+      .hamburger {
+        display: none;
+      }
+      #hero .hero-content {
+        padding: 150px 20px;
+      }
+      #contact-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .form-group {
+        flex: 1 1 48%;
+      }
+      .form-group.full-width {
+        flex: 1 1 100%;
+      }
+      /* Ensure message textarea spans full width in grid */
+      #message {
+        min-height: 150px;
+      }
+    }
+    @media (max-width: 767px) {
+  .nav-center {
+    display: none;
+  }
+
+  .nav-center.open {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 44, 96, 0.95);
+    flex-direction: column;
+    text-align: center;
+    z-index: 999;
+  }
+
+  .nav-center.open li {
+    margin: 15px 0;
+  }
+
+  .nav-center.open a {
+    color: white;
+  }
+
+  .nav-center.open a:hover {
+    color: var(--secondary-color);
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+	
+	@media (min-width: 768px) {
+  .nav-center {
+    display: flex !important;
+    flex-direction: row;
+    position: static;
+    background: none;
+  }
+
+  .hamburger {
+    display: none !important;
+  }
+}
 	
   </style>
 </head>
 <body>
-  <!-- Header / Navigation -->
-  <header>
-    <div class="nav-container">
-      <div class="logo">
-        <img src="baner.png" alt="Logo Sykowni Chłopcy">
-      </div>
 
-      <!-- Przycisk hamburgera (tylko na telefonach)
-      <div class="menu-toggle" id="menu-toggle">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>-->
+<header id="hero">
+  <nav class="navbar">
+  <div class="nav-left">
+    <img src="banner_new.png" alt="Sykowni Chłopcy Logo" class="hero-logo" />
+  </div>
+  <ul class="nav-center nav-links">
+    <li><a href="#about" data-pl="O nas" data-sk="O nás">O nas</a></li>
+    <li><a href="#services" data-pl="Usługi" data-sk="Služby">Usługi</a></li>
+    <li><a href="#gallery" data-pl="Galeria" data-sk="Galéria">Galeria</a></li>
+    <li><a href="#contact-section" data-pl="Kontakt" data-sk="Kontakt">Kontakt</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switch">
+      <button type="button" id="lang-pl" class="active">PL</button>
+      <button type="button" id="lang-sk">SK</button>
+    </div>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+  <div class="hero-content" data-aos="fade-up">
+    <h1 data-pl="Sykowni Chłopcy" data-sk="Sykowni Chłopcy">Sykowni Chłopcy</h1>
+    <p data-pl="Profesjonalne prace budowlane" data-sk="Profesionálne stavebné práce">Profesjonalne prace budowlane</p>
+    <!--<a href="#contact-section" class="btn cta" data-pl="Skontaktuj się z nami" data-sk="Kontaktujte nás">Skontaktuj się z nami</a>-->
+  </div>
+</header>
 
-      <nav>
-        <ul id="nav-list">
-          <li>
-            <a href="#hero" class="lang pl">Strona Główna</a>
-            <a href="#hero" class="lang sk hidden">Domov</a>
-          </li>
-          <li>
-            <a href="#services" class="lang pl">Usługi</a>
-            <a href="#services" class="lang sk hidden">Služby</a>
-          </li>
-          <li>
-            <a href="#gallery" class="lang pl">Galeria</a>
-            <a href="#gallery" class="lang sk hidden">Galéria</a>
-          </li>
-          <li>
-            <a href="#contact" class="lang pl">Kontakt</a>
-            <a href="#contact" class="lang sk hidden">Kontakt</a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="header-right">
-        <div class="lang-switch">
-          <button id="btn-pl" class="active" onclick="setLanguage('pl')">PL</button>
-          <button id="btn-sk" onclick="setLanguage('sk')">SK</button>
-        </div>
+<section id="about" data-aos="fade-up">
+  <h2 data-pl="O nas" data-sk="O nás">O nas</h2>
+  <p data-pl="Jesteśmy firmą budowlaną z wieloletnim doświadczeniem. Oferujemy szeroki zakres usług, gwarantując wysoką jakość i nowoczesne metody pracy. Nasz zespół składa się z wykwalifikowanych specjalistów, dążących do spełnienia oczekiwań klientów." 
+     data-sk="Sme stavebná firma s dlhoročnými skúsenosťami. Ponúkame široký rozsah služieb a zaručujeme vysokú kvalitu práce modernými metódami. Náš tím tvoria kvalifikovaní špecialisti, ktorí sa snažia naplniť očakávania zákazníkov.">
+    Jesteśmy firmą budowlaną z wieloletnim doświadczeniem. Oferujemy szeroki zakres usług, gwarantując wysoką jakość i nowoczesne metody pracy. Nasz zespół składa się z wykwalifikowanych specjalistów, dążących do spełnienia oczekiwań klientów.
+  </p>
+  <div class="about-wrapper">
+    <div class="about-block" data-aos="fade-right">
+      <div class="about-icon"><i class="fas fa-hard-hat"></i></div>
+      <div class="about-text">
+        <h3 data-pl="Doświadczenie" data-sk="Skúsenosti">Doświadczenie</h3>
+        <p data-pl="Działamy w branży budowlanej od lat, zapewniając solidne i sprawdzone rozwiązania." 
+           data-sk="V stavebníctve pôsobíme roky a poskytujeme spoľahlivé a overené riešenia.">
+          Działamy w branży budowlanej od lat, zapewniając solidne i sprawdzone rozwiązania.
+        </p>
       </div>
     </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="hero" class="hero">
-    <div class="hero-content">
-      <h1 class="lang pl">Profesjonalne Prace Budowlane</h1>
-      <h1 class="lang sk hidden">Profesionálne Stavebné Práce</h1></br>
-      <p class="lang pl">Ocieplenia • Obróbki Blacharskie • Montaż Parapetów i Rynien • Podbitki • Tynk Zewnętrzny</p>
-      <p class="lang sk hidden">Zateplenie • Plechárske Práce • Montáž Parapetov a Odkvapov • Podbitie • Exteriérová Omietka</p>
+    <div class="about-block" data-aos="fade-left">
+      <div class="about-icon"><i class="fas fa-tools"></i></div>
+      <div class="about-text">
+        <h3 data-pl="Nowoczesne technologie" data-sk="Moderné technológie">Nowoczesne technologie</h3>
+        <p data-pl="Stosujemy innowacyjne techniki, które zapewniają trwałość i estetykę." 
+           data-sk="Používame inovatívne technológie, ktoré zabezpečujú trvácnosť a estetiku.">
+          Stosujemy innowacyjne techniki, które zapewniają trwałość i estetykę.
+        </p>
+      </div>
     </div>
-  </section>
-  
-  <!-- About Section -->
-  <section id="about" class="section" style="background-color: #f5f5f5;">
-  <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
-    <h2 class="section-title">
-      <span class="lang pl">O nas</span>
-      <span class="lang sk hidden">O nás</span>
-    </h2>
-	<p class="lang pl">Jesteśmy młodą, dynamicznie rozwijającą się firmą, która stawia na jakość i zadowolenie klienta.
-      Oferujemy konkurencyjne ceny, indywidualne podejście do każdego zlecenia oraz szybką i profesjonalną realizację prac.
-      Dzięki elastyczności i zaangażowaniu zapewniamy krótkie terminy wykonania, nie rezygnując przy tym z wysokiego standardu usług.</p>
-          <p class="lang sk hidden">Sme mladá, dynamicky sa rozvíjajúca firma, ktorá kladie dôraz na kvalitu a spokojnosť zákazníka.
-		  Ponúkame konkurenčné ceny, individuálny prístup ku každému projektu a rýchlu a profesionálnu realizáciu prác.
-		  Vďaka flexibilite a nasadeniu zabezpečujeme krátke dodacie lehoty bez toho, aby sme ustúpili z vysokého štandardu služieb.</p>
+    <div class="about-block" data-aos="fade-right">
+      <div class="about-icon"><i class="fas fa-handshake"></i></div>
+      <div class="about-text">
+        <h3 data-pl="Zaufanie i podejście" data-sk="Dôvera a prístup">Zaufanie i podejście</h3>
+        <p data-pl="Dla nas najważniejsze jest zadowolenie klienta i partnerskie relacje." 
+           data-sk="Najdôležitejšia je pre nás spokojnosť zákazníka a partnerský prístup.">
+          Dla nas najważniejsze jest zadowolenie klienta i partnerskie relacje.
+        </p>
+      </div>
+    </div>
   </div>
 </section>
 
-  <!-- Services Section -->
-  <section id="services" class="section">
-    <h2 class="section-title">
-      <span class="lang pl">Nasze Usługi</span>
-      <span class="lang sk hidden">Naše Služby</span>
-    </h2>
-    <div class="services-grid">
-      <!-- Ocieplenia -->
-      <div class="service-card">
-        <img src="ocieplenia.jpg" alt="Ocieplenia">
-        <div class="service-content">
-          <h3 class="lang pl">Ocieplenia</h3>
-          <h3 class="lang sk hidden">Zateplenie Budov</h3>
-		  </br>
-          <p class="lang pl">Wykonujemy nowoczesne ocieplenia budynków jednorodzinnych i wielorodzinnych z gwarancją najwyższej jakości izolacji.</p>
-          <p class="lang sk hidden">Vykonávame moderné zateplenie rodinných a bytových domov s garantovanou kvalitou izolácie.</p>
-        </div>
-      </div>
-	  <!-- Tynk Zewnętrzny -->
-      <div class="service-card">
-        <img src="tynk.jpg" alt="Tynk Zewnętrzny">
-        <div class="service-content">
-          <h3 class="lang pl">Tynk Zewnętrzny</h3>
-          <h3 class="lang sk hidden">Exteriérová Omietka</h3>
-          <p class="lang pl">Nakładamy tynki zewnętrzne, które zabezpieczają mury i nadają nowoczesny wygląd każdej elewacji.</p>
-          <p class="lang sk hidden">Nanášame exteriérové omietky, ktoré chránia steny a dodávajú moderný vzhľad každej fasáde.</p>
-        </div>
-      </div>
-      <!-- Obróbki Blacharskie -->
-      <div class="service-card">
-        <img src="cos.jpg" alt="Obróbki Blacharskie">
-        <div class="service-content">
-          <h3 class="lang pl">Obróbki Blacharskie</h3>
-          <h3 class="lang sk hidden">Plechárske Práce</h3>
-          <p class="lang pl">Profesjonalne obróbki dachów i elementów budynku. Zabezpieczamy przed wilgocią i wydłużamy żywotność konstrukcji.</p>
-          <p class="lang sk hidden">Profesionálne plechárske práce strechy a prvkov budovy. Chránime pred vlhkosťou a predlžujeme životnosť konštrukcie.</p>
-        </div>
-      </div>
-      <!-- Montaż Parapetów i Rynien -->
-      <div class="service-card">
-        <img src="rynny.jpg" alt="Montaż Parapetów i Rynien">
-        <div class="service-content">
-          <h3 class="lang pl">Montaż Parapetów i Rynien</h3>
-          <h3 class="lang sk hidden">Montáž Parapetov a Odkvapov</h3>
-          <p class="lang pl">Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych, zapewniających estetykę i trwałość.</p>
-          <p class="lang sk hidden">Montáž vonkajších a vnútorných parapetov a odkvapových systémov, ktoré zabezpečia estetiku a odolnosť.</p>
-        </div>
-      </div>
-      <!-- Podbitki -->
-      <div class="service-card">
-        <img src="podbitki.jpg" alt="Podbitki">
-        <div class="service-content">
-          <h3 class="lang pl">Podbitki</h3>
-          <h3 class="lang sk hidden">Podbitie Strechy</h3>
-          <p class="lang pl">Wykonujemy podbitki dachów, chroniące elementy drewniane i poprawiające estetykę elewacji.</p>
-          <p class="lang sk hidden">Vykonávame podbitie strechy, ktoré chráni drevené prvky a vylepšuje estetiku fasády.</p>
-        </div>
-      </div>
+<section id="services" data-aos="fade-up">
+  <h2 data-pl="Nasze usługi" data-sk="Naše služby">Nasze usługi</h2>
+  <div class="services-grid">
+    <div class="service-item" data-aos="fade-up">
+	  <i class="fas fa-thermometer-half"></i>
+      <h3 data-pl="Ocieplenia" data-sk="Zateplenie Budov">Ocieplenia</h3>
+      <p data-pl="Wykonujemy nowoczesne ocieplenia budynków jednorodzinnych i wielorodzinnych z gwarancją najwyższej jakości izolacji." data-sk="Vykonávame moderné zateplenie rodinných a bytových domov s garantovanou kvalitou izolácie.">
+        Wykonujemy nowoczesne ocieplenia budynków jednorodzinnych i wielorodzinnych z gwarancją najwyższej jakości izolacji.
+      </p>
     </div>
-  </section>
-
-<section id="galeria" class="section" style="background-color: #f5f5f5;">
- <h2 class="section-title">
- </br>
-      <span class="lang pl">Galeria</span>
-      <span class="lang sk hidden">Galeria</span>
-    </h2>
-  <div class="gallery" id="gallery"></div>
-
-  <div class="modal" id="imageModal" onclick="handleOutsideClick(event)">
-    <button class="arrow left" onclick="changeImage(-1)">&#10094;</button>
-    <div class="modal-content" onclick="event.stopPropagation()">
-      <button class="close-btn" onclick="closeModal()">&times;</button>
-      <img id="modalImg" src="" alt="Modal Image">
-      <div class="description" id="modalDesc"></div>
+    <div class="service-item" data-aos="fade-up">
+      <i class="fas fa-paint-roller"></i>
+      <h3 data-pl="Tynk Zewnętrzny" data-sk="Exteriérová Omietka">Tynk Zewnętrzny</h3>
+      <p data-pl="Nakładamy tynki zewnętrzne, które zabezpieczają mury i nadają nowoczesny wygląd każdej elewacji." data-sk="Nanášame exteriérové omietky, ktoré chránia steny a dodávajú moderný vzhľad každej fasáde.">
+        Nakładamy tynki zewnętrzne, które zabezpieczają mury i nadają nowoczesny wygląd każdej elewacji.
+      </p>
     </div>
-    <button class="arrow right" onclick="changeImage(1)">&#10095;</button>
+    <div class="service-item" data-aos="fade-up">
+      <i class="fas fa-hammer"></i>
+      <h3 data-pl="Obróbki Blacharskie" data-sk="Plechárske Práce">Obróbki Blacharskie</h3>
+      <p data-pl="Profesjonalne obróbki dachów i elementów budynku. Zabezpieczamy przed wilgocią i wydłużamy żywotność konstrukcji." data-sk="Profesionálne plechárske práce strechy a prvkov budovy. Chránime pred vlhkosťou a predlžujeme životnosť konštrukcie.">
+        Profesjonalne obróbki dachów i elementów budynku. Zabezpieczamy przed wilgocią i wydłużamy żywotność konstrukcji.
+      </p>
+    </div>
+    <div class="service-item" data-aos="fade-up">
+      <i class="fas fa-ruler-combined"></i>
+      <h3 data-pl="Montaż Parapetów i Rynien" data-sk="Montáž Parapetov a Odkvapov">Montaż Parapetów i Rynien</h3>
+      <p data-pl="Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych, zapewniających estetykę i trwałość." data-sk="Montáž vonkajších a vnútorných parapetov a odkvapových systémov, ktoré zabezpečia estetiku a odolnosť.">
+        Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych, zapewniających estetykę i trwałość.
+      </p>
+    </div>
+    <div class="service-item" data-aos="fade-up">
+      <i class="fas fa-columns"></i>
+      <h3 data-pl="Podbitki" data-sk="Podbitie Strechy">Podbitki</h3>
+      <p data-pl="Wykonujemy podbitki dachów, chroniące elementy drewniane i poprawiające estetykę elewacji." data-sk="Vykonávame podbitie strechy, ktoré chráni drevené prvky a vylepšuje estetiku fasády.">
+        Wykonujemy podbitki dachów, chroniące elementy drewniane i poprawiające estetykę elewacji.
+      </p>
+    </div>
   </div>
-  </section>
+</section>
 
-  <script>
-    const images = [
-      { src: 'galery_1.jpg', desc: 'Kolejny domek' },
-      { src: 'galery_2.jpg', desc: 'Domek fajny' },
-	  { src: 'rynny.jpg', desc: 'Domek niefajny' },
-	  { src: 'mian_background.jpg', desc: 'Jakiś domek' }
-    ];
+<section id="gallery" data-aos="fade-up">
+  <h2 data-pl="Galeria realizacji" data-sk="Galéria realizácií">Galeria realizacji</h2>
+  <div class="gallery-grid">
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="galery_1.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="galery_2.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="rynny.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="mian_background.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="ocieplenia.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="tynk.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="podbitki.jpg" alt="Realizacja 1" />
+    </div>
+    <div class="gallery-item" data-aos="zoom-in">
+      <img src="cos.jpg" alt="Realizacja 1" />
+    </div>
+  </div>
+</section>
 
-    const gallery = document.getElementById('gallery');
-    images.forEach((img, i) => {
-      const item = document.createElement('div');
-      item.className = 'gallery-item';
-      item.innerHTML = `<img src="${img.src}" alt="img${i}"><div class="caption">${img.desc}</div>`;
-      item.onclick = () => openModal(i);
-      gallery.appendChild(item);
-    });
+<section id="contact-section" data-aos="fade-up">
+  <h2 data-aos="fade-up" data-pl="Kontakt" data-sk="Kontakt">Kontakt</h2>
+  <p class="contact-lead" data-aos="fade-up"
+     data-pl="Masz pytania? Napisz do nas, odpowiemy tak szybko jak to możliwe."
+     data-sk="Máte otázky? Napíšte nám a odpovieme čo najskôr.">
+    Masz pytania? Napisz do nas, odpowiemy tak szybko jak to możliwe.
+  </p>
 
-    let currentIndex = 0;
+  <div class="contact-wrapper">
+    <!-- Lewy blok: formularz -->
+    <div class="contact-box" data-aos="fade-right">
+      <h3 class="contact-header" data-pl="Zapytaj o wycenę" data-sk="Požiadaj o cenovú ponuku">Zapytaj o wycenę</h3>
+      <form id="contact-form" action="https://formspree.io/f/xgvyvrle" method="POST">
+	    <input type="hidden" name="_subject" value="Sykowni Chłopcy - wiadomość z formularza">
+        <div class="form-group">
+          <label for="name" data-pl="Imię:" data-sk="Meno:">Imię:</label>
+          <input type="name" id="name" name="name" placeholder="Imię" required data-pl-ph="Imię" data-sk-ph="Meno" />
+        </div>
+        <div class="form-group">
+          <label for="email" data-pl="E-mail:" data-sk="E-mail:">E-mail:</label>
+          <input type="email" id="email" name="email" placeholder="E-mail" required data-pl-ph="E-mail" data-sk-ph="E-mail" />
+        </div>
+        <div class="form-group">
+          <label for="message" data-pl="Wiadomość:" data-sk="Správa:">Wiadomość:</label>
+          <textarea id="message" name="message" placeholder="Wiadomość" rows="5" required data-pl-ph="Wiadomość" data-sk-ph="Správa"></textarea>
+        </div>
+        <button type="submit" class="btn" data-pl="Wyślij" data-sk="Odoslať">Wyślij</button>
+        <p id="form-message" class="form-message"></p>
+      </form>
+    </div>
 
-    function openModal(index) {
-      currentIndex = index;
-      updateModal();
-      document.getElementById('imageModal').classList.add('active');
-    }
-
-    function updateModal() {
-      const img = images[currentIndex];
-      document.getElementById('modalImg').src = img.src;
-      document.getElementById('modalDesc').innerText = img.desc;
-    }
-
-    function changeImage(offset) {
-      currentIndex = (currentIndex + offset + images.length) % images.length;
-      updateModal();
-    }
-
-    function closeModal() {
-      document.getElementById('imageModal').classList.remove('active');
-    }
-
-    function handleOutsideClick(event) {
-      if (event.target.id === 'imageModal') closeModal();
-    }
-
-    document.getElementById('imageModal').addEventListener('wheel', e => {
-      if (e.deltaY < 0) changeImage(-1);
-      else changeImage(1);
-    });
-
-    let startX = 0;
-    document.getElementById('imageModal').addEventListener('touchstart', e => {
-      startX = e.touches[0].clientX;
-    });
-
-    document.getElementById('imageModal').addEventListener('touchend', e => {
-      const endX = e.changedTouches[0].clientX;
-      const diffX = startX - endX;
-      if (Math.abs(diffX) > 50) {
-        if (diffX > 0) changeImage(1);
-        else changeImage(-1);
-      }
-    });
-  </script>
-
-
-  <!-- Contact Section -->
-  <section id="contact" class="section">
-    <h2 class="section-title">
-      <span class="lang pl">Kontakt</span>
-      <span class="lang sk hidden">Kontakt</span>
-    </h2>
-    <div class="contact-container">
-      <!-- Contact Info -->
-      <div class="contact-info">
-        <h4 class="lang pl">Dane Kontaktowe</h4>
-        <h4 class="lang sk hidden">Kontaktné Údaje</h4>
-        <p>Tomasz Grygiel</p>
-        <p>Biała Niżna</p>
-        <p>
-          <span class="lang pl">Telefon:</span>
-          <span class="lang sk hidden">Telefón:</span>
-          <a href="tel:+48574977131">+48 574 977 131</a>
-        </p>
-        <p>Email: <a href="mailto:grygieltomek99@gmail.com">grygieltomek99@gmail.com</a></p>
+    <!-- Prawy blok: dane kontaktowe -->
+    <div class="contact-box contact-info" data-aos="fade-left">
+      <h3 class="contact-header" data-pl="Kontakt" data-sk="Kontakt">Kontakt</h3>
+      <div class="info-item" data-aos="fade-up">
+        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+        <p>Biała Niżna<br />33-330 Grybów</p>
       </div>
-      <!-- Contact Form -->
-      <div class="contact-form">
-        <form action="#" method="POST">
-          <h3 class="lang pl">Wycena pracy</h3>
-          <h3 class="lang sk hidden">Cenová ponuka prác</h3>
-          <br><br>
-          <p class="lang pl"><strong>Imię:</strong></p>
-          <p class="lang sk hidden"><strong>Meno:</strong></p>
-          <input type="text" id="name" name="name" required>
-
-          <p class="lang pl"><strong>Telefon:</strong></p>
-          <p class="lang sk hidden"><strong>Telefón:</strong></p>
-          <input type="text" id="phone" name="phone" required>
-
-          <p class="lang pl"><strong>Email:</strong></p>
-          <p class="lang sk hidden"><strong>Email:</strong></p>
-          <input type="email" id="email" name="email" required>
-
-          <button type="submit" class="lang pl">Wyślij</button>
-          <button type="submit" class="lang sk hidden">Odoslať</button>
-        </form>
+      <div class="info-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="icon-circle"><i class="fas fa-phone"></i></div>
+        <p>+48 574 977 131</p>
+      </div>
+      <div class="info-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+        <p>grygieltomek99@gmail.com</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; <span id="year"></span> 
-      <span class="lang pl">Sykowni Chłopcy. Wszelkie prawa zastrzeżone.</span>
-      <span class="lang sk hidden">Sykowni Chłopcy. Všetky práva vyhradené.</span>
-    </p>
-  </footer>
+<footer class="footer">
+  <div class="footer-container">
+    <p class="footer-name">Sykowni Chłopcy</p>
+    <p class="footer-copy">&copy; 2025 Sykowni Chłopcy. Wszelkie prawa zastrzeżone.</p>
+  </div>
+</footer>
 
-  <!-- JavaScript for Hamburger, Language Switching & Footer Year -->
-  <script>
-    // Przełącznik języka
-    function setLanguage(lang) {
-      document.querySelectorAll('.lang').forEach(el => {
-        el.classList.add('hidden');
-      });
-      document.querySelectorAll('.lang.' + lang).forEach(el => {
-        el.classList.remove('hidden');
-      });
-      document.querySelectorAll('.lang-switch button').forEach(btn => {
-        btn.classList.remove('active');
-      });
-      document.getElementById('btn-' + lang).classList.add('active');
+<!-- Lightbox overlay for gallery images -->
+<div id="lightbox-overlay">
+  <span id="lightbox-prev" class="lightbox-arrow">&#10094;</span>
+  <img id="lightbox-img" src="#" alt="Large view" />
+  <span id="lightbox-next" class="lightbox-arrow">&#10095;</span>
+  <span id="lightbox-close">&times;</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init();
+  // Language switcher
+  const langSwitchPL = document.getElementById('lang-pl');
+  const langSwitchSK = document.getElementById('lang-sk');
+  let currentLang = 'pl';
+  function switchLanguage(lang) {
+    currentLang = lang;
+    document.querySelectorAll('[data-pl]').forEach(el => {
+  const tag = el.tagName.toLowerCase();
+  const text = el.getAttribute('data-' + lang);
+  if (!text) return;
+  if (tag === 'input' || tag === 'textarea' || tag === 'button') {
+    if (el.hasAttribute('placeholder')) el.placeholder = text;
+    if (tag === 'button') el.textContent = text;
+  } else {
+    el.textContent = text;
+  }
+});
+
+document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el => {
+  const ph = el.getAttribute('data-' + lang + '-ph');
+  if(ph) el.placeholder = ph;
+});
+    if(lang === 'pl') {
+      langSwitchPL.classList.add('active');
+      langSwitchSK.classList.remove('active');
+      document.documentElement.setAttribute('lang','pl');
+    } else {
+      langSwitchSK.classList.add('active');
+      langSwitchPL.classList.remove('active');
+      document.documentElement.setAttribute('lang','sk');
     }
-    setLanguage('pl');
+  }
+  langSwitchPL.addEventListener('click', () => switchLanguage('pl'));
+  langSwitchSK.addEventListener('click', () => switchLanguage('sk'));
+  // Responsive hamburger menu toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-center');
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    const targetElement = document.querySelector(targetId);
+    if (!targetElement) return;
 
-    // Aktualny rok w stopce
-    document.getElementById('year').textContent = new Date().getFullYear();
+    e.preventDefault();
 
-    // Obsługa menu hamburger
-    const menuToggle = document.getElementById('menu-toggle');
-    const navList = document.getElementById('nav-list');
-    menuToggle.addEventListener('click', () => {
-      navList.classList.toggle('open');
-      // Prosta animacja ikonki:
-      menuToggle.classList.toggle('open');
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const offsetPosition = targetPosition - navbarHeight;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
     });
-  </script>
+
+    // Zamknij hamburgera po kliknięciu
+    document.querySelector('.nav-center').classList.remove('open');
+    document.querySelector('.hamburger').classList.remove('open');
+  });
+});
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    hamburger.classList.toggle('open');
+  });
+  // Lightbox functionality
+  const lightboxOverlay = document.getElementById('lightbox-overlay');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxPrev = document.getElementById('lightbox-prev');
+  const lightboxNext = document.getElementById('lightbox-next');
+  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
+  let currentIndex = 0;
+
+  function showImage(index) {
+  currentIndex = (index + galleryImages.length) % galleryImages.length;
+  lightboxImg.src = galleryImages[currentIndex].src;
+  lightboxOverlay.style.display = 'flex';
+  document.body.classList.add('noscroll'); // zablokuj scroll
+}
+
+  galleryImages.forEach((img, index) => {
+    img.addEventListener('click', () => showImage(index));
+  });
+
+  lightboxClose.addEventListener('click', () => {
+  lightboxOverlay.style.display = 'none';
+  document.body.classList.remove('noscroll'); // odblokuj scroll
+});
+
+  lightboxOverlay.addEventListener('click', e => {
+  if (e.target === lightboxOverlay) {
+    lightboxOverlay.style.display = 'none';
+    document.body.classList.remove('noscroll'); // odblokuj scroll
+  }
+});
+
+  lightboxPrev.addEventListener('click', () => showImage(currentIndex - 1));
+  lightboxNext.addEventListener('click', () => showImage(currentIndex + 1));
+
+  // Scroll (mouse wheel)
+  lightboxOverlay.addEventListener('wheel', e => {
+    if (e.deltaY < 0) {
+      showImage(currentIndex - 1);
+    } else {
+      showImage(currentIndex + 1);
+    }
+  });
+
+  // Touch gestures for mobile
+  let touchStartX = 0;
+  lightboxOverlay.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  });
+
+  lightboxOverlay.addEventListener('touchend', e => {
+    const touchEndX = e.changedTouches[0].clientX;
+    if (touchStartX - touchEndX > 50) {
+      showImage(currentIndex + 1); // swipe left
+    } else if (touchEndX - touchStartX > 50) {
+      showImage(currentIndex - 1); // swipe right
+    }
+  });
+  // Form validation and submission simulation
+  const contactForm = document.getElementById('contact-form');
+  const formMessage = document.getElementById('form-message');
+  function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  }
+  document.addEventListener('click', function(event) {
+  const isClickInsideMenu = navLinks.contains(event.target);
+  const isClickOnHamburger = hamburger.contains(event.target);
+
+  if (!isClickInsideMenu && !isClickOnHamburger) {
+    navLinks.classList.remove('open');
+    hamburger.classList.remove('open');
+  }
+});
+contactForm.addEventListener('submit', async function(e) {
+  e.preventDefault(); // zablokuj przeładowanie
+
+  const formData = new FormData(contactForm);
+  const data = Object.fromEntries(formData.entries());
+
+  formMessage.textContent = currentLang === 'pl' ? 'Wysyłanie...' : 'Odosielanie...';
+  formMessage.className = 'form-message';
+
+  try {
+    const response = await fetch(contactForm.action, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json'
+      },
+      body: formData
+    });
+
+    if (response.ok) {
+      contactForm.reset();
+      formMessage.textContent = currentLang === 'pl' 
+        ? 'Dziękujemy! Twoja wiadomość została wysłana.' 
+        : 'Ďakujeme! Vaša správa bola odoslaná.';
+      formMessage.classList.add('success');
+    } else {
+      throw new Error('Server error');
+    }
+  } catch (error) {
+    formMessage.textContent = currentLang === 'pl' 
+      ? 'Wystąpił problem podczas wysyłania wiadomości. Spróbuj ponownie.' 
+      : 'Pri odosielaní správy sa vyskytol problém. Skúste znova.';
+    formMessage.classList.add('error');
+  }
+});
+const sections = document.querySelectorAll('section[id]');
+const navLinksList = document.querySelectorAll('.nav-links a');
+
+function setActiveNav() {
+  const scrollY = window.scrollY;
+  const viewportCenter = scrollY + window.innerHeight / 2;
+
+  let closestSection = null;
+  let closestDistance = Infinity;
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    const sectionTop = scrollY + rect.top;
+    const sectionCenter = sectionTop + section.offsetHeight / 2;
+    const distance = Math.abs(viewportCenter - sectionCenter);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestSection = section;
+    }
+  });
+
+  if (closestSection) {
+    const id = closestSection.getAttribute('id');
+    navLinksList.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+    });
+  }
+}
+
+window.addEventListener('scroll', setActiveNav);
+window.addEventListener('load', setActiveNav);
+</script>
 </body>
 </html>
