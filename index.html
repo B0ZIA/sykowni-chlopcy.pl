@@ -1105,6 +1105,14 @@ function setActiveNav() {
     }
   });
 
+const topBuffer = 450; // ile px od góry uznać za "blisko góry strony"
+
+  if (scrollY < topBuffer) {
+    // Za wysoko — nie podświetlamy niczego
+    navLinksList.forEach(link => link.classList.remove('active'));
+    return;
+  }
+
   if (closestSection) {
     const id = closestSection.getAttribute('id');
     navLinksList.forEach(link => {
