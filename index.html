@@ -1033,26 +1033,44 @@ document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el 
   // Responsive hamburger menu toggle
   const hamburger = document.querySelector('.hamburger');
   const navLinks = document.querySelector('.nav-links');
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    const targetId = this.getAttribute('href');
-    const targetElement = document.querySelector(targetId);
-    if (!targetElement) return;
+function scrollToSectionWithOffset(id) {
+  const target = document.querySelector(id);
+  if (!target) return;
 
-    e.preventDefault();
+  const navbarHeight = document.querySelector('.navbar').offsetHeight;
 
-    const navbarHeight = document.querySelector('.navbar').offsetHeight;
-    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-    const offsetPosition = targetPosition - navbarHeight;
+  // Wyłącz AOS chwilowo
+  document.querySelectorAll('[data-aos]').forEach(el => {
+    el.setAttribute('data-aos-disabled', el.getAttribute('data-aos'));
+    el.removeAttribute('data-aos');
+  });
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
+  const scrollTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight + 10;
+
+  window.scrollTo({
+    top: scrollTop,
+    behavior: 'smooth'
+  });
+
+  // Po krótkim czasie przywróć AOS
+  setTimeout(() => {
+    document.querySelectorAll('[data-aos-disabled]').forEach(el => {
+      el.setAttribute('data-aos', el.getAttribute('data-aos-disabled'));
+      el.removeAttribute('data-aos-disabled');
     });
+  }, 600); // 600ms = czas scrolla
+}
 
-    // Zamknij hamburgera po kliknięciu
+// Scrollowanie z menu
+document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const id = this.getAttribute('href');
+
     document.querySelector('.nav-links').classList.remove('open');
     document.querySelector('.hamburger').classList.remove('open');
+
+    scrollToSectionWithOffset(id);
   });
 });
   hamburger.addEventListener('click', () => {
