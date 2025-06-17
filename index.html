@@ -752,6 +752,13 @@
   color: var(--light-color);
   transform: scale(1.05);
 }
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.3);
+  outline: none;
+  transition: all 0.3s ease;
+}
 	
   </style>
 </head>
@@ -907,25 +914,32 @@
   <div class="contact-wrapper">
     <!-- Lewy blok: formularz -->
     <div class="contact-box" data-aos="fade-right">
-      <h3 class="contact-header" data-pl="Zapytaj o wycenę" data-sk="Požiadaj o cenovú ponuku">Zapytaj o wycenę</h3>
-      <form id="contact-form" action="https://formspree.io/f/xgvyvrle" method="POST">
-	    <input type="hidden" name="_subject" value="Sykowni Chłopcy - wiadomość z formularza">
-        <div class="form-group">
-          <label for="name" data-pl="Imię:" data-sk="Meno:">Imię:</label>
-          <input type="name" id="name" name="name" placeholder="Imię" required data-pl-ph="Imię" data-sk-ph="Meno" />
-        </div>
-        <div class="form-group">
-          <label for="email" data-pl="E-mail:" data-sk="E-mail:">E-mail:</label>
-          <input type="email" id="email" name="email" placeholder="E-mail" required data-pl-ph="E-mail" data-sk-ph="E-mail" />
-        </div>
-        <div class="form-group">
-          <label for="message" data-pl="Wiadomość:" data-sk="Správa:">Wiadomość:</label>
-          <textarea id="message" name="message" placeholder="Wiadomość" rows="5" required data-pl-ph="Wiadomość" data-sk-ph="Správa"></textarea>
-        </div>
-        <button type="submit" class="btn" data-pl="Wyślij" data-sk="Odoslať">Wyślij</button>
-        <p id="form-message" class="form-message"></p>
-      </form>
+  <h3 class="contact-header" data-pl="Zapytaj o wycenę" data-sk="Požiadaj o cenovú ponuku">Zapytaj o wycenę</h3>
+  <form id="contact-form" action="https://formspree.io/f/xgvyvrle" method="POST">
+    <input type="hidden" name="_subject" value="Sykowni Chłopcy - wiadomość z formularza">
+
+    <div class="form-group" data-aos="fade-up" data-aos-delay="0">
+      <label for="name" data-pl="Imię:" data-sk="Meno:">Imię:</label>
+      <input type="text" id="name" name="name" placeholder="Imię" required data-pl-ph="Imię" data-sk-ph="Meno" />
     </div>
+
+    <div class="form-group" data-aos="fade-up" data-aos-delay="100">
+      <label for="email" data-pl="E-mail:" data-sk="E-mail:">E-mail:</label>
+      <input type="email" id="email" name="email" placeholder="E-mail" required data-pl-ph="E-mail" data-sk-ph="E-mail" />
+    </div>
+
+    <div class="form-group" data-aos="fade-up" data-aos-delay="200">
+      <label for="message" data-pl="Wiadomość:" data-sk="Správa:">Wiadomość:</label>
+      <textarea id="message" name="message" placeholder="Wiadomość" rows="5" required data-pl-ph="Wiadomość" data-sk-ph="Správa"></textarea>
+    </div>
+
+    <div data-aos="zoom-in" data-aos-delay="300">
+      <button type="submit" class="btn animated-submit" data-pl="Wyślij" data-sk="Odoslať">Wyślij</button>
+    </div>
+
+    <p id="form-message" class="form-message"></p>
+  </form>
+</div>
 
     <!-- Prawy blok: dane kontaktowe -->
     <div class="contact-box contact-info" data-aos="fade-left">
@@ -966,7 +980,11 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-  AOS.init();
+  AOS.init({
+  duration: 800,
+  once: false,
+  easing: 'ease-in-out'
+});
   function scrollToTop() {
   window.scrollTo({
     top: 0,
@@ -1116,36 +1134,38 @@ document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el 
   }
 });
 contactForm.addEventListener('submit', async function(e) {
-  e.preventDefault(); // zablokuj przeładowanie
+  e.preventDefault();
 
   const formData = new FormData(contactForm);
   const data = Object.fromEntries(formData.entries());
 
-  formMessage.textContent = currentLang === 'pl' ? 'Wysyłanie...' : 'Odosielanie...';
+  const sendingText = currentLang === 'pl' ? 'Wysyłanie...' : 'Odosielanie...';
+  const successText = currentLang === 'pl'
+    ? 'Dziękujemy! Twoja wiadomość została wysłana.'
+    : 'Ďakujeme! Vaša správa bola odoslaná.';
+  const errorText = currentLang === 'pl'
+    ? 'Wystąpił problem podczas wysyłania wiadomości. Spróbuj ponownie.'
+    : 'Pri odosielaní správy sa vyskytol problém. Skúste znova.';
+
+  formMessage.textContent = sendingText;
   formMessage.className = 'form-message';
 
   try {
     const response = await fetch(contactForm.action, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json'
-      },
+      headers: { 'Accept': 'application/json' },
       body: formData
     });
 
     if (response.ok) {
       contactForm.reset();
-      formMessage.textContent = currentLang === 'pl' 
-        ? 'Dziękujemy! Twoja wiadomość została wysłana.' 
-        : 'Ďakujeme! Vaša správa bola odoslaná.';
+      formMessage.textContent = successText;
       formMessage.classList.add('success');
     } else {
       throw new Error('Server error');
     }
   } catch (error) {
-    formMessage.textContent = currentLang === 'pl' 
-      ? 'Wystąpił problem podczas wysyłania wiadomości. Spróbuj ponownie.' 
-      : 'Pri odosielaní správy sa vyskytol problém. Skúste znova.';
+    formMessage.textContent = errorText;
     formMessage.classList.add('error');
   }
 });
