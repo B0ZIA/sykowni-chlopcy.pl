@@ -1,5 +1,23 @@
 <!DOCTYPE html>
 <html lang="pl">
+<script>
+  (function() {
+    const savedLang = localStorage.getItem('preferredLang');
+    if (savedLang === 'sk') {
+      document.documentElement.setAttribute('lang', 'sk');
+      window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('lang-sk')?.classList.add('active');
+        document.getElementById('lang-pl')?.classList.remove('active');
+      });
+    } else {
+      document.documentElement.setAttribute('lang', 'pl');
+      window.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('lang-pl')?.classList.add('active');
+        document.getElementById('lang-sk')?.classList.remove('active');
+      });
+    }
+  })();
+</script>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -777,7 +795,7 @@
   </ul>
   <div class="nav-right">
     <div class="lang-switch">
-      <button type="button" id="lang-pl" class="active">PL</button>
+      <button type="button" id="lang-pl">PL</button>
       <button type="button" id="lang-sk">SK</button>
     </div>
     <div class="hamburger">
@@ -980,169 +998,126 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 <script>
-  AOS.init({
+AOS.init({
   duration: 800,
   once: true,
   easing: 'ease-in-out'
 });
-  function scrollToTop() {
+
+// Scroll do góry po kliknięciu logo
+function scrollToTop() {
   window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
 
-  // zamyka hamburgera jeśli otwarty
   document.querySelector('.nav-links')?.classList.remove('open');
   document.querySelector('.hamburger')?.classList.remove('open');
 }
-  // Language switcher
-  const langSwitchPL = document.getElementById('lang-pl');
-  const langSwitchSK = document.getElementById('lang-sk');
-  let currentLang = 'pl';
-  function switchLanguage(lang) {
-    currentLang = lang;
-    document.querySelectorAll('[data-pl]').forEach(el => {
-  const tag = el.tagName.toLowerCase();
-  const text = el.getAttribute('data-' + lang);
-  if (!text) return;
-  if (tag === 'input' || tag === 'textarea' || tag === 'button') {
-    if (el.hasAttribute('placeholder')) el.placeholder = text;
-    if (tag === 'button') el.textContent = text;
-  } else {
-    el.textContent = text;
-  }
-});
 
-
-document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el => {
-  const ph = el.getAttribute('data-' + lang + '-ph');
-  if(ph) el.placeholder = ph;
-});
-    if(lang === 'pl') {
-      langSwitchPL.classList.add('active');
-      langSwitchSK.classList.remove('active');
-      document.documentElement.setAttribute('lang','pl');
-    } else {
-      langSwitchSK.classList.add('active');
-      langSwitchPL.classList.remove('active');
-      document.documentElement.setAttribute('lang','sk');
-    }
-  }
-  langSwitchPL.addEventListener('click', () => switchLanguage('pl'));
-  langSwitchSK.addEventListener('click', () => switchLanguage('sk'));
-  // Responsive hamburger menu toggle
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links');
+// Przewijanie z offsetem, bez zaburzania przez AOS
 function scrollToSectionWithOffset(id) {
   const target = document.querySelector(id);
   if (!target) return;
 
   const navbarHeight = document.querySelector('.navbar').offsetHeight;
 
-  // Wyłącz AOS chwilowo
+  // Tymczasowo wyłącz AOS (bo powoduje zmianę layoutu)
   document.querySelectorAll('[data-aos]').forEach(el => {
     el.setAttribute('data-aos-disabled', el.getAttribute('data-aos'));
     el.removeAttribute('data-aos');
   });
 
-  const scrollTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight + 10;
+  const offsetTop = target.getBoundingClientRect().top + window.scrollY - navbarHeight + 10;
 
   window.scrollTo({
-    top: scrollTop,
+    top: offsetTop,
     behavior: 'smooth'
   });
 
-  // Po krótkim czasie przywróć AOS
   setTimeout(() => {
     document.querySelectorAll('[data-aos-disabled]').forEach(el => {
       el.setAttribute('data-aos', el.getAttribute('data-aos-disabled'));
       el.removeAttribute('data-aos-disabled');
     });
-  }, 600); // 600ms = czas scrolla
+  }, 600);
 }
 
-// Scrollowanie z menu
+// Obsługa kliknięć w menu
 document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
   link.addEventListener('click', function(e) {
     e.preventDefault();
     const id = this.getAttribute('href');
 
-    document.querySelector('.nav-links').classList.remove('open');
-    document.querySelector('.hamburger').classList.remove('open');
+    document.querySelector('.nav-links')?.classList.remove('open');
+    document.querySelector('.hamburger')?.classList.remove('open');
 
     scrollToSectionWithOffset(id);
   });
 });
-  hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('open');
-    hamburger.classList.toggle('open');
-  });
-  // Lightbox functionality
-  const lightboxOverlay = document.getElementById('lightbox-overlay');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const lightboxClose = document.getElementById('lightbox-close');
-  const lightboxPrev = document.getElementById('lightbox-prev');
-  const lightboxNext = document.getElementById('lightbox-next');
-  const galleryImages = Array.from(document.querySelectorAll('.gallery-grid img'));
-  let currentIndex = 0;
 
-  function showImage(index) {
-  currentIndex = (index + galleryImages.length) % galleryImages.length;
-  lightboxImg.src = galleryImages[currentIndex].src;
-  lightboxOverlay.style.display = 'flex';
-  document.body.classList.add('noscroll'); // zablokuj scroll
+// Hamburger menu
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  hamburger.classList.toggle('open');
+});
+
+// Scroll do góry przycisk
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 200) {
+    scrollToTopBtn.classList.add("show");
+  } else {
+    scrollToTopBtn.classList.remove("show");
+  }
+});
+
+scrollToTopBtn.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  navLinks.classList.remove('open');
+  hamburger.classList.remove('open');
+});
+
+// Ustawianie aktywnej sekcji w menu
+const sections = document.querySelectorAll('section[id]');
+const navLinksList = document.querySelectorAll('.nav-links a');
+
+function setActiveNav() {
+  const scrollY = window.scrollY;
+  const viewportCenter = scrollY + window.innerHeight / 2;
+
+  let closestSection = null;
+  let closestDistance = Infinity;
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    const sectionTop = scrollY + rect.top;
+    const sectionCenter = sectionTop + section.offsetHeight / 2;
+    const distance = Math.abs(viewportCenter - sectionCenter);
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestSection = section;
+    }
+  });
+
+  if (closestSection) {
+    const id = closestSection.getAttribute('id');
+    navLinksList.forEach(link => {
+      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+    });
+  }
 }
 
-  galleryImages.forEach((img, index) => {
-    img.addEventListener('click', () => showImage(index));
-  });
+window.addEventListener('scroll', setActiveNav);
+window.addEventListener('load', setActiveNav);
 
-  lightboxClose.addEventListener('click', () => {
-  lightboxOverlay.style.display = 'none';
-  document.body.classList.remove('noscroll'); // odblokuj scroll
-});
-
-  lightboxOverlay.addEventListener('click', e => {
-  if (e.target === lightboxOverlay) {
-    lightboxOverlay.style.display = 'none';
-    document.body.classList.remove('noscroll'); // odblokuj scroll
-  }
-});
-
-  lightboxPrev.addEventListener('click', () => showImage(currentIndex - 1));
-  lightboxNext.addEventListener('click', () => showImage(currentIndex + 1));
-
-  // Scroll (mouse wheel)
-  lightboxOverlay.addEventListener('wheel', e => {
-    if (e.deltaY < 0) {
-      showImage(currentIndex - 1);
-    } else {
-      showImage(currentIndex + 1);
-    }
-  });
-
-  // Touch gestures for mobile
-  let touchStartX = 0;
-  lightboxOverlay.addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-  });
-
-  lightboxOverlay.addEventListener('touchend', e => {
-    const touchEndX = e.changedTouches[0].clientX;
-    if (touchStartX - touchEndX > 50) {
-      showImage(currentIndex + 1); // swipe left
-    } else if (touchEndX - touchStartX > 50) {
-      showImage(currentIndex - 1); // swipe right
-    }
-  });
-  // Form validation and submission simulation
-  const contactForm = document.getElementById('contact-form');
-  const formMessage = document.getElementById('form-message');
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  }
-  document.addEventListener('click', function(event) {
+// Zamykanie menu po kliknięciu poza
+document.addEventListener('click', function(event) {
   const isClickInsideMenu = navLinks.contains(event.target);
   const isClickOnHamburger = hamburger.contains(event.target);
 
@@ -1151,6 +1126,60 @@ document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
     hamburger.classList.remove('open');
   }
 });
+
+// Obsługa języków PL/SK
+const langSwitchPL = document.getElementById('lang-pl');
+const langSwitchSK = document.getElementById('lang-sk');
+let currentLang = 'pl';
+
+function switchLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('preferredLang', lang);
+
+  document.querySelectorAll('[data-pl]').forEach(el => {
+    const tag = el.tagName.toLowerCase();
+    const text = el.getAttribute('data-' + lang);
+    if (!text) return;
+    if (tag === 'input' || tag === 'textarea' || tag === 'button') {
+      if (el.hasAttribute('placeholder')) el.placeholder = text;
+      if (tag === 'button') el.textContent = text;
+    } else {
+      el.textContent = text;
+    }
+  });
+
+  document.querySelectorAll('input[data-pl-ph], textarea[data-pl-ph]').forEach(el => {
+    const ph = el.getAttribute('data-' + lang + '-ph');
+    if (ph) el.placeholder = ph;
+  });
+
+  if (lang === 'pl') {
+    langSwitchPL.classList.add('active');
+    langSwitchSK.classList.remove('active');
+    document.documentElement.setAttribute('lang', 'pl');
+  } else {
+    langSwitchSK.classList.add('active');
+    langSwitchPL.classList.remove('active');
+    document.documentElement.setAttribute('lang', 'sk');
+  }
+}
+
+// Wybrany język od razu po starcie
+const savedLang = localStorage.getItem('preferredLang') || 'pl';
+switchLanguage(savedLang);
+
+langSwitchPL.addEventListener('click', () => switchLanguage('pl'));
+langSwitchSK.addEventListener('click', () => switchLanguage('sk'));
+
+// Formularz kontaktowy — obsługa wysyłki
+const contactForm = document.getElementById('contact-form');
+const formMessage = document.getElementById('form-message');
+
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
 contactForm.addEventListener('submit', async function(e) {
   e.preventDefault();
 
@@ -1187,57 +1216,6 @@ contactForm.addEventListener('submit', async function(e) {
     formMessage.classList.add('error');
   }
 });
-const sections = document.querySelectorAll('section[id]');
-const navLinksList = document.querySelectorAll('.nav-links a');
-
-function setActiveNav() {
-  const scrollY = window.scrollY;
-  const viewportCenter = scrollY + window.innerHeight / 2;
-
-  let closestSection = null;
-  let closestDistance = Infinity;
-
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
-    const sectionTop = scrollY + rect.top;
-    const sectionCenter = sectionTop + section.offsetHeight / 2;
-    const distance = Math.abs(viewportCenter - sectionCenter);
-
-    if (distance < closestDistance) {
-      closestDistance = distance;
-      closestSection = section;
-    }
-  });
-
-  if (closestSection) {
-    const id = closestSection.getAttribute('id');
-    navLinksList.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-    });
-  }
-}
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 200) {
-    scrollToTopBtn.classList.add("show");
-  } else {
-    scrollToTopBtn.classList.remove("show");
-  }
-});
-
-scrollToTopBtn.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-
-  document.querySelector('.nav-links')?.classList.remove('open');
-  document.querySelector('.hamburger')?.classList.remove('open');
-});
-
-window.addEventListener('scroll', setActiveNav);
-window.addEventListener('load', setActiveNav);
 </script>
 </body>
 </html>
