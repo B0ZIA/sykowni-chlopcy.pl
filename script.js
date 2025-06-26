@@ -144,3 +144,54 @@ if (contactForm) {
     }
   });
 }
+
+//gallery
+const galleryPairs = document.querySelectorAll('.gallery-pair');
+const overlay = document.getElementById('lightbox-overlay');
+const beforeImg = document.getElementById('lightbox-before');
+const afterImg = document.getElementById('lightbox-after');
+let currentIndex = 0;
+
+function disableScroll() {
+  document.body.classList.add('noscroll');
+  document.documentElement.classList.add('noscroll');
+}
+
+function enableScroll() {
+  document.body.classList.remove('noscroll');
+  document.documentElement.classList.remove('noscroll');
+}
+
+function showPair(index) {
+  const pair = galleryPairs[index];
+  beforeImg.src = pair.children[0].src;
+  afterImg.src = pair.children[1].src;
+  overlay.style.display = 'flex';
+  disableScroll();
+  currentIndex = index;
+}
+
+function closeOverlay() {
+  overlay.style.display = 'none';
+  enableScroll();
+}
+
+galleryPairs.forEach((pair, index) => {
+  pair.addEventListener('click', () => showPair(index));
+});
+
+document.getElementById('lightbox-close').onclick = closeOverlay;
+
+document.getElementById('lightbox-prev').onclick = () => {
+  currentIndex = (currentIndex - 1 + galleryPairs.length) % galleryPairs.length;
+  showPair(currentIndex);
+};
+
+document.getElementById('lightbox-next').onclick = () => {
+  currentIndex = (currentIndex + 1) % galleryPairs.length;
+  showPair(currentIndex);
+};
+
+overlay.addEventListener('click', e => {
+  if (e.target === overlay) closeOverlay();
+});

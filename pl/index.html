@@ -149,15 +149,22 @@
 <section id="gallery" data-aos="fade-up">
   <h2>Galeria realizacji</h2>
   <div class="gallery-grid">
-    <!-- Galeria bez zmian, alt text możesz dostosować -->
-    <div class="gallery-item" data-aos="zoom-in"><img src="../galery_1.jpg" alt="Realizacja 1" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../galery_2.jpg" alt="Realizacja 2" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../rynny.jpg" alt="Realizacja rynien" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../mian_background.jpg" alt="Realizacja elewacji" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../ocieplenia.jpg" alt="Realizacja ocieplenia" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../tynk.jpg" alt="Realizacja tynku" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../podbitki.jpg" alt="Realizacja podbitki" /></div>
-    <div class="gallery-item" data-aos="zoom-in"><img src="../cos.jpg" alt="Inna realizacja" /></div>
+    <div class="gallery-pair" data-index="0">
+      <img src="../galery_1.jpg" alt="Przed 1" class="gallery-thumb" />
+      <img src="../galery_2.jpg" alt="Po 1" class="gallery-thumb" />
+    </div>
+    <div class="gallery-pair" data-index="1">
+      <img src="../rynny.jpg" alt="Przed 2" class="gallery-thumb" />
+      <img src="../mian_background.jpg" alt="Po 2" class="gallery-thumb" />
+    </div>
+	<div class="gallery-pair" data-index="1">
+      <img src="../rynny.jpg" alt="Przed 2" class="gallery-thumb" />
+      <img src="../mian_background.jpg" alt="Po 2" class="gallery-thumb" />
+    </div>
+	<div class="gallery-pair" data-index="1">
+      <img src="../rynny.jpg" alt="Przed 2" class="gallery-thumb" />
+      <img src="../mian_background.jpg" alt="Po 2" class="gallery-thumb" />
+    </div>
   </div>
 </section>
 
@@ -215,13 +222,17 @@
   </div>
 </footer>
 
-<!-- Lightbox overlay for gallery images -->
+<!-- Lightbox dla pary zdjęć -->
 <div id="lightbox-overlay">
-  <span id="lightbox-prev" class="lightbox-arrow">&#10094;</span>
-  <img id="lightbox-img" src="#" alt="Large view" />
-  <span id="lightbox-next" class="lightbox-arrow">&#10095;</span>
   <span id="lightbox-close">&times;</span>
+  <div class="lightbox-content">
+    <img id="lightbox-before" src="#" alt="Zdjęcie przed" />
+    <img id="lightbox-after" src="#" alt="Zdjęcie po" />
+  </div>
+  <span id="lightbox-prev" class="lightbox-arrow">&#10094;</span>
+  <span id="lightbox-next" class="lightbox-arrow">&#10095;</span>
 </div>
+
 <button id="scrollToTopBtn" title="Do góry">
   <i class="fas fa-chevron-up"></i>
 </button>
