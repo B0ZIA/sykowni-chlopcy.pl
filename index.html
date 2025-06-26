@@ -1,6 +1,5 @@
 <script>
-  const savedLang = localStorage.getItem('preferredLang');
-  const lang = savedLang || (navigator.language.startsWith('sk') ? 'sk' : 'pl');
+  const lang = (navigator.language.startsWith('sk') ? 'sk' : 'pl');
   window.location.href = '/' + lang + '/';
 </script>
 <head>
