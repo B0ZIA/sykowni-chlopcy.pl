@@ -192,6 +192,19 @@ document.getElementById('lightbox-next').onclick = () => {
   showPair(currentIndex);
 };
 
-overlay.addEventListener('click', e => {
-  if (e.target === overlay) closeOverlay();
-});
+function overlayBackgroundClick(e) {
+  const clickedImage = e.target.closest('.lightbox-content img');
+  const clickedPrev  = e.target.closest('#lightbox-prev');
+  const clickedNext  = e.target.closest('#lightbox-next');
+  const clickedClose = e.target.closest('#lightbox-close');
+
+  // Nie zamykaj, jeśli kliknięto zdjęcie lub kontrolki
+  if (clickedImage || clickedPrev || clickedNext || clickedClose) return;
+
+  // Kliknięto tło / puste miejsce -> zamknij
+  closeOverlay();
+}
+
+overlay.addEventListener('click', overlayBackgroundClick);
+// na niektórych mobilnych przeglądarkach lepiej też:
+overlay.addEventListener('touchstart', overlayBackgroundClick, { passive: true });
