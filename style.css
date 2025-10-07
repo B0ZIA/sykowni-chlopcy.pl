@@ -723,3 +723,68 @@
   outline: none;
   transition: all 0.3s ease;
 }
+/* --- GALERIA RESPONSYWNA --- */
+@media (max-width: 768px) {
+  .gallery-grid {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .gallery-pair {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .gallery-pair img {
+    width: 90%;
+    max-width: 400px;
+  }
+}
+/* --- LIGHTBOX: widok mobilny (ulepszony) --- */
+@media (max-width: 768px) {
+  .lightbox-content {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 100%;
+  }
+
+  .lightbox-content img {
+    width: auto;
+    max-width: 90vw;
+    max-height: 45vh; /* dwa zdjęcia mieszczą się w ekranie */
+    object-fit: contain;
+  }
+
+  /* Strzałki – wyśrodkowane pionowo po bokach */
+  #lightbox-prev,
+  #lightbox-next {
+    display: block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    cursor: pointer;
+    user-select: none;
+    z-index: 10000;
+  }
+
+  #lightbox-prev {
+    left: 20px;
+  }
+
+  #lightbox-next {
+    right: 20px;
+  }
+
+  /* X w prawym górnym rogu */
+  #lightbox-close {
+    top: 10px;
+    right: 20px;
+    font-size: 2.5rem;
+  }
+}
