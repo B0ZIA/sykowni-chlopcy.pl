@@ -45,7 +45,15 @@
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 20px); -webkit-text-size-adjust: 100%; }
+html {
+  scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 20px);
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+/* fallback dla starszych przeglądarek bez overflow:clip */
+@supports not (overflow: clip) {
+  html { overflow-x: hidden; }
+}
 
 body {
   font-family: var(--font-body);
@@ -53,8 +61,9 @@ body {
   background: var(--bg);
   line-height: 1.7;
   font-size: 1rem;
-  overflow-x: hidden;
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
 }
 body.noscroll { overflow: hidden !important; }
 
@@ -75,11 +84,12 @@ h1, h2, h3, h4 {
 .bg-dark { background: var(--bg-dark); color: rgba(255, 255, 255, 0.78); }
 
 .skip-link {
-  position: absolute; left: -9999px; top: 0; z-index: 10001;
+  position: fixed; left: 0; top: 0; z-index: 10001;
+  transform: translateY(-120%);
   background: var(--accent); color: #fff; padding: 12px 20px; border-radius: 0 0 12px 0;
-  font-weight: 600; text-decoration: none;
+  font-weight: 600; text-decoration: none; transition: transform 0.2s ease;
 }
-.skip-link:focus { left: 0; }
+.skip-link:focus { transform: translateY(0); }
 
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
 
@@ -209,8 +219,23 @@ h1, h2, h3, h4 {
 .hero-chips li {
   display: flex; align-items: center; gap: 10px;
   font-size: 0.92rem; font-weight: 500; color: rgba(255, 255, 255, 0.85);
+  padding: 8px 14px; margin: -8px 0; border-radius: 999px;
+  border: 1px solid transparent;
+  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease, transform 0.4s var(--ease);
 }
-.hero-chips i { color: var(--accent); font-size: 1rem; }
+.hero-chips li:hover {
+  color: #fff; transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+.hero-chips i {
+  color: var(--accent); font-size: 1rem;
+  transition: transform 0.45s var(--ease), color 0.3s ease, filter 0.3s ease;
+}
+.hero-chips li:hover i {
+  color: var(--accent-soft); transform: scale(1.2);
+  filter: drop-shadow(0 0 10px rgba(255, 138, 0, 0.6));
+}
 
 .hero-scroll {
   position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 2;
@@ -234,6 +259,7 @@ h1, h2, h3, h4 {
 .stat-num {
   display: block; font-family: var(--font-head); font-weight: 800;
   font-size: clamp(2.1rem, 3vw, 2.9rem); color: var(--accent-soft); line-height: 1.1;
+  transition: color 0.3s ease;
 }
 .stat-label { display: block; color: rgba(255, 255, 255, 0.66); font-size: 0.9rem; margin-top: 6px; }
 
@@ -278,14 +304,29 @@ h1, h2, h3, h4 {
 .about-text .lead { font-size: 1.12rem; color: var(--text); font-weight: 500; margin-bottom: 16px; }
 .about-text p { color: var(--text-muted); }
 
-.about-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 20px 26px; margin: 34px 0 10px; }
-.about-list li { display: flex; gap: 14px; align-items: flex-start; }
+.about-list { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 4px 12px; margin: 28px 0 4px; }
+.about-list li {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 12px 14px; border-radius: 14px;
+  border: 1px solid transparent;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+}
+.about-list li:hover {
+  background: var(--bg-light); border-color: var(--border);
+  transform: translateY(-3px); box-shadow: var(--shadow-sm);
+}
 .about-list i {
   flex-shrink: 0; width: 38px; height: 38px; border-radius: 11px;
   background: var(--accent-tint); color: var(--accent);
   display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.45s var(--ease), box-shadow 0.3s ease;
 }
-.about-list strong { display: block; font-family: var(--font-head); font-size: 0.98rem; color: var(--primary); }
+.about-list li:hover i {
+  background: var(--accent); color: #fff;
+  transform: rotate(-6deg) scale(1.06); box-shadow: 0 8px 18px rgba(255, 138, 0, 0.3);
+}
+.about-list strong { display: block; font-family: var(--font-head); font-size: 0.98rem; color: var(--primary); transition: color 0.3s ease; }
+.about-list li:hover strong { color: var(--accent-hover); }
 .about-list span { display: block; font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; }
 
 .about-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; margin-top: 30px; }
@@ -630,8 +671,8 @@ a.info-item:hover .icon-circle { background: var(--accent); transform: rotate(-6
   #hero { min-height: 0; padding: 58px 0 66px; }
   .hero-scroll { display: none; }
   .hero-actions { display: none; }
-  #hero h1 { font-size: 2.6rem; line-height: 1.1; margin-bottom: 18px; }
-  #hero h1 br { display: none; }
+  /* rozmiar dobrany tak, żeby „Ocieplenia i elewacje,” zawsze mieściło się w jednej linii */
+  #hero h1 { font-size: min(8.5vw, 3.2rem); line-height: 1.14; margin-bottom: 18px; }
   .hero-subtitle { font-size: 1rem; max-width: none; }
   .hero-chips {
     display: grid; grid-template-columns: 1fr; gap: 0;
@@ -639,10 +680,11 @@ a.info-item:hover .icon-circle { background: var(--accent); transform: rotate(-6
     border-top: 1px solid rgba(255, 255, 255, 0.15);
   }
   .hero-chips li {
-    gap: 13px; padding: 12px 2px; color: #fff;
-    font-size: 0.95rem; font-weight: 600;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    gap: 13px; padding: 12px 10px; margin: 0; color: #fff;
+    font-size: 0.95rem; font-weight: 600; border-radius: 12px;
+    border: none; border-bottom: 1px solid rgba(255, 255, 255, 0.15);
   }
+  .hero-chips li:hover { transform: none; border-color: transparent; }
   .hero-chips i {
     flex-shrink: 0; width: 32px; height: 32px; border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
@@ -664,7 +706,8 @@ a.info-item:hover .icon-circle { background: var(--accent); transform: rotate(-6
   .about-badge { left: 0; top: 14px; padding: 11px 16px; gap: 10px; }
   .about-badge-num { font-size: 1.9rem; }
   .about-badge-txt { font-size: 0.78rem; }
-  .about-list { gap: 16px; margin: 28px 0 6px; }
+  .about-list { gap: 4px; margin: 24px 0 4px; }
+  .about-list li:hover { transform: none; }
   .about-actions { gap: 8px; margin-top: 26px; }
   .about-actions .btn-primary { width: 100%; }
   .about-actions .btn-link { width: 100%; justify-content: center; }
@@ -760,11 +803,47 @@ a.info-item:hover .icon-circle { background: var(--accent); transform: rotate(-6
   #lightbox-close { top: 12px; right: 16px; font-size: 2.2rem; }
 }
 
+/* na wąskich ekranach animacje wjeżdżają z dołu, nie z boków –
+   inaczej tworzą poziomy nadmiar i stronę da się przesuwać w bok */
+@media (max-width: 992px) {
+  [data-aos="fade-right"], [data-aos="fade-left"] { transform: translate3d(0, 40px, 0); }
+  [data-aos="fade-right"].aos-animate, [data-aos="fade-left"].aos-animate { transform: translate3d(0, 0, 0); }
+}
+
+/* ================= REAKCJE NA DOTYK ================= */
+a, button, select, .gallery-card, .service-item, .faq-q, .info-item { touch-action: manipulation; }
+
+@media (hover: none) {
+  .service-item:active, .process-step:active, .faq-item:active { transform: scale(0.985); }
+  .gallery-card:active .img-wrap { transform: scale(0.965); }
+  .btn:active, .mobile-bar-btn:active { transform: scale(0.955); }
+  a.info-item:active { transform: scale(0.98); background: #fff; border-color: var(--accent); }
+  .faq-q:active { background: var(--bg-light); }
+  .nav-links a:active, .footer-col a:active { color: var(--accent); }
+
+  /* zaznaczanie atutów po dotknięciu */
+  .about-list li:active {
+    background: var(--bg-light); border-color: var(--border); transform: scale(0.985);
+  }
+  .about-list li:active i {
+    background: var(--accent); color: #fff;
+    transform: rotate(-6deg) scale(1.06); box-shadow: 0 8px 18px rgba(255, 138, 0, 0.3);
+  }
+  .about-list li:active strong { color: var(--accent-hover); }
+
+  .hero-chips li:active { background: rgba(255, 255, 255, 0.1); }
+  .hero-chips li:active i {
+    background: var(--accent); color: #fff;
+    transform: scale(1.08); filter: none;
+  }
+
+  .stat:active .stat-num { color: #fff; }
+}
+
 /* małe telefony */
 @media (max-width: 430px) {
   .wrap { padding-left: 18px; padding-right: 18px; }
-  #hero h1 { font-size: 2.3rem; }
-  .hero-chips li { font-size: 0.9rem; gap: 11px; padding: 11px 0; }
+  .hero-chips li { font-size: 0.9rem; gap: 11px; padding: 11px 8px; }
   .hero-chips i { width: 30px; height: 30px; font-size: 0.82rem; }
   .stat { padding: 16px 4px; }
   .stat-num { font-size: 1.95rem; }
