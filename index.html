@@ -1,222 +1,598 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Sykowni Chłopcy",
-  "image": "https://sykowni-chlopcy.pl/banner_new.png",
-  "address": {
-    "@type": "PostalAddress",
-    "streetAddress": "Biała Niżna",
-    "addressLocality": "Grybów",
-    "postalCode": "33-330",
-    "addressCountry": "PL"
-  },
-  "telephone": "+48 574 977 131",
-  "email": "grygieltomek99@gmail.com",
-  "url": "https://sykowni-chlopcy.pl/",
-  "priceRange": "$"
-}
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sykowni Chłopcy – Prace budowlane</title>
-  <link rel="icon" href="https://sykowni-chlopcy.pl/favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">  
+  <title>Sykowni Chłopcy – Ocieplenia, elewacje i prace budowlane | Grybów</title>
+  <meta name="description" content="Ocieplenia budynków, tynki zewnętrzne, podbitki, prace blacharskie, parapety i rynny. Własny sprzęt, kompleksowa obsługa materiałów, gwarancja i darmowa wycena z dojazdem. Grybów, Małopolska i Słowacja." />
+  <meta name="theme-color" content="#0B1F3A" />
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
   <link rel="canonical" href="https://sykowni-chlopcy.pl/" />
   <link rel="alternate" hreflang="pl" href="https://sykowni-chlopcy.pl/" />
   <link rel="alternate" hreflang="sk" href="https://sykowni-chlopcy.sk/" />
-  <meta name="description" content="Profesjonalne usługi budowlane w Polsce i na Słowacji. Ocieplenia, tynki, podbitki, prace blacharskie, parapety, rynny i więcej." />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pl_PL" />
+  <meta property="og:site_name" content="Sykowni Chłopcy" />
+  <meta property="og:title" content="Sykowni Chłopcy – Ocieplenia, elewacje i prace budowlane" />
+  <meta property="og:description" content="Własny sprzęt, kompleksowa obsługa materiałów, gwarancja i darmowa wycena z dojazdem na miejsce." />
+  <meta property="og:image" content="https://sykowni-chlopcy.pl/modern_1.jpg" />
+  <meta property="og:url" content="https://sykowni-chlopcy.pl/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+  <link rel="stylesheet" href="style.css?v=9" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Sykowni Chłopcy",
+    "image": "https://sykowni-chlopcy.pl/banner_new.png",
+    "description": "Ocieplenia budynków, tynki zewnętrzne, podbitki dachowe, prace blacharskie, parapety i rynny. Usługi budowlane na terenie Polski i Słowacji.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Grybów",
+      "postalCode": "33-330",
+      "addressCountry": "PL"
+    },
+    "telephone": "+48 574 977 131",
+    "email": "grygieltomek99@gmail.com",
+    "url": "https://sykowni-chlopcy.pl/",
+    "priceRange": "$$",
+    "areaServed": ["Polska", "Słowacja"],
+    "foundingDate": "2024",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Usługi budowlane",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ocieplenie budynków" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tynk zewnętrzny" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Prace blacharskie" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Parapety i rynny" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podbitka dachowa" } }
+      ]
+    }
+  }
+  </script>
 </head>
-<body>
+<body id="top">
+
+<a class="skip-link" href="#main">Przejdź do treści</a>
+
+<nav class="navbar" id="navbar">
+  <div class="wrap nav-container">
+    <a href="#top" class="nav-logo" aria-label="Sykowni Chłopcy – strona główna">
+      <img src="banner_new.png" alt="Sykowni Chłopcy" class="hero-logo" />
+    </a>
+
+    <ul class="nav-center nav-links" id="nav-links">
+      <li><a href="#about">O firmie</a></li>
+      <li><a href="#services">Usługi</a></li>
+      <li><a href="#process">Jak pracujemy</a></li>
+      <li><a href="#gallery">Realizacje</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact-section">Kontakt</a></li>
+      <li class="nav-cta-mobile"><a href="#contact-section" class="btn btn-accent btn-sm">Darmowa wycena</a></li>
+    </ul>
+
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Wybór języka">
+        <a href="https://sykowni-chlopcy.pl/" class="lang-btn is-active">PL</a>
+        <a href="https://sykowni-chlopcy.sk/" class="lang-btn">SK</a>
+        <span class="lang-pill"></span>
+      </div>
+      <a href="#contact-section" class="btn btn-accent btn-sm nav-cta">Darmowa wycena</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
 
 <header id="hero">
-  <nav class="navbar">
-    <div class="nav-left">
-      <img src="banner_new.png" alt="Sykowni Chłopcy Logo" class="hero-logo" style="cursor: pointer;" onclick="scrollToTop()" />
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="wrap hero-content">
+    <h1 data-aos="fade-up">Ocieplenia i elewacje,<br /><span class="grad">które robi się raz</span></h1>
+    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+      Ustalamy, doradzamy, wykonujemy i zostawiamy porządek. Kompleksowe prace budowlane
+      na własnym sprzęcie – z gwarancją i terminem, który się nie zmienia.
+    </p>
+    <div class="hero-actions" data-aos="fade-up" data-aos-delay="180">
+      <a href="#contact-section" class="btn btn-accent btn-lg">Zamów darmową wycenę <i class="fas fa-arrow-right"></i></a>
+      <a href="tel:+48574977131" class="btn btn-ghost btn-lg"><i class="fas fa-phone-alt"></i> +48 574 977 131</a>
     </div>
-    <ul class="nav-center nav-links">
-      <li><a href="#services">Usługi</a></li>
-      <li><a href="#gallery">Galeria</a></li>
-      <li><a href="#contact-section">Kontakt</a></li>
+    <ul class="hero-chips" data-aos="fade-up" data-aos-delay="260">
+      <li><i class="fas fa-tools"></i> Własne narzędzia</li>
+      <li><i class="fas fa-shield-alt"></i> Gwarancja jakości</li>
+      <li><i class="fas fa-truck"></i> Dowozimy materiały</li>
+      <li><i class="fas fa-broom"></i> Sprzątamy po sobie</li>
     </ul>
-    <div class="nav-right">
-      <div class="lang-switch">
-        <a href="https://sykowni-chlopcy.pl/"><button class="active" type="button">PL</button></a>
-        <a href="https://sykowni-chlopcy.sk/"><button type="button">SK</button></a>
-      </div>
-      <div class="hamburger">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </nav>
-  <div class="hero-content" data-aos="fade-up">
-    <h1>Sykowni Chłopcy</h1>
-    <p>Profesjonalne prace budowlane</p>
   </div>
+  <a href="#stats" class="hero-scroll" aria-label="Przewiń w dół"><span></span></a>
 </header>
 
-<section id="services" data-aos="fade-up">
-  <h2>Nasze usługi</h2>
-  <div class="services-grid">
-    <div class="service-item" data-aos="fade-up">
-      <i class="fas fa-thermometer-half"></i>
-      <h3>Ocieplenie budynków</h3>
-      <p>
-        Wykonujemy nowoczesne ocieplenia domów jednorodzinnych i wielorodzinnych z gwarancją jakości izolacji.
-      </p>
+<section id="stats" class="stats-band">
+  <div class="wrap stats-grid">
+    <div class="stat" data-aos="fade-up">
+      <span class="stat-num" data-count="2" data-suffix="">2</span>
+      <span class="stat-label">lata na rynku</span>
     </div>
-    <div class="service-item" data-aos="fade-up">
-      <i class="fas fa-paint-roller"></i>
-      <h3>Tynk zewnętrzny</h3>
-      <p>
-        Nasze tynki zewnętrzne skutecznie chronią fasadę przed wilgocią i zmienną pogodą, zapewniając nowoczesny wygląd na lata.
-      </p>
+    <div class="stat" data-aos="fade-up" data-aos-delay="80">
+      <span class="stat-num" data-count="30" data-suffix="+">30+</span>
+      <span class="stat-label">zadowolonych klientów</span>
     </div>
-    <div class="service-item" data-aos="fade-up">
-      <i class="fas fa-hammer"></i>
-      <h3>Prace blacharskie</h3>
-      <p>
-        Profesjonalne prace blacharskie przy dachach i elementach budynku – ochrona przed wilgocią i dłuższa trwałość konstrukcji.
-      </p>
+    <div class="stat" data-aos="fade-up" data-aos-delay="160">
+      <span class="stat-num" data-count="100" data-suffix="%">100%</span>
+      <span class="stat-label">własny sprzęt i rusztowanie</span>
     </div>
-    <div class="service-item" data-aos="fade-up">
-      <i class="fas fa-ruler-combined"></i>
-      <h3>Montaż parapetów i rynien</h3>
-      <p>
-        Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych zapewniających estetykę i trwałość.
-      </p>
-    </div>
-    <div class="service-item" data-aos="fade-up">
-      <i class="fas fa-columns"></i>
-      <h3>Podbitka dachowa</h3>
-      <p>
-        Wykonujemy podbitki dachowe, chroniące drewno i poprawiające wygląd elewacji.
-      </p>
+    <div class="stat" data-aos="fade-up" data-aos-delay="240">
+      <span class="stat-num" data-count="0" data-suffix=" zł">0 zł</span>
+      <span class="stat-label">koszt wyceny i dojazdu</span>
     </div>
   </div>
 </section>
 
-<section id="gallery" data-aos="fade-up">
-  <h2>Galeria realizacji</h2>
-  <div class="gallery-grid">
-    <div class="gallery-pair" data-index="0">
-      <img src="modern_6.jpg" alt="Przed 1" class="gallery-thumb" />
-      <img src="background.jpg" alt="Po 1" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="1">
-      <img src="modern_7.jpg" alt="Przed 1" class="gallery-thumb" />
-      <img src="modern_5.jpg" alt="Po 1" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="2">
-      <img src="modern_8.jpg" alt="Przed 1" class="gallery-thumb" />
-      <img src="modern_2.jpg" alt="Po 1" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="3">
-      <img src="galery_9.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_2.jpg" alt="Po 2" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="4">
-      <img src="galery_11.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_1.jpg" alt="Po 2" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="5">
-      <img src="galery_3.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_12.jpg" alt="Po 2" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="6">
-      <img src="galery_13.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_14.jpg" alt="Po 2" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="7">
-      <img src="galery_15.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_16.jpg" alt="Po 2" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="8">
-      <img src="galery_17.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_18.jpg" alt="Po 2" class="gallery-thumb" />
-    </div>
-    <div class="gallery-pair" data-index="9">
-      <img src="galery_19.jpg" alt="Przed 2" class="gallery-thumb" />
-      <img src="galery_20.jpg" alt="Po 2" class="gallery-thumb" />
+<section id="about">
+  <div class="wrap section-container">
+    <div class="about-grid">
+      <div class="about-media" data-aos="fade-right">
+        <div class="about-img-main">
+          <img src="galery_14.jpg" alt="Sykowni Chłopcy podczas prac elewacyjnych przy budynku jednorodzinnym" loading="lazy" />
+        </div>
+        <div class="about-img-sub">
+          <img src="galery_13.jpg" alt="Gotowa elewacja domu jednorodzinnego" loading="lazy" />
+        </div>
+        <div class="about-badge">
+          <span class="about-badge-num">2</span>
+          <span class="about-badge-txt">lata<br />na rynku</span>
+        </div>
+      </div>
+
+      <div class="about-text" data-aos="fade-left">
+        <span class="section-tag">O firmie</span>
+        <h2>Elewacja na lata, nie na jedną zimę</h2>
+        <p class="lead">
+          Sykowni Chłopcy to firma budowlana z Małopolski. Od dwóch lat wykonujemy ocieplenia,
+          tynki i elewacje dla klientów w Polsce i na Słowacji.
+        </p>
+        <p>
+          Pracujemy na własnym sprzęcie, więc nie tracisz czasu na organizowanie zaplecza
+          budowy. Nie namawiamy na najdroższe rozwiązania – dobieramy takie, które mają
+          sens przy Twoim budynku i budżecie, a gdy czegoś nie opłaca się robić, mówimy
+          o tym wprost. Za to, co wykonamy, bierzemy odpowiedzialność.
+        </p>
+
+        <ul class="about-list">
+          <li><i class="fas fa-layer-group"></i><div><strong>Własne rusztowanie</strong><span>Nie doliczamy wynajmu, zaczynamy od razu.</span></div></li>
+          <li><i class="fas fa-cubes"></i><div><strong>Kompleksowa obsługa materiałów</strong><span>Doradzimy, kupimy i dowieziemy pod dom.</span></div></li>
+          <li><i class="fas fa-globe-europe"></i><div><strong>Polska i Słowacja</strong><span>Realizujemy zlecenia po obu stronach granicy.</span></div></li>
+          <li><i class="fas fa-shield-alt"></i><div><strong>Gwarancja</strong><span>Odpowiadamy za jakość wykonanych prac.</span></div></li>
+          <li><i class="fas fa-clock"></i><div><strong>Terminowość</strong><span>Ustalamy termin i się go trzymamy.</span></div></li>
+          <li><i class="fas fa-broom"></i><div><strong>Czystość</strong><span>Zostawiamy po sobie porządek, nie gruzowisko.</span></div></li>
+        </ul>
+
+        <div class="about-actions">
+          <a href="#gallery" class="btn btn-primary">Zobacz nasze realizacje</a>
+          <a href="#process" class="btn btn-link">Jak wygląda współpraca <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section id="contact-section" data-aos="fade-up">
-  <h2 data-aos="fade-up">Kontakt</h2>
-  <p class="contact-lead" data-aos="fade-up">
-    Masz pytania? Napisz do nas, odpowiemy jak najszybciej.
-  </p>
-  <div class="contact-wrapper">
-    <div class="contact-box" data-aos="fade-right">
-      <h3 class="contact-header">Poproś o wycenę</h3>
-      <form id="contact-form" action="https://formspree.io/f/xgvyvrle" method="POST">
-        <input type="hidden" name="_subject" value="Sykowni Chłopcy – wiadomość z formularza">
-        <div class="form-group" data-aos="fade-up" data-aos-delay="0">
-          <label for="name">Imię i nazwisko:</label>
-          <input type="text" id="name" name="name" placeholder="Imię i nazwisko" required />
-        </div>
-        <div class="form-group" data-aos="fade-up" data-aos-delay="100">
-          <label for="email">E‑mail:</label>
-          <input type="email" id="email" name="email" placeholder="Twój e‑mail" required />
-        </div>
-        <div class="form-group" data-aos="fade-up" data-aos-delay="200">
-          <label for="message">Wiadomość:</label>
-          <textarea id="message" name="message" placeholder="Treść wiadomości" rows="5" required></textarea>
-        </div>
-        <div data-aos="zoom-in" data-aos-delay="300">
-          <button type="submit" class="btn animated-submit">Wyślij</button>
-        </div>
-        <p id="form-message" class="form-message"></p>
-      </form>
-    </div>
+<section id="services" class="bg-light">
+  <div class="wrap section-container">
+    <header class="section-head" data-aos="fade-up">
+      <span class="section-tag">Zakres prac</span>
+      <h2>Nasze usługi</h2>
+      <p class="section-sub">Kompleksowo zajmujemy się elewacją i tym, co ją otacza – od izolacji po ostatnią rynnę.</p>
+    </header>
 
-    <div class="contact-box contact-info" data-aos="fade-left">
-      <h3 class="contact-header">Dane kontaktowe</h3>
-      <div class="info-item" data-aos="fade-up">
-        <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-        <p>Biała Niżna<br />33‑330 Grybów, Polska</p>
+    <div class="services-grid">
+      <article class="service-item" data-aos="fade-up">
+        <div class="service-icon"><i class="fas fa-thermometer-half"></i></div>
+        <h3>Ocieplenie budynków</h3>
+        <p>Nowoczesne ocieplenia domów jednorodzinnych i wielorodzinnych w systemie ETICS – styropian lub wełna, z dbałością o detale i mostki termiczne.</p>
+        <ul class="service-tags"><li>styropian</li><li>wełna</li><li>siatka i klej</li></ul>
+      </article>
+
+      <article class="service-item" data-aos="fade-up" data-aos-delay="80">
+        <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
+        <h3>Tynk zewnętrzny</h3>
+        <p>Tynki elewacyjne, które chronią fasadę przed wilgocią i pogodą, a przy okazji nadają budynkowi nowoczesny, równy wygląd na lata.</p>
+        <ul class="service-tags"><li>silikonowy</li><li>akrylowy</li><li>mozaika</li></ul>
+      </article>
+
+      <article class="service-item" data-aos="fade-up" data-aos-delay="160">
+        <div class="service-icon"><i class="fas fa-hammer"></i></div>
+        <h3>Prace blacharskie</h3>
+        <p>Obróbki blacharskie dachu i elementów budynku – szczelnie, estetycznie i tak, żeby woda nie miała gdzie się zatrzymać.</p>
+        <ul class="service-tags"><li>obróbki</li><li>kominy</li><li>attyki</li></ul>
+      </article>
+
+      <article class="service-item" data-aos="fade-up" data-aos-delay="240">
+        <div class="service-icon"><i class="fas fa-ruler-combined"></i></div>
+        <h3>Parapety i rynny</h3>
+        <p>Montaż parapetów zewnętrznych i wewnętrznych oraz kompletnych systemów rynnowych – z zachowaniem spadków i porządnym uszczelnieniem.</p>
+        <ul class="service-tags"><li>parapety</li><li>rynny</li><li>rury spustowe</li></ul>
+      </article>
+
+      <article class="service-item" data-aos="fade-up" data-aos-delay="320">
+        <div class="service-icon"><i class="fas fa-columns"></i></div>
+        <h3>Podbitka dachowa</h3>
+        <p>Trwałe podbitki chroniące konstrukcję drewnianą przed wilgocią i ptakami, jednocześnie domykające wygląd całej elewacji.</p>
+        <ul class="service-tags"><li>PVC</li><li>drewno</li><li>blacha</li></ul>
+      </article>
+
+      <article class="service-item service-cta" data-aos="fade-up" data-aos-delay="400">
+        <div class="service-icon"><i class="fas fa-question"></i></div>
+        <h3>Nie ma tego na liście?</h3>
+        <p>Napisz lub zadzwoń i opisz, co potrzebujesz zrobić. Jeśli dany zakres nie jest w naszej specjalizacji, powiemy o tym wprost i podpowiemy, kto się tym zajmie.</p>
+        <a href="#contact-section" class="btn btn-accent btn-sm">Zapytaj o wycenę</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap section-container">
+    <header class="section-head" data-aos="fade-up">
+      <span class="section-tag">Jak pracujemy</span>
+      <h2>Cztery kroki do gotowej elewacji</h2>
+      <p class="section-sub">Wiesz, co się dzieje na każdym etapie – i ile to kosztuje, zanim zaczniemy.</p>
+    </header>
+
+    <ol class="process-grid">
+      <li class="process-step" data-aos="fade-up">
+        <div class="process-node">
+          <div class="process-icon"><i class="fas fa-ruler-combined"></i></div>
+          <span class="process-num">01</span>
+        </div>
+        <h3>Darmowa wycena i obmiar</h3>
+        <p>Przyjeżdżamy na miejsce, oceniamy stan budynku i wykonujemy obmiar – wyliczamy, ile i jakiego materiału będzie potrzeba.</p>
+      </li>
+      <li class="process-step" data-aos="fade-up" data-aos-delay="100">
+        <div class="process-node">
+          <div class="process-icon"><i class="fas fa-cubes"></i></div>
+          <span class="process-num">02</span>
+        </div>
+        <h3>Dobór materiałów</h3>
+        <p>Doradzamy najlepsze rozwiązania pod Twój budynek i budżet. Na życzenie sami kupujemy materiał i dowozimy go na miejsce – nie musisz się tym zajmować.</p>
+      </li>
+      <li class="process-step" data-aos="fade-up" data-aos-delay="200">
+        <div class="process-node">
+          <div class="process-icon"><i class="fas fa-hard-hat"></i></div>
+          <span class="process-num">03</span>
+        </div>
+        <h3>Realizacja</h3>
+        <p>Wchodzimy na budowę w ustalonym terminie i pracujemy systematycznie. Jesteś na bieżąco informowany o postępach.</p>
+      </li>
+      <li class="process-step" data-aos="fade-up" data-aos-delay="300">
+        <div class="process-node">
+          <div class="process-icon"><i class="fas fa-broom"></i></div>
+          <span class="process-num">04</span>
+        </div>
+        <h3>Czystość i odbiór</h3>
+        <p>Po zakończeniu prac sprzątamy teren i oddajemy Ci gotową elewację. Odbierasz skończoną robotę, a nie plac budowy.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="gallery" class="bg-dark">
+  <div class="wrap section-container">
+    <header class="section-head section-head-light" data-aos="fade-up">
+      <span class="section-tag">Realizacje</span>
+      <h2>Zobacz efekt przed i po</h2>
+      <p class="section-sub">Kliknij zdjęcie, żeby zobaczyć stan przed rozpoczęciem prac i po ich zakończeniu.</p>
+    </header>
+
+    <div class="gallery-grid">
+      <div class="gallery-card" data-aos="fade-up" data-before="modern_6.jpg" data-after="background.jpg">
+        <div class="img-wrap">
+          <img src="background.jpg" alt="Realizacja 1 – elewacja domu jednorodzinnego" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
       </div>
-      <div class="info-item" data-aos="fade-up" data-aos-delay="100">
-        <div class="icon-circle"><i class="fas fa-phone"></i></div>
-        <p>+48 574 977 131</p>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="modern_7.jpg" data-after="modern_5.jpg">
+        <div class="img-wrap">
+          <img src="modern_5.jpg" alt="Realizacja 2 – ocieplenie i tynk zewnętrzny" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
       </div>
-      <div class="info-item" data-aos="fade-up" data-aos-delay="200">
-        <div class="icon-circle"><i class="fas fa-envelope"></i></div>
-        <p>grygieltomek99@gmail.com</p>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="modern_8.jpg" data-after="modern_2.jpg">
+        <div class="img-wrap">
+          <img src="modern_2.jpg" alt="Realizacja 3 – nowoczesna elewacja" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-before="galery_9.jpg" data-after="galery_2.jpg">
+        <div class="img-wrap">
+          <img src="galery_2.jpg" alt="Realizacja 4 – prace elewacyjne" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_11.jpg" data-after="galery_1.jpg">
+        <div class="img-wrap">
+          <img src="galery_1.jpg" alt="Realizacja 5 – ocieplenie budynku" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_3.jpg" data-after="galery_12.jpg">
+        <div class="img-wrap">
+          <img src="galery_12.jpg" alt="Realizacja 6 – elewacja po remoncie" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-before="galery_13.jpg" data-after="galery_14.jpg">
+        <div class="img-wrap">
+          <img src="galery_14.jpg" alt="Realizacja 7 – dom po ociepleniu" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_15.jpg" data-after="galery_16.jpg">
+        <div class="img-wrap">
+          <img src="galery_16.jpg" alt="Realizacja 8 – wykończona fasada" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_17.jpg" data-after="galery_18.jpg">
+        <div class="img-wrap">
+          <img src="galery_18.jpg" alt="Realizacja 9 – elewacja z podbitką" loading="lazy" />
+          <span class="ba-badge">Przed / Po</span>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i> Zobacz porównanie</span></div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<section class="cta-band">
+  <div class="wrap cta-inner" data-aos="fade-up">
+    <div class="cta-text">
+      <h2>Darmowa wycena i obmiar – przyjeżdżamy na miejsce</h2>
+      <p>Powiedz, co planujesz zrobić. Umówimy się na oględziny, wykonamy obmiar, wyliczymy zapotrzebowanie na materiały i przygotujemy konkretną wycenę – bez opłat i bez zobowiązań.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="tel:+48574977131" class="btn btn-accent btn-lg"><i class="fas fa-phone-alt"></i> Zadzwoń teraz</a>
+      <a href="#contact-section" class="btn btn-outline-light btn-lg">Napisz wiadomość</a>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap section-container">
+    <header class="section-head" data-aos="fade-up">
+      <span class="section-tag">FAQ</span>
+      <h2>Najczęstsze pytania</h2>
+      <p class="section-sub">Nie znalazłeś odpowiedzi? Zadzwoń – wytłumaczymy wszystko po ludzku.</p>
+    </header>
+
+    <div class="faq-list" data-aos="fade-up">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Na jakim terenie pracujecie?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Działamy przede wszystkim w okolicach Grybowa, Nowego Sącza i całej Małopolsce, a także na terenie Słowacji. Dalsze wyjazdy też są możliwe – wystarczy zapytać.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Ile kosztuje wycena i dojazd?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Nic. Dojazd, oględziny, obmiar i przygotowanie wyceny są bezpłatne i do niczego Cię nie zobowiązują – nawet jeśli po wszystkim zdecydujesz się na inną ekipę.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Czy pomagacie dobrać kolor i rodzaj tynku?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Tak. Podpowiadamy, jaka faktura i kolorystyka sprawdzi się przy Twoim budynku oraz które rozwiązania są trwalsze w naszym klimacie. Decyzja zawsze należy do Ciebie.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Kto kupuje materiały?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Jak wolisz. Doradzamy w doborze materiałów, a na życzenie sami je kupujemy i dowozimy na miejsce – wtedy nie musisz się niczym zajmować. Możesz też zaopatrzyć się we własnym zakresie, a my podpowiemy, ile i czego zamówić.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Czy dajecie gwarancję na wykonane prace?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Tak. Na wykonane przez nas prace udzielamy gwarancji – szczegóły i zakres ustalamy indywidualnie przy ustaleniach dotyczących zlecenia.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Jak szybko możecie zacząć?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Termin zależy od sezonu i zakresu prac. Po oględzinach podajemy realny termin rozpoczęcia i zakończenia – i trzymamy się ustaleń.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Ile trwa ocieplenie domu?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>To zależy od powierzchni elewacji, stanu ścian i zakresu dodatkowych prac. Przy typowym domu jednorodzinnym mówimy zwykle o kilku tygodniach. Konkretny harmonogram podajemy po obmiarze, żeby nie rzucać terminów z sufitu.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Czy pracujecie również zimą?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Prace „mokre" – kleje, siatka, tynki – wymagają odpowiedniej temperatury, dlatego planujemy je w sezonie. Poza nim realizujemy m.in. prace blacharskie, podbitki, parapety i rynny. Jeśli nie ma warunków na dobrą robotę, powiemy o tym wprost zamiast ryzykować efekt.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Czy trzeba się wyprowadzić na czas prac?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Nie. Prace elewacyjne prowadzimy z zewnątrz budynku, więc możesz normalnie mieszkać. Zabezpieczamy okna, drzwi i otoczenie, a rusztowanie ustawiamy tak, żeby dało się swobodnie wchodzić i wychodzić.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Co dzieje się z parapetami, rynnami i lampami przy ociepleniu?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Demontujemy je przed rozpoczęciem prac i montujemy ponownie po ociepleniu – z uwzględnieniem nowej grubości ściany. Jeśli coś kwalifikuje się do wymiany, mówimy o tym na etapie wyceny, a nie w trakcie robót.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Jak wygląda rozliczenie?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Zakres, cenę i harmonogram płatności ustalamy przed wejściem na budowę i omawiamy przy przedstawianiu wyceny. Koszty nie „dopowiadają się" w trakcie robót.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Czy mogę zobaczyć więcej Waszych realizacji?<i class="fas fa-plus"></i></button>
+        <div class="faq-a"><p>Jasne – część zdjęć „przed i po" znajdziesz w <a href="#gallery">galerii realizacji</a>. Jeśli chcesz zobaczyć coś podobnego do swojego budynku, zadzwoń, a podeślemy więcej zdjęć.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact-section" class="bg-light">
+  <div class="wrap section-container">
+    <header class="section-head" data-aos="fade-up">
+      <span class="section-tag">Kontakt</span>
+      <h2>Porozmawiajmy o Twojej inwestycji</h2>
+      <p class="section-sub">Zadzwoń albo napisz – oddzwonimy, nawet z rusztowania.</p>
+    </header>
+
+    <div class="contact-wrapper">
+      <div class="contact-box" data-aos="fade-right">
+        <h3 class="contact-header">Wyślij zapytanie</h3>
+        <form id="contact-form" action="https://formspree.io/f/xgvyvrle" method="POST">
+          <input type="hidden" name="_subject" value="Sykowni Chłopcy – nowa wiadomość" />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Imię i nazwisko</label>
+              <input type="text" id="name" name="name" placeholder="np. Jan Kowalski" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Adres e-mail</label>
+              <input type="email" id="email" name="email" placeholder="jan@example.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Telefon <span class="opt">(opcjonalnie)</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="np. 500 600 700" />
+            </div>
+            <div class="form-group">
+              <label for="scope">Zakres prac</label>
+              <select id="scope" name="scope">
+                <option value="Ocieplenie budynku">Ocieplenie budynku</option>
+                <option value="Tynk zewnętrzny">Tynk zewnętrzny</option>
+                <option value="Prace blacharskie">Prace blacharskie</option>
+                <option value="Parapety i rynny">Parapety i rynny</option>
+                <option value="Podbitka dachowa">Podbitka dachowa</option>
+                <option value="Inne / kilka usług">Inne / kilka usług</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="message">Wiadomość</label>
+            <textarea id="message" name="message" placeholder="Napisz krótko o budynku: metraż, lokalizacja, planowany termin..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-accent btn-block">Wyślij zapytanie <i class="fas fa-paper-plane"></i></button>
+          <p id="form-message" class="form-message"></p>
+          <p class="form-note">Wysyłając wiadomość zgadzasz się na kontakt zwrotny w sprawie zapytania.</p>
+        </form>
+      </div>
+
+      <div class="contact-side" data-aos="fade-left">
+        <div class="contact-box contact-info">
+          <h3 class="contact-header">Dane kontaktowe</h3>
+          <a href="tel:+48574977131" class="info-item">
+            <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+            <div><span class="info-label">Telefon</span><p>+48 574 977 131</p></div>
+          </a>
+          <a href="mailto:grygieltomek99@gmail.com" class="info-item">
+            <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+            <div><span class="info-label">E-mail</span><p>grygieltomek99@gmail.com</p></div>
+          </a>
+          <a href="https://maps.google.com/?q=33-330+Grybów" target="_blank" rel="noopener" class="info-item">
+            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+            <div><span class="info-label">Siedziba</span><p>33‑330 Grybów, Małopolska</p></div>
+          </a>
+          <div class="info-item info-static">
+            <div class="icon-circle"><i class="fas fa-globe-europe"></i></div>
+            <div><span class="info-label">Obszar działania</span><p>Małopolska i Słowacja</p></div>
+          </div>
+        </div>
+
+        <div class="map-box">
+          <iframe
+            src="https://www.google.com/maps?q=33-330%20Gryb%C3%B3w&output=embed"
+            title="Mapa – Grybów"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer class="footer">
-  <div class="footer-container">
-    <p class="footer-name">Sykowni Chłopcy</p>
-    <p class="footer-copy">&copy; 2026 Sykowni Chłopcy. Wszelkie prawa zastrzeżone.</p>
+  <div class="wrap footer-grid">
+    <div class="footer-col footer-brand">
+      <img src="banner_new.png" alt="Sykowni Chłopcy" class="footer-logo" />
+      <p>Firma budowlana z Grybowa. Ocieplenia, tynki i elewacje w Polsce i na Słowacji – własny sprzęt, doradztwo i gwarancja na wykonane prace.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Usługi</h4>
+      <ul>
+        <li><a href="#services">Ocieplenie budynków</a></li>
+        <li><a href="#services">Tynk zewnętrzny</a></li>
+        <li><a href="#services">Prace blacharskie</a></li>
+        <li><a href="#services">Parapety i rynny</a></li>
+        <li><a href="#services">Podbitka dachowa</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Firma</h4>
+      <ul>
+        <li><a href="#about">O firmie</a></li>
+        <li><a href="#process">Jak pracujemy</a></li>
+        <li><a href="#gallery">Realizacje</a></li>
+        <li><a href="#faq">Najczęstsze pytania</a></li>
+        <li><a href="https://sykowni-chlopcy.sk/">Slovenská verzia</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakt</h4>
+      <ul class="footer-contact">
+        <li><a href="tel:+48574977131"><i class="fas fa-phone-alt"></i> +48 574 977 131</a></li>
+        <li><a href="mailto:grygieltomek99@gmail.com"><i class="fas fa-envelope"></i> grygieltomek99@gmail.com</a></li>
+        <li><i class="fas fa-map-marker-alt"></i> 33‑330 Grybów</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="wrap footer-bottom-inner">
+      <p>&copy; <span id="year"></span> Sykowni Chłopcy. Wszelkie prawa zastrzeżone.</p>
+      <p class="footer-area">Grybów · Nowy Sącz · Małopolska · Słowacja</p>
+    </div>
   </div>
 </footer>
 
-<div id="lightbox-overlay">
-  <span id="lightbox-close">&times;</span>
-  <div class="lightbox-content">
-    <img id="lightbox-before" src="#" alt="Zdjęcie przed" />
-    <img id="lightbox-after" src="#" alt="Zdjęcie po" />
-  </div>
-  <span id="lightbox-prev" class="lightbox-arrow">&#10094;</span>
-  <span id="lightbox-next" class="lightbox-arrow">&#10095;</span>
+<div class="mobile-bar">
+  <a href="tel:+48574977131" class="mobile-bar-btn primary"><i class="fas fa-phone-alt"></i> Zadzwoń</a>
+  <a href="#contact-section" class="mobile-bar-btn"><i class="fas fa-envelope"></i> Wycena</a>
 </div>
 
-<button id="scrollToTopBtn" title="Do góry">
+<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Porównanie przed i po">
+  <button id="lightbox-close" aria-label="Zamknij">&times;</button>
+  <div class="lightbox-content">
+    <div class="lightbox-img-wrapper">
+      <span class="lightbox-label">PRZED</span>
+      <img id="lightbox-before" src="" alt="Stan przed pracami" />
+    </div>
+    <div class="lightbox-img-wrapper">
+      <span class="lightbox-label">PO</span>
+      <img id="lightbox-after" src="" alt="Stan po pracach" />
+    </div>
+  </div>
+  <button id="lightbox-prev" class="lightbox-arrow" aria-label="Poprzednia">&#10094;</button>
+  <button id="lightbox-next" class="lightbox-arrow" aria-label="Następna">&#10095;</button>
+</div>
+
+<button id="scrollToTopBtn" title="Wróć do góry" aria-label="Wróć do góry">
   <i class="fas fa-chevron-up"></i>
 </button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js"></script>
+<script src="script.js?v=9"></script>
 </body>
 </html>
