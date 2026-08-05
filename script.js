@@ -186,6 +186,240 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  /* ---------- opinie: dane z wizytówki Google ----------
+     reviews.json wypełnia raz na dobę GitHub Action (tools/fetch_reviews.py).
+     Sekcja startuje ukryta i pokazuje się dopiero przy komplecie opinii –
+     mniej niż MIN_REVIEWS wygląda gorzej niż brak sekcji w ogóle. */
+  const MIN_REVIEWS = 3;
+
+  const GOOGLE_G_SVG = `
+    <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+      <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+      <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+      <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+    </svg>`;
+
+  function buildStars(rating) {
+    const stars = document.createElement('div');
+    stars.className = 'rv-stars';
+    stars.setAttribute('role', 'img');
+    stars.setAttribute('aria-label', `Ocena ${rating} na 5`);
+    for (let i = 1; i <= 5; i++) {
+      const star = document.createElement('i');
+      star.className = i <= Math.round(rating) ? 'fas fa-star' : 'far fa-star';
+      stars.appendChild(star);
+    }
+    return stars;
+  }
+
+  function buildReviewCard(review) {
+    const card = document.createElement('article');
+    card.className = 'review-card';
+
+    const head = document.createElement('div');
+    head.className = 'rv-head';
+
+    const avatar = document.createElement('span');
+    avatar.className = 'rv-avatar';
+    avatar.setAttribute('aria-hidden', 'true');
+    avatar.style.setProperty('--av', review.color || '#1A73E8');
+    avatar.textContent = review.initials || '?';
+    if (review.photo) {
+      const photo = document.createElement('img');
+      photo.className = 'rv-photo';
+      photo.src = review.photo;
+      photo.alt = '';
+      photo.loading = 'lazy';
+      photo.referrerPolicy = 'no-referrer';
+      photo.addEventListener('error', () => photo.remove());
+      avatar.appendChild(photo);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'rv-meta';
+    const name = document.createElement('strong');
+    name.textContent = review.author || 'Klient Google';
+    const time = document.createElement('span');
+    time.textContent = review.relativeTime || '';
+    meta.append(name, time);
+
+    const logo = document.createElement('span');
+    logo.className = 'rv-g';
+    logo.setAttribute('aria-hidden', 'true');
+    logo.innerHTML = GOOGLE_G_SVG;
+
+    head.append(avatar, meta, logo);
+
+    const text = document.createElement('p');
+    text.className = 'rv-text';
+    text.textContent = review.text || '';
+
+    const more = document.createElement('button');
+    more.type = 'button';
+    more.className = 'rv-more';
+    more.textContent = 'Czytaj więcej';
+
+    card.append(head, buildStars(review.rating || 5), text, more);
+    return card;
+  }
+
+  function renderGoogleReviews(data, track) {
+    if (!data || !Array.isArray(data.reviews) || data.reviews.length < MIN_REVIEWS) return false;
+
+    track.replaceChildren(...data.reviews.map(buildReviewCard));
+
+    const summary = document.querySelector('.google-card');
+    if (!summary) return true;
+
+    const count = data.ratingCount || data.reviews.length;
+    const rating = typeof data.rating === 'number'
+      ? data.rating
+      : data.reviews.reduce((sum, r) => sum + (r.rating || 5), 0) / data.reviews.length;
+
+    const num = summary.querySelector('.gc-num');
+    if (num) num.textContent = rating.toFixed(1).replace('.', ',');
+
+    const oldStars = summary.querySelector('.rv-stars');
+    if (oldStars) oldStars.replaceWith(buildStars(rating));
+
+    const counter = summary.querySelector('.gc-count');
+    /* po „na podstawie" liczebnik zawsze łączy się z dopełniaczem: 3 opinii, 5 opinii */
+    if (counter) counter.textContent = `na podstawie ${count} opinii`;
+
+    const profile = summary.querySelector('a[href*="google"]');
+    if (profile && data.profileUrl) profile.href = data.profileUrl;
+
+    /* rozkład ocen pokazujemy tylko wtedy, gdy mamy komplet opinii –
+       Google udostępnia treść najwyżej pięciu, więc przy większej liczbie byłby zmyślony */
+    const bars = summary.querySelector('.gc-bars');
+    if (bars) {
+      if (data.reviews.length >= count) {
+        Array.from(bars.querySelectorAll('li')).forEach((row, index) => {
+          const stars = 5 - index;
+          const share = data.reviews.filter(r => Math.round(r.rating || 5) === stars).length / count * 100;
+          row.querySelector('.gc-bar i').style.setProperty('--w', `${share}%`);
+        });
+      } else {
+        bars.remove();
+      }
+    }
+
+    return true;
+  }
+
+  async function loadGoogleReviews(track) {
+    try {
+      const response = await fetch('reviews.json', { cache: 'no-cache' });
+      if (!response.ok) return false;
+      return renderGoogleReviews(await response.json(), track);
+    } catch (error) {
+      /* brak pliku albo błąd sieci – sekcja zostaje ukryta */
+      return false;
+    }
+  }
+
+  function revealReviewsSection() {
+    document.querySelectorAll('#reviews, .js-reviews-link').forEach(el => { el.hidden = false; });
+    if (window.AOS) AOS.refresh();
+  }
+
+  /* ---------- karuzela opinii ---------- */
+  function initReviewsCarousel(reviewsTrack) {
+    const reviewCards = Array.from(reviewsTrack.querySelectorAll('.review-card'));
+    const reviewDots = document.getElementById('reviews-dots');
+    const reviewPrev = document.getElementById('reviews-prev');
+    const reviewNext = document.getElementById('reviews-next');
+
+    /* szerokość jednej karty razem z odstępem */
+    const cardStep = () => (reviewCards.length > 1
+      ? reviewCards[1].offsetLeft - reviewCards[0].offsetLeft
+      : reviewsTrack.clientWidth);
+    const perView = () => Math.max(1, Math.round(reviewsTrack.clientWidth / cardStep()));
+    const pageCount = () => Math.max(1, Math.ceil(reviewCards.length / perView()));
+    const currentPage = () => Math.min(
+      Math.round(reviewsTrack.scrollLeft / (cardStep() * perView())),
+      pageCount() - 1
+    );
+
+    function scrollToPage(page) {
+      const index = Math.min(Math.max(page, 0) * perView(), reviewCards.length - 1);
+      reviewsTrack.scrollTo({
+        left: reviewCards[index].offsetLeft - reviewCards[0].offsetLeft,
+        behavior: prefersReducedMotion ? 'auto' : 'smooth'
+      });
+    }
+
+    function syncReviewControls() {
+      const page = currentPage();
+      Array.from(reviewDots.children).forEach((dot, i) => {
+        dot.classList.toggle('is-active', i === page);
+        dot.setAttribute('aria-current', i === page ? 'true' : 'false');
+      });
+      reviewPrev.disabled = page === 0;
+      reviewNext.disabled = page >= pageCount() - 1;
+    }
+
+    function buildReviewDots() {
+      reviewDots.innerHTML = '';
+      for (let i = 0; i < pageCount(); i++) {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', `Opinie – strona ${i + 1}`);
+        dot.addEventListener('click', () => scrollToPage(i));
+        reviewDots.appendChild(dot);
+      }
+      syncReviewControls();
+    }
+
+    /* „czytaj więcej" pokazujemy tylko tam, gdzie tekst faktycznie się nie mieści */
+    function checkClamped() {
+      reviewCards.forEach(card => {
+        if (card.classList.contains('expanded')) return;
+        const text = card.querySelector('.rv-text');
+        if (!text) return;
+        card.classList.toggle('has-more', text.scrollHeight - text.clientHeight > 4);
+      });
+    }
+
+    reviewCards.forEach(card => {
+      const moreBtn = card.querySelector('.rv-more');
+      if (!moreBtn) return;
+      moreBtn.addEventListener('click', () => {
+        const expanded = card.classList.toggle('expanded');
+        moreBtn.textContent = expanded ? 'Zwiń' : 'Czytaj więcej';
+      });
+    });
+
+    reviewPrev.addEventListener('click', () => scrollToPage(currentPage() - 1));
+    reviewNext.addEventListener('click', () => scrollToPage(currentPage() + 1));
+    reviewsTrack.addEventListener('scroll', syncReviewControls, { passive: true });
+
+    let reviewsResizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(reviewsResizeTimer);
+      reviewsResizeTimer = setTimeout(() => {
+        buildReviewDots();
+        checkClamped();
+      }, 200);
+    });
+
+    buildReviewDots();
+    checkClamped();
+    /* po dociągnięciu fontów wysokość tekstu potrafi się zmienić */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkClamped);
+  }
+
+  const reviewsTrackEl = document.getElementById('reviews-track');
+  if (reviewsTrackEl) {
+    loadGoogleReviews(reviewsTrackEl).then(hasReviews => {
+      if (!hasReviews) return;
+      /* karuzelę mierzymy dopiero po odsłonięciu sekcji – ukryta nie ma wymiarów */
+      revealReviewsSection();
+      initReviewsCarousel(reviewsTrackEl);
+    });
+  }
+
   /* ---------- galeria przed / po ---------- */
   const galleryCards = document.querySelectorAll('.gallery-card');
   const overlay = document.getElementById('lightbox-overlay');
