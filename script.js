@@ -52,6 +52,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
   });
 
+  /* ---------- wybór wersji językowej ---------- */
+  const langToggle = document.getElementById('lang-toggle');
+  const langMenu = document.getElementById('lang-menu');
+
+  if (langToggle && langMenu) {
+    const closeLangMenu = () => {
+      langMenu.hidden = true;
+      langToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    langToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langMenu.hidden;
+      langMenu.hidden = !open;
+      langToggle.setAttribute('aria-expanded', String(open));
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!langMenu.hidden && !langMenu.contains(e.target)) closeLangMenu();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !langMenu.hidden) {
+        closeLangMenu();
+        langToggle.focus();
+      }
+    });
+  }
+
   /* ---------- płynne przewijanie do sekcji ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', function (e) {
@@ -422,16 +451,210 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- galeria przed / po ---------- */
   const galleryCards = document.querySelectorAll('.gallery-card');
+
+  /* podpis pod zdjęciem budujemy z atrybutów data-* karty;
+     zakres prac idzie na pierwszy plan, reszta jako parametry z ikonami,
+     a puste pola pomijamy, żeby nie zostawiać sierot */
+  const FACT_ICONS = { place: 'fas fa-map-marker-alt', area: 'fas fa-vector-square', time: 'far fa-clock' };
+
+  function buildGalleryMeta(card) {
+    const { place, scope, area, time } = card.dataset;
+    if (!place && !scope && !area && !time) return;
+
+    const wrap = card.querySelector('.img-wrap');
+
+    /* miejscowość jako plakietka w rogu zdjęcia */
+    if (place && wrap) {
+      const badge = document.createElement('span');
+      badge.className = 'gm-badge';
+      const pin = document.createElement('i');
+      pin.className = FACT_ICONS.place;
+      pin.setAttribute('aria-hidden', 'true');
+      badge.append(pin, document.createTextNode(place));
+      wrap.appendChild(badge);
+    }
+
+    /* zakres prac na przyciemnionym pasku u dołu zdjęcia */
+    if (scope && wrap) {
+      const strip = document.createElement('p');
+      strip.className = 'gm-strip';
+      strip.textContent = scope;
+      wrap.appendChild(strip);
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'gallery-meta';
+
+    const facts = [
+      wrap ? null : ['place', place],
+      ['area', area],
+      ['time', time]
+    ].filter(entry => entry && entry[1]);
+
+    if (!facts.length) return;
+
+    const list = document.createElement('ul');
+    list.className = 'gm-facts';
+    facts.forEach(([key, value]) => {
+      const item = document.createElement('li');
+      const icon = document.createElement('i');
+      icon.className = FACT_ICONS[key];
+      icon.setAttribute('aria-hidden', 'true');
+      item.append(icon, document.createTextNode(value));
+      list.appendChild(item);
+    });
+    meta.appendChild(list);
+
+    card.appendChild(meta);
+  }
+
+  galleryCards.forEach(buildGalleryMeta);
+
   const overlay = document.getElementById('lightbox-overlay');
   const beforeImg = document.getElementById('lightbox-before');
   const afterImg = document.getElementById('lightbox-after');
   let currentIndex = 0;
   let lastFocused = null;
 
+  /* podmieniamy rozszerzenie na .webp, a przy braku pliku wracamy do .jpg */
+  function setLightboxImage(img, file) {
+    img.onerror = () => { img.onerror = null; img.src = file; };
+    img.src = file.replace(/\.jpe?g$/i, '.webp');
+  }
+
+  const lbPlace = document.getElementById('lightbox-place');
+  const lbTitle = document.getElementById('lightbox-title');
+  const lbCounter = document.getElementById('lightbox-counter');
+  const lbDesc = document.getElementById('lightbox-desc');
+  const lbFacts = document.getElementById('lightbox-facts');
+  const lbLegend = document.getElementById('lightbox-legend');
+  const lbFrames = {
+    before: document.getElementById('lightbox-frame-before'),
+    after: document.getElementById('lightbox-frame-after')
+  };
+
+  /* dymek przy pinezce z brzegu zdjęcia wyjechałby poza ekran – przesuwamy go do środka */
+  function clampPinLabel(pin) {
+    const label = pin.querySelector('.lb-pin-label');
+    if (!label) return;
+    label.style.left = '50%';
+    label.style.setProperty('--shift', '0px');
+    const box = label.getBoundingClientRect();
+    const margin = 12;
+    let shift = 0;
+    if (box.left < margin) shift = margin - box.left;
+    else if (box.right > window.innerWidth - margin) shift = window.innerWidth - margin - box.right;
+    shift = Math.round(shift);
+    if (!shift) return;
+    label.style.left = `calc(50% + ${shift}px)`;
+    /* dziobek zostaje nad kropką */
+    label.style.setProperty('--shift', `${shift}px`);
+  }
+
+  /* pinezki i legenda podświetlają się nawzajem */
+  function linkPinToLegendItem(pin, item) {
+    const on = () => { pin.classList.add('is-active'); item.classList.add('is-active'); };
+    const off = () => { pin.classList.remove('is-active'); item.classList.remove('is-active'); };
+    item.addEventListener('mouseenter', on);
+    item.addEventListener('mouseleave', off);
+    pin.addEventListener('mouseenter', on);
+    pin.addEventListener('mouseleave', off);
+  }
+
+  function buildLightboxPins(card) {
+    Object.values(lbFrames).forEach(frame => {
+      frame.querySelectorAll('.lb-pin').forEach(pin => pin.remove());
+    });
+    lbLegend.replaceChildren();
+
+    const details = card.querySelector('.gm-details');
+    const notes = details ? Array.from(details.content.querySelectorAll('li')) : [];
+    if (!notes.length) {
+      lbLegend.hidden = true;
+      return;
+    }
+
+    notes.forEach((note, i) => {
+      const number = i + 1;
+      const text = note.textContent.trim();
+      const frame = lbFrames[note.dataset.side === 'before' ? 'before' : 'after'];
+
+      const pin = document.createElement('button');
+      pin.type = 'button';
+      pin.className = 'lb-pin';
+      pin.style.left = `${note.dataset.x || 50}%`;
+      pin.style.top = `${note.dataset.y || 50}%`;
+      pin.setAttribute('aria-label', `Szczegół ${number}: ${text}`);
+
+      const dot = document.createElement('span');
+      dot.className = 'lb-pin-dot';
+      dot.textContent = number;
+
+      const label = document.createElement('span');
+      label.className = 'lb-pin-label';
+      label.textContent = text;
+
+      /* na dotyku nie ma najechania, więc kliknięcie przypina dymek */
+      pin.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = pin.classList.contains('is-open');
+        overlay.querySelectorAll('.lb-pin.is-open').forEach(p => p.classList.remove('is-open'));
+        pin.classList.toggle('is-open', !open);
+        if (!open) clampPinLabel(pin);
+      });
+      pin.addEventListener('mouseenter', () => clampPinLabel(pin));
+      pin.addEventListener('focus', () => clampPinLabel(pin));
+
+      pin.append(dot, label);
+      frame.appendChild(pin);
+
+      const item = document.createElement('li');
+      const badge = document.createElement('span');
+      badge.className = 'lb-legend-num';
+      badge.textContent = number;
+      item.append(badge, document.createTextNode(text));
+      lbLegend.appendChild(item);
+
+      linkPinToLegendItem(pin, item);
+    });
+
+    lbLegend.hidden = false;
+  }
+
   function showLightboxPair(index) {
     const card = galleryCards[index];
-    beforeImg.src = card.getAttribute('data-before');
-    afterImg.src = card.getAttribute('data-after');
+    const { place, scope, area, time } = card.dataset;
+
+    setLightboxImage(beforeImg, card.getAttribute('data-before'));
+    setLightboxImage(afterImg, card.getAttribute('data-after'));
+
+    lbPlace.hidden = !place;
+    if (place) lbPlace.querySelector('span').textContent = place;
+    lbTitle.textContent = scope || place || 'Porównanie przed i po';
+    lbCounter.textContent = `${index + 1} / ${galleryCards.length}`;
+
+    const details = card.querySelector('.gm-details');
+    const desc = details ? details.content.querySelector('p') : null;
+    lbDesc.textContent = desc ? desc.textContent.trim() : '';
+    lbDesc.hidden = !desc;
+
+    /* zakres prac jest już nagłówkiem, więc w parametrach zostają liczby */
+    const facts = [
+      ['fas fa-vector-square', area],
+      ['far fa-clock', time]
+    ].filter(([, value]) => value);
+
+    lbFacts.replaceChildren(...facts.map(([iconClass, value]) => {
+      const item = document.createElement('li');
+      const icon = document.createElement('i');
+      icon.className = iconClass;
+      icon.setAttribute('aria-hidden', 'true');
+      item.append(icon, document.createTextNode(value));
+      return item;
+    }));
+
+    buildLightboxPins(card);
+
     overlay.style.display = 'flex';
     document.body.classList.add('noscroll');
     currentIndex = index;
@@ -475,7 +698,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   overlay.addEventListener('click', (e) => {
-    if (e.target === overlay || e.target.classList.contains('lightbox-content')) closeLightbox();
+    /* kliknięcie w tło zamyka, ale najpierw chowamy otwarty dymek pinezki */
+    const openPin = overlay.querySelector('.lb-pin.is-open');
+    if (openPin && !openPin.contains(e.target)) {
+      openPin.classList.remove('is-open');
+      return;
+    }
+    if (e.target === overlay || e.target.classList.contains('lb-shell') || e.target.classList.contains('lb-stage')) {
+      closeLightbox();
+    }
   });
 
   document.addEventListener('keydown', (e) => {

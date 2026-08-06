@@ -26,17 +26,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <link rel="stylesheet" href="style.css?v=20" />
+  <link rel="stylesheet" href="style.css?v=30" />
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "name": "Sykowni Chłopcy",
+    "legalName": "Tomasz Grygiel SYKOWNI-CHLOPCY",
+    "taxID": "7343620881",
     "image": "https://sykowni-chlopcy.pl/banner_new.png",
     "description": "Ocieplenia budynków, tynki zewnętrzne, podbitki dachowe, prace blacharskie, parapety i rynny. Usługi budowlane na terenie Polski i Słowacji.",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Biała Wyżna 380",
       "addressLocality": "Grybów",
       "postalCode": "33-330",
       "addressCountry": "PL"
@@ -82,9 +85,30 @@
     </ul>
 
     <div class="nav-right">
-      <div class="lang-switch" role="group" aria-label="Wybór języka">
-        <a href="https://sykowni-chlopcy.pl/" class="lang-btn is-active">PL</a>
-        <a href="https://sykowni-chlopcy.sk/" class="lang-btn">SK</a>
+      <!-- wersje językowe to dwa osobne serwisy, więc wybór prowadzi na inną domenę –
+           menu pokazuje adres, żeby nie udawać przełącznika w obrębie strony -->
+      <div class="lang-select">
+        <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="lang-menu">
+          <i class="fas fa-globe-europe" aria-hidden="true"></i>
+          <span class="lang-current">PL</span>
+          <i class="fas fa-chevron-down lang-caret" aria-hidden="true"></i>
+        </button>
+        <ul class="lang-menu" id="lang-menu" hidden>
+          <li>
+            <a href="https://sykowni-chlopcy.pl/" hreflang="pl" class="is-active" aria-current="true">
+              <span class="lang-code">PL</span>
+              <span class="lang-name">Polska wersja<small>sykowni-chlopcy.pl</small></span>
+              <i class="fas fa-check" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://sykowni-chlopcy.sk/" hreflang="sk">
+              <span class="lang-code">SK</span>
+              <span class="lang-name">Slovenská verzia<small>sykowni-chlopcy.sk</small></span>
+              <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
       </div>
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
@@ -144,10 +168,16 @@
     <div class="about-grid">
       <div class="about-media" data-aos="fade-right">
         <div class="about-img-main">
-          <img src="galery_13.jpg" alt="Sykowni Chłopcy podczas prac elewacyjnych przy budynku jednorodzinnym" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_13-800.webp 800w, galery_13.webp 1400w" sizes="(max-width: 992px) 90vw, 490px" />
+            <img src="galery_13.jpg" alt="Sykowni Chłopcy podczas prac elewacyjnych przy budynku jednorodzinnym" loading="lazy" width="1400" height="1050" />
+          </picture>
         </div>
         <div class="about-img-sub">
-          <img src="galery_14.jpg" alt="Gotowa elewacja domu jednorodzinnego" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_14-800.webp 800w, galery_14.webp 1400w" sizes="(max-width: 992px) 45vw, 240px" />
+            <img src="galery_14.jpg" alt="Gotowa elewacja domu jednorodzinnego" loading="lazy" width="1400" height="1050" />
+          </picture>
         </div>
         <div class="about-badge">
           <span class="about-badge-num">3</span>
@@ -295,57 +325,111 @@
     </header>
 
     <div class="gallery-grid">
-      <div class="gallery-card" data-aos="fade-up" data-before="modern_6.jpg" data-after="background.jpg">
+      <div class="gallery-card" data-aos="fade-up" data-before="modern_6.jpg" data-after="background.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
         <div class="img-wrap">
-          <img src="background.jpg" alt="Realizacja 1 – elewacja domu jednorodzinnego" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="background-800.webp 800w, background.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="background.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
+        </div>
+        <template class="gm-details">
+          <p></p>
+          <ul>
+            <!--<li data-side="after" data-x="68" data-y="34">Nowe rynny i rury spustowe</li>-->
+            <!--<li data-side="after" data-x="30" data-y="62">Cokół z tynku mozaikowego</li>-->
+            <!--<li data-side="before" data-x="44" data-y="48">Tynk odchodził płatami</li>-->
+          </ul>
+        </template>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="modern_7.jpg" data-after="modern_5.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
+        <div class="img-wrap">
+          <picture>
+            <source type="image/webp" srcset="modern_5-800.webp 800w, modern_5.webp 1600w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="modern_5.jpg" alt="" loading="lazy" width="1600" height="1200" />
+          </picture>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
+        </div>
+        <template class="gm-details">
+          <p></p>
+          <ul>
+          </ul>
+        </template>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="modern_8.jpg" data-after="modern_2.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
+        <div class="img-wrap">
+          <picture>
+            <source type="image/webp" srcset="modern_2-800.webp 800w, modern_2.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="modern_2.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
           <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
         </div>
       </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="modern_7.jpg" data-after="modern_5.jpg">
+      <div class="gallery-card" data-aos="fade-up" data-before="galery_9.jpg" data-after="galery_2.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
         <div class="img-wrap">
-          <img src="modern_5.jpg" alt="Realizacja 2 – ocieplenie i tynk zewnętrzny" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_2-800.webp 800w, galery_2.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="galery_2.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
           <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
         </div>
       </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="modern_8.jpg" data-after="modern_2.jpg">
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_11.jpg" data-after="galery_1.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
         <div class="img-wrap">
-          <img src="modern_2.jpg" alt="Realizacja 3 – nowoczesna elewacja" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_1-800.webp 800w, galery_1.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="galery_1.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
+          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
+        </div>
+        <template class="gm-details">
+          <p></p>
+          <ul>
+          </ul>
+        </template>
+      </div>
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_3.jpg" data-after="galery_12.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
+        <div class="img-wrap">
+          <picture>
+            <source type="image/webp" srcset="galery_12-800.webp 800w, galery_12.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="galery_12.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
           <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
         </div>
       </div>
-      <div class="gallery-card" data-aos="fade-up" data-before="galery_9.jpg" data-after="galery_2.jpg">
+      <div class="gallery-card" data-aos="fade-up" data-before="galery_13.jpg" data-after="galery_14.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
         <div class="img-wrap">
-          <img src="galery_2.jpg" alt="Realizacja 4 – prace elewacyjne" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_14-800.webp 800w, galery_14.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="galery_14.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
           <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
         </div>
       </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_11.jpg" data-after="galery_1.jpg">
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_15.jpg" data-after="galery_16.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
         <div class="img-wrap">
-          <img src="galery_1.jpg" alt="Realizacja 5 – ocieplenie budynku" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_16-800.webp 800w, galery_16.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="galery_16.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
           <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
         </div>
       </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_3.jpg" data-after="galery_12.jpg">
+      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_17.jpg" data-after="galery_18.jpg"
+           data-place="" data-scope="" data-area="" data-time="">
         <div class="img-wrap">
-          <img src="galery_12.jpg" alt="Realizacja 6 – elewacja po remoncie" loading="lazy" />
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-before="galery_13.jpg" data-after="galery_14.jpg">
-        <div class="img-wrap">
-          <img src="galery_14.jpg" alt="Realizacja 7 – dom po ociepleniu" loading="lazy" />
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_15.jpg" data-after="galery_16.jpg">
-        <div class="img-wrap">
-          <img src="galery_16.jpg" alt="Realizacja 8 – wykończona fasada" loading="lazy" />
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_17.jpg" data-after="galery_18.jpg">
-        <div class="img-wrap">
-          <img src="galery_18.jpg" alt="Realizacja 9 – elewacja z podbitką" loading="lazy" />
+          <picture>
+            <source type="image/webp" srcset="galery_18-800.webp 800w, galery_18.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
+            <img src="galery_18.jpg" alt="" loading="lazy" width="1400" height="1050" />
+          </picture>
           <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
         </div>
       </div>
@@ -546,7 +630,11 @@
           </div>
           <button type="submit" class="btn btn-accent btn-block">Wyślij zapytanie <i class="fas fa-paper-plane"></i></button>
           <p id="form-message" class="form-message"></p>
-          <p class="form-note">Wysyłając wiadomość zgadzasz się na kontakt zwrotny w sprawie zapytania.</p>
+          <p class="form-note">
+            Wysyłając wiadomość zgadzasz się na kontakt zwrotny w sprawie zapytania. Administratorem danych
+            jest Tomasz Grygiel SYKOWNI-CHLOPCY, NIP 7343620881 – szczegóły znajdziesz w
+            <a href="polityka-prywatnosci.html">polityce prywatności</a>.
+          </p>
         </form>
       </div>
 
@@ -561,26 +649,20 @@
             <div class="icon-circle"><i class="fas fa-envelope"></i></div>
             <div><span class="info-label">E-mail</span><p>schlopcy@gmail.com</p></div>
           </a>
-          <a href="https://maps.google.com/?q=33-330+Grybów" target="_blank" rel="noopener" class="info-item">
+          <a href="https://www.google.com/maps/search/?api=1&amp;query=Bia%C5%82a%20Wy%C5%BCna%20380%2C%2033-330%20Gryb%C3%B3w" target="_blank" rel="noopener" class="info-item">
             <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-            <div><span class="info-label">Siedziba</span><p>33‑330 Grybów, Małopolska</p></div>
+            <div><span class="info-label">Siedziba</span><p>Biała Wyżna 380<br />33‑330 Grybów</p></div>
           </a>
-          <div class="info-item info-static">
-            <div class="icon-circle"><i class="fas fa-globe-europe"></i></div>
-            <div><span class="info-label">Obszar działania</span><p>Małopolska i Słowacja</p></div>
-          </div>
         </div>
 
         <div class="map-box">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1458527.9496987208!2d19.20483623242933!3d49.100742523807334!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xa701f98953116ab%3A0xfe503f383579712a!2sSykowni%20Ch%C5%82opcy!5e0!3m2!1spl!2spl!4v1785962124827!5m2!1spl!2spl" 
-			width="600" 
-			height="450" 
-			style="border:0;" 
-			allowfullscreen="" 
-			loading="lazy" 
-			referrerpolicy="no-referrer-when-downgrade">
-			</iframe>
-		</div>
+          <iframe
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzqmAF9WhqwhBbT2axfeLAfQRKVEEEwBk&q=place_id:ChIJqxYxlZgfcAoRKnF5NTg_UP4&language=pl&zoom=13"
+            title="Sykowni Chłopcy w Mapach Google"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
       </div>
     </div>
   </div>
@@ -613,6 +695,7 @@
         <li class="js-reviews-link" hidden><a href="#reviews">Opinie klientów</a></li>
         <li><a href="#faq">Najczęstsze pytania</a></li>
         <li><a href="https://sykowni-chlopcy.sk/">Slovenská verzia</a></li>
+        <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -620,13 +703,13 @@
       <ul class="footer-contact">
         <li><a href="tel:+48574977131"><i class="fas fa-phone-alt"></i> +48 574 977 131</a></li>
         <li><a href="mailto:schlopcy@gmail.com"><i class="fas fa-envelope"></i> schlopcy@gmail.com</a></li>
-        <li><i class="fas fa-map-marker-alt"></i> 33‑330 Grybów</li>
+        <li><i class="fas fa-map-marker-alt"></i> Biała Wyżna 380, 33‑330 Grybów</li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <div class="wrap footer-bottom-inner">
-      <p>&copy; <span id="year"></span> Sykowni Chłopcy. Wszelkie prawa zastrzeżone.</p>
+      <p>&copy; <span id="year"></span> Tomasz Grygiel SYKOWNI-CHLOPCY · NIP 7343620881</p>
       <p class="footer-area">Grybów · Nowy Sącz · Małopolska · Preszów · Poprad · Koszyce · Bardejów</p>
     </div>
   </div>
@@ -637,20 +720,43 @@
   <a href="#contact-section" class="mobile-bar-btn"><i class="fas fa-envelope"></i> Wycena</a>
 </div>
 
-<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-label="Porównanie przed i po">
-  <button id="lightbox-close" aria-label="Zamknij">&times;</button>
-  <div class="lightbox-content">
-    <div class="lightbox-img-wrapper">
-      <span class="lightbox-label">PRZED</span>
-      <img id="lightbox-before" src="" alt="Stan przed pracami" />
+<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+  <div class="lb-shell">
+    <header class="lb-head">
+      <div class="lb-heading">
+        <p class="lb-place" id="lightbox-place" hidden><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span></span></p>
+        <h3 class="lb-title" id="lightbox-title">Porównanie przed i po</h3>
+      </div>
+      <div class="lb-head-actions">
+        <span class="lb-counter" id="lightbox-counter"></span>
+        <button id="lightbox-close" aria-label="Zamknij"><i class="fas fa-times" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <div class="lb-stage">
+      <figure class="lb-figure">
+        <div class="lb-frame" id="lightbox-frame-before">
+          <img id="lightbox-before" src="" alt="Stan przed pracami" />
+          <span class="lb-tag">Przed</span>
+        </div>
+      </figure>
+      <figure class="lb-figure">
+        <div class="lb-frame" id="lightbox-frame-after">
+          <img id="lightbox-after" src="" alt="Stan po pracach" />
+          <span class="lb-tag lb-tag-after">Po</span>
+        </div>
+      </figure>
     </div>
-    <div class="lightbox-img-wrapper">
-      <span class="lightbox-label">PO</span>
-      <img id="lightbox-after" src="" alt="Stan po pracach" />
+
+    <div class="lb-info" id="lightbox-info">
+      <p class="lb-desc" id="lightbox-desc" hidden></p>
+      <ul class="lb-facts" id="lightbox-facts"></ul>
+      <ol class="lb-legend" id="lightbox-legend" hidden></ol>
     </div>
   </div>
-  <button id="lightbox-prev" class="lightbox-arrow" aria-label="Poprzednia">&#10094;</button>
-  <button id="lightbox-next" class="lightbox-arrow" aria-label="Następna">&#10095;</button>
+
+  <button id="lightbox-prev" class="lightbox-arrow" aria-label="Poprzednia realizacja"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
+  <button id="lightbox-next" class="lightbox-arrow" aria-label="Następna realizacja"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
 </div>
 
 <button id="scrollToTopBtn" title="Wróć do góry" aria-label="Wróć do góry">
@@ -658,6 +764,6 @@
 </button>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=20"></script>
+<script src="script.js?v=30"></script>
 </body>
 </html>
