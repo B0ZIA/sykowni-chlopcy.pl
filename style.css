@@ -274,7 +274,7 @@ h1, h2, h3, h4 {
 .hero-bg {
   position: absolute; inset: 0;
   background: center center / cover no-repeat;
-  background-image: url('modern_5.webp');
+  background-image: url('modern_1.webp');
   transform: scale(1.04);
 }
 /* na telefonie pełne 1600 px to strata transferu na najważniejszym
