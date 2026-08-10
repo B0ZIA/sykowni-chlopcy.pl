@@ -1283,17 +1283,9 @@ a.info-item:hover .icon-circle { background: var(--accent); transform: rotate(-6
   .process-step:last-child::after { display: none; }
   .services-grid { grid-template-columns: 1fr; gap: 18px; }
 
-  /* na telefonie trzy kolumny są za ciasne na podpisy – panel staje się listą */
-  .gallery-stats { grid-template-columns: 1fr; margin: -12px 0 36px; }
-  .gallery-stats li {
-    grid-template-columns: auto 1fr; justify-items: start; align-items: center;
-    gap: 14px; padding: 15px 18px; text-align: left;
-  }
-  .gallery-stats li + li::before {
-    left: 18px; right: 18px; top: 0; width: auto; height: 1px;
-  }
-  .gallery-stats strong { font-size: 1.45rem; }
-  .gallery-stats li span { font-size: 0.82rem; }
+  /* na telefonie liczby tylko wydłużają drogę do zdjęć – zdjęcia sprzedają
+     lepiej niż statystyki, więc podsumowanie zostaje na większych ekranach */
+  .gallery-stats { display: none; }
 
   .gallery-grid { gap: 18px; }
   .gc-media { box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32); }
