@@ -392,7 +392,7 @@
      reviews.json wypełnia raz na dobę GitHub Action (tools/fetch_reviews.py).
      Sekcja startuje ukryta i pokazuje się dopiero przy komplecie opinii –
      mniej niż MIN_REVIEWS wygląda gorzej niż brak sekcji w ogóle. */
-  const MIN_REVIEWS = 3;
+  const MIN_REVIEWS = 1;
 
   const GOOGLE_G_SVG = `
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
