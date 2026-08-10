@@ -9,6 +9,71 @@
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
 
+  /* ---------- teksty budowane w JS ----------
+     Plik jest wspólny dla sykowni-chlopcy.pl i sykowni-chlopcy.sk, więc
+     każdy komunikat, który nie stoi w HTML-u, ma tu obie wersje językowe.
+     Wersję wybiera atrybut lang na <html> – innych przełączników nie ma. */
+  const STRINGS = {
+    pl: {
+      menuOpen: 'Otwórz menu',
+      menuClose: 'Zamknij menu',
+      formSending: 'Wysyłanie...',
+      formSuccess: 'Dziękujemy! Twoja wiadomość została wysłana. Odezwiemy się najszybciej, jak to możliwe.',
+      formError: 'Wystąpił błąd. Spróbuj ponownie za chwilę.',
+      formErrorPhone: phone => `Wystąpił błąd. Spróbuj ponownie lub zadzwoń: ${phone}.`,
+      formInvalid: 'Sprawdź proszę zaznaczone pola.',
+      fieldRequired: 'To pole jest wymagane.',
+      fieldEmail: 'Podaj poprawny adres e-mail.',
+      fieldShort: 'Napisz proszę chociaż kilka słów.',
+      reviewMore: 'Czytaj więcej',
+      reviewLess: 'Zwiń',
+      reviewAuthorFallback: 'Klient Google',
+      /* po „na podstawie" liczebnik zawsze łączy się z dopełniaczem: 3 opinii, 5 opinii */
+      reviewsBasedOn: count => `na podstawie ${count} opinii`,
+      reviewsPage: page => `Opinie – strona ${page}`,
+      ratingLabel: rating => `Ocena ${rating} na 5`,
+      lightboxTitle: 'Porównanie przed i po',
+      lightboxFallbackLabel: 'realizacja',
+      lightboxShot: (index, total) => ` (ujęcie ${index} z ${total})`,
+      lightboxBeforeAlt: label => `${label} – stan przed pracami`,
+      lightboxAfterAlt: label => `${label} – stan po pracach`,
+      lightboxThumb: (scope, index, total) => `${scope} – ujęcie ${index} z ${total}`,
+      pinLabel: (number, text) => `Szczegół ${number}: ${text}`
+    },
+    sk: {
+      menuOpen: 'Otvoriť menu',
+      menuClose: 'Zavrieť menu',
+      formSending: 'Odosielanie...',
+      formSuccess: 'Ďakujeme! Vaša správa bola odoslaná. Ozveme sa čo najskôr.',
+      formError: 'Vyskytla sa chyba. Skúste to prosím o chvíľu znova.',
+      formErrorPhone: phone => `Vyskytla sa chyba. Skúste to prosím znova alebo zavolajte: ${phone}.`,
+      formInvalid: 'Skontrolujte prosím zvýraznené polia.',
+      fieldRequired: 'Toto pole je povinné.',
+      fieldEmail: 'Zadajte platnú e-mailovú adresu.',
+      fieldShort: 'Napíšte prosím aspoň pár slov.',
+      reviewMore: 'Čítať viac',
+      reviewLess: 'Zbaliť',
+      reviewAuthorFallback: 'Zákazník Google',
+      reviewsBasedOn: count => `na základe ${count} hodnotení`,
+      reviewsPage: page => `Hodnotenia – strana ${page}`,
+      ratingLabel: rating => `Hodnotenie ${rating} z 5`,
+      lightboxTitle: 'Porovnanie pred a po',
+      lightboxFallbackLabel: 'realizácia',
+      lightboxShot: (index, total) => ` (záber ${index} z ${total})`,
+      lightboxBeforeAlt: label => `${label} – stav pred prácami`,
+      lightboxAfterAlt: label => `${label} – stav po prácach`,
+      lightboxThumb: (scope, index, total) => `${scope} – záber ${index} z ${total}`,
+      pinLabel: (number, text) => `Detail ${number}: ${text}`
+    }
+  };
+
+  const t = STRINGS[document.documentElement.lang] || STRINGS.pl;
+
+  /* Numer do oddzwonienia bierzemy z sekcji kontaktu, żeby komunikat o błędzie
+     wysyłki nie rozjeżdżał się z tym, co widać na stronie – a przy okazji ten
+     sam plik obsługuje polski i słowacki numer bez osobnej stałej. */
+  const phoneNumber = document.querySelector('.contact-info a[href^="tel:"] p')?.textContent.trim() || '';
+
   /* ikony pochodzą ze sprite'a wklejonego na początku <body>;
      w kodzie budujemy taki sam znacznik, jaki jest w HTML-u */
   function icon(name, className) {
@@ -117,7 +182,7 @@
     hamburger.classList.remove('open');
     navLinks.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
-    hamburger.setAttribute('aria-label', 'Otwórz menu');
+    hamburger.setAttribute('aria-label', t.menuOpen);
   }
 
   function initMobileMenu() {
@@ -125,7 +190,7 @@
       const open = navLinks.classList.toggle('open');
       hamburger.classList.toggle('open', open);
       hamburger.setAttribute('aria-expanded', String(open));
-      hamburger.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+      hamburger.setAttribute('aria-label', open ? t.menuClose : t.menuOpen);
       /* menu wjeżdża z visibility:hidden – fokus da się przenieść dopiero
          po przemalowaniu, inaczej przeglądarka go ignoruje */
       if (open) {
@@ -295,26 +360,7 @@
     const formMessage = document.getElementById('form-message');
     if (!form || !formMessage) return;
 
-    const isSK = document.documentElement.lang === 'sk';
-    const t = isSK
-      ? {
-          sending: 'Odosielanie...',
-          success: 'Ďakujeme! Vaša správa bola odoslaná.',
-          error: 'Vyskytla sa chyba. Skúste to prosím znova alebo zavolajte: +48 574 977 131.',
-          invalid: 'Skontrolujte prosím zvýraznené polia.',
-          required: 'Toto pole je povinné.',
-          email: 'Zadajte platnú e-mailovú adresu.',
-          short: 'Napíšte prosím aspoň pár slov.'
-        }
-      : {
-          sending: 'Wysyłanie...',
-          success: 'Dziękujemy! Twoja wiadomość została wysłana. Odezwiemy się najszybciej, jak to możliwe.',
-          error: 'Wystąpił błąd. Spróbuj ponownie lub zadzwoń: +48 574 977 131.',
-          invalid: 'Sprawdź proszę zaznaczone pola.',
-          required: 'To pole jest wymagane.',
-          email: 'Podaj poprawny adres e-mail.',
-          short: 'Napisz proszę chociaż kilka słów.'
-        };
+    const errorMessage = phoneNumber ? t.formErrorPhone(phoneNumber) : t.formError;
 
     const setFieldError = (field, message) => {
       const group = field.closest('.form-group');
@@ -328,9 +374,9 @@
 
     const validateField = field => {
       const value = field.value.trim();
-      if (field.required && !value) return t.required;
-      if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return t.email;
-      if (field.tagName === 'TEXTAREA' && value && value.length < 5) return t.short;
+      if (field.required && !value) return t.fieldRequired;
+      if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return t.fieldEmail;
+      if (field.tagName === 'TEXTAREA' && value && value.length < 5) return t.fieldShort;
       return '';
     };
 
@@ -356,14 +402,14 @@
       });
 
       if (firstInvalid) {
-        formMessage.textContent = t.invalid;
+        formMessage.textContent = t.formInvalid;
         formMessage.className = 'form-message error';
         firstInvalid.focus();
         return;
       }
 
       const submitBtn = form.querySelector('button[type="submit"]');
-      formMessage.textContent = t.sending;
+      formMessage.textContent = t.formSending;
       formMessage.className = 'form-message';
       if (submitBtn) submitBtn.disabled = true;
 
@@ -377,10 +423,10 @@
 
         form.reset();
         fields.forEach(field => setFieldError(field, ''));
-        formMessage.textContent = t.success;
+        formMessage.textContent = t.formSuccess;
         formMessage.className = 'form-message success';
       } catch (error) {
-        formMessage.textContent = t.error;
+        formMessage.textContent = errorMessage;
         formMessage.className = 'form-message error';
       } finally {
         if (submitBtn) submitBtn.disabled = false;
@@ -406,7 +452,7 @@
     const stars = document.createElement('div');
     stars.className = 'rv-stars';
     stars.setAttribute('role', 'img');
-    stars.setAttribute('aria-label', `Ocena ${rating} na 5`);
+    stars.setAttribute('aria-label', t.ratingLabel(rating));
     for (let i = 1; i <= 5; i++) {
       stars.appendChild(icon(i <= Math.round(rating) ? 'i-star' : 'i-star-o', i <= Math.round(rating) ? '' : 'is-empty'));
     }
@@ -439,7 +485,7 @@
     const meta = document.createElement('div');
     meta.className = 'rv-meta';
     const name = document.createElement('strong');
-    name.textContent = review.author || 'Klient Google';
+    name.textContent = review.author || t.reviewAuthorFallback;
     const time = document.createElement('span');
     time.textContent = review.relativeTime || '';
     meta.append(name, time);
@@ -458,7 +504,7 @@
     const more = document.createElement('button');
     more.type = 'button';
     more.className = 'rv-more';
-    more.textContent = 'Czytaj więcej';
+    more.textContent = t.reviewMore;
 
     card.append(head, buildStars(review.rating || 5), text, more);
     return card;
@@ -484,8 +530,7 @@
     if (oldStars) oldStars.replaceWith(buildStars(rating));
 
     const counter = summary.querySelector('.gc-count');
-    /* po „na podstawie" liczebnik zawsze łączy się z dopełniaczem: 3 opinii, 5 opinii */
-    if (counter) counter.textContent = `na podstawie ${count} opinii`;
+    if (counter) counter.textContent = t.reviewsBasedOn(count);
 
     const profile = summary.querySelector('a[href*="google"]');
     if (profile && data.profileUrl) profile.href = data.profileUrl;
@@ -568,7 +613,7 @@
       for (let i = 0; i < pageCount(); i++) {
         const dot = document.createElement('button');
         dot.type = 'button';
-        dot.setAttribute('aria-label', `Opinie – strona ${i + 1}`);
+        dot.setAttribute('aria-label', t.reviewsPage(i + 1));
         dot.addEventListener('click', () => scrollToPage(i));
         dots.appendChild(dot);
       }
@@ -590,7 +635,7 @@
       if (!moreBtn) return;
       moreBtn.addEventListener('click', () => {
         const expanded = card.classList.toggle('expanded');
-        moreBtn.textContent = expanded ? 'Zwiń' : 'Czytaj więcej';
+        moreBtn.textContent = expanded ? t.reviewLess : t.reviewMore;
       });
     });
 
@@ -749,7 +794,7 @@
         pin.className = 'lb-pin';
         pin.style.left = `${note.dataset.x || 50}%`;
         pin.style.top = `${note.dataset.y || 50}%`;
-        pin.setAttribute('aria-label', `Szczegół ${number}: ${text}`);
+        pin.setAttribute('aria-label', t.pinLabel(number, text));
 
         const dot = document.createElement('span');
         dot.className = 'lb-pin-dot';
@@ -803,7 +848,7 @@
         button.className = 'lb-thumb';
         button.setAttribute('role', 'tab');
         button.setAttribute('aria-selected', String(i === current.index));
-        button.setAttribute('aria-label', `${scope} – ujęcie ${i + 1} z ${current.total}`);
+        button.setAttribute('aria-label', t.lightboxThumb(scope, i + 1, current.total));
 
         const img = document.createElement('img');
         img.src = pair.after;
@@ -859,18 +904,18 @@
     function show(index) {
       const pair = galleryPairs[index];
       const { place, scope, area, time } = pair.card.dataset;
-      const label = scope || place || 'realizacja';
-      const shot = pair.total > 1 ? ` (ujęcie ${pair.index + 1} z ${pair.total})` : '';
+      const label = scope || place || t.lightboxFallbackLabel;
+      const shot = pair.total > 1 ? t.lightboxShot(pair.index + 1, pair.total) : '';
 
       beforeImg.src = pair.before;
-      beforeImg.alt = `${label}${shot} – stan przed pracami`;
+      beforeImg.alt = t.lightboxBeforeAlt(`${label}${shot}`);
       afterImg.src = pair.after;
-      afterImg.alt = `${label}${shot} – stan po pracach`;
+      afterImg.alt = t.lightboxAfterAlt(`${label}${shot}`);
       fitFrames();
 
       lbPlace.hidden = !place;
       if (place) lbPlace.querySelector('span').textContent = place;
-      lbTitle.textContent = scope || place || 'Porównanie przed i po';
+      lbTitle.textContent = scope || place || t.lightboxTitle;
       lbCounter.textContent = `${index + 1} / ${galleryPairs.length}`;
 
       const desc = pair.desc.trim();

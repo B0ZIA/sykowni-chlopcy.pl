@@ -40,7 +40,7 @@
   <!-- tło hero jest największym elementem pierwszego ekranu (LCP);
        telefon dostaje lżejszy wariant, bo i tak przykrywa go ciemna nakładka -->
   <link rel="preload" href="modern_5-800.webp" as="image" type="image/webp" media="(max-width: 700px)" fetchpriority="high" />
-  <link rel="preload" href="modern_5.webp" as="image" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />
+  <link rel="preload" href="modern_1.webp" as="image" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />
 
   <!-- klasa .js włącza animacje wjazdu; bez skryptów treść zostaje widoczna -->
   <script>document.documentElement.classList.add('js');</script>
@@ -519,12 +519,13 @@
 
         <template class="gc-pairs">
           <p>Została zastosowana izolacja wełną szklaną o grubości 10 cm. Naniesiony został tynk silikonowy z cokołem z mozaiki.</p>
-          <figure data-before="galery_3.webp" data-after="galery_12.webp"></figure>
-            <ul>
-              <li data-side="before" data-x="37" data-y="90">Zabezpieczenie podłoża przed uszkodzeniami</li>
-            </ul>
+          <figure data-before="galery_3.webp" data-after="galery_12.webp">
           </figure>
           <figure data-before="galery_11.webp" data-after="galery_1.webp">
+		  <ul>
+              <li data-side="before" data-x="37" data-y="90">Zabezpieczenie podłoża przed uszkodzeniami</li>
+            </ul>
+		  </figure>
         </template>
       </article>
 
@@ -807,9 +808,9 @@
             <div class="form-group">
               <label for="scope">Forma odpowiedzi</label>
               <select id="scope" name="scope">
-                <option value="Ocieplenie budynku">e-mail</option>
-                <option value="Prace blacharskie">SMS</option>
-                <option value="Tynk zewnętrzny">Telefon</option>
+                <option value="E-mail">E-mail</option>
+                <option value="SMS">SMS</option>
+                <option value="Telefon">Telefon</option>
               </select>
             </div>
           </div>
