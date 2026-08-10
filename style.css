@@ -661,20 +661,41 @@ h1, h2, h3, h4 {
 .gc-top strong { display: block; font-family: var(--font-head); font-size: 1.02rem; color: var(--primary); line-height: 1.3; }
 .gc-top span { font-size: 0.82rem; color: var(--text-muted); }
 
-.gc-score { display: flex; align-items: center; gap: 16px; padding-top: 20px; }
-.gc-num { font-family: var(--font-head); font-weight: 800; font-size: 3rem; line-height: 1; color: var(--primary); }
-.gc-count { display: block; font-size: 0.84rem; color: var(--text-muted); margin-top: 3px; }
+/* ocena wyśrodkowana w kolumnie: liczba, gwiazdki, podpis –
+   czyta się od razu i nie zostawia pustego pola obok */
+.gc-score {
+  display: grid; justify-items: center; gap: 9px;
+  padding: 24px 0 4px; text-align: center;
+}
+.gc-num {
+  font-family: var(--font-head); font-weight: 800; font-size: 2.9rem;
+  line-height: 1; letter-spacing: -0.03em; color: var(--primary);
+}
+.gc-score .rv-stars { font-size: 1.05rem; gap: 4px; }
+.gc-count { font-size: 0.85rem; color: var(--text-muted); }
 
 .rv-stars { display: inline-flex; gap: 3px; color: #FBBC04; font-size: 0.88rem; line-height: 1; }
 .rv-stars .is-empty { color: #DADCE0; }
 
-.gc-bars { list-style: none; display: grid; gap: 8px; margin: 20px 0 24px; }
+.gc-bars { list-style: none; display: grid; gap: 8px; margin: 22px 0 4px; }
 .gc-bars li { display: grid; grid-template-columns: 10px 1fr; align-items: center; gap: 12px; font-size: 0.78rem; color: var(--text-muted); }
 .gc-bar { display: block; height: 8px; border-radius: 999px; background: var(--bg-light); border: 1px solid var(--border); overflow: hidden; }
 .gc-bar i { display: block; height: 100%; width: var(--w, 0%); background: #FBBC04; border-radius: 999px; animation: gcGrow 1.1s var(--ease) both; }
 @keyframes gcGrow { from { width: 0; } to { width: var(--w, 0%); } }
 
-.gc-note { margin-top: 14px; font-size: 0.78rem; color: var(--text-muted); text-align: center; }
+/* odnośnik do wizytówki to akcja drugoplanowa – obramowanie zamiast
+   pełnej granatowej płyty, która przytłaczała całą kartę */
+.gc-link {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-top: 22px; padding: 13px 18px; border-radius: 12px;
+  background: #fff; border: 1.5px solid var(--border);
+  font-family: var(--font-head); font-weight: 700; font-size: 0.9rem;
+  color: var(--primary); text-decoration: none;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.gc-link .ico { font-size: 0.78rem; color: var(--text-muted); transition: color 0.25s ease; }
+.gc-link:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+.gc-link:hover .ico { color: rgba(255, 255, 255, 0.75); }
 
 /* karuzela opinii */
 .reviews-col { min-width: 0; }
@@ -1146,12 +1167,11 @@ a.info-item:hover .icon-circle { background: var(--accent); transform: rotate(-6
 
 /* karta Google w układzie poziomym na tabletach */
 @media (max-width: 992px) and (min-width: 769px) {
-  .google-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px 30px; }
+  .google-card { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 18px 30px; }
   .gc-top { grid-column: 1 / -1; }
-  .gc-score { padding-top: 0; }
+  .gc-score { padding: 0; }
   .gc-bars { margin: 0; }
-  .google-card .btn-block { width: auto; justify-self: end; }
-  .gc-note { grid-column: 1 / -1; margin-top: 0; }
+  .gc-link { margin-top: 0; justify-self: end; }
 }
 
 /* menu mobilne włączamy już od 900 px – siedem pozycji rozpycha pasek */

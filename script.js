@@ -392,7 +392,7 @@
      reviews.json wypełnia raz na dobę GitHub Action (tools/fetch_reviews.py).
      Sekcja startuje ukryta i pokazuje się dopiero przy komplecie opinii –
      mniej niż MIN_REVIEWS wygląda gorzej niż brak sekcji w ogóle. */
-  const MIN_REVIEWS = 1;
+  const MIN_REVIEWS = 2;
 
   const GOOGLE_G_SVG = `
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -515,6 +515,12 @@
       return renderGoogleReviews(await response.json(), track);
     } catch (error) {
       /* brak pliku albo błąd sieci – sekcja zostaje ukryta */
+      if (location.protocol === 'file:') {
+        console.info(
+          'Opinie: przeglądarka blokuje wczytanie reviews.json przy otwarciu strony jako plik (file://). ' +
+          'Uruchom podgląd przez serwer, np. „python -m http.server 4173" i wejdź na http://localhost:4173.'
+        );
+      }
       return false;
     }
   }

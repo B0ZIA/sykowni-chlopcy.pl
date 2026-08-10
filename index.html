@@ -44,8 +44,8 @@
 
   <!-- klasa .js włącza animacje wjazdu; bez skryptów treść zostaje widoczna -->
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=52" />
-  <script src="script.js?v=53" defer></script>
+  <link rel="stylesheet" href="style.css?v=53" />
+  <script src="script.js?v=54" defer></script>
 
   <script type="application/ld+json">
   {
@@ -693,12 +693,10 @@
 
         <div class="gc-score">
           <span class="gc-num">5,0</span>
-          <div>
-            <div class="rv-stars" role="img" aria-label="Średnia ocena 5 na 5">
-              <i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i>
-            </div>
-            <span class="gc-count">na podstawie 8 opinii</span>
+          <div class="rv-stars" role="img" aria-label="Średnia ocena 5 na 5">
+            <i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i>
           </div>
+          <span class="gc-count">na podstawie 8 opinii</span>
         </div>
 
         <ul class="gc-bars">
@@ -710,10 +708,10 @@
         </ul>
 
         <!-- link podmienia się automatycznie na ten z reviews.json, gdy workflow pobierze dane -->
-        <a href="https://www.google.com/maps?cid=18325216394418417962" target="_blank" rel="noopener" class="btn btn-primary btn-sm btn-block">
-          Zobacz nas w Google <i class="ico ico-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"></use></svg></i>
+        <a href="https://www.google.com/maps?cid=18325216394418417962" target="_blank" rel="noopener" class="gc-link">
+          Zobacz wizytówkę w Google
+          <i class="ico" aria-hidden="true"><svg><use href="#i-external-link-alt"></use></svg></i>
         </a>
-        <p class="gc-note">Wizytówka firmy w Google Maps.</p>
       </aside>
 
       <div class="reviews-col" data-reveal data-reveal-delay="100">
