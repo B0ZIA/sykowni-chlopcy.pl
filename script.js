@@ -1,126 +1,214 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* =========================================================
+   Sykowni Chłopcy – logika strony
+   Bez zależności zewnętrznych: odsłanianie sekcji, nawigacja,
+   galeria przed/po, opinie z Google i formularz kontaktowy.
+   ========================================================= */
+(() => {
+  'use strict';
 
-  if (window.AOS) {
-    AOS.init({
-      duration: 700,
-      easing: 'ease-out-cubic',
-      once: true,
-      offset: 80,
-      disable: prefersReducedMotion
-    });
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const scrollBehavior = prefersReducedMotion ? 'auto' : 'smooth';
+
+  /* ikony pochodzą ze sprite'a wklejonego na początku <body>;
+     w kodzie budujemy taki sam znacznik, jaki jest w HTML-u */
+  function icon(name, className) {
+    const wrap = document.createElement('i');
+    wrap.className = className ? `ico ${className}` : 'ico';
+    wrap.setAttribute('aria-hidden', 'true');
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
+    use.setAttribute('href', `#${name}`);
+    svg.appendChild(use);
+    wrap.appendChild(svg);
+    return wrap;
   }
 
-  const yearSpan = document.getElementById('year');
-  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+  /* ---------- odsłanianie sekcji przy przewijaniu ---------- */
+  function initReveal() {
+    const items = document.querySelectorAll('[data-reveal]');
+    if (!items.length) return;
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      items.forEach(el => el.classList.add('is-revealed'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-revealed');
+        obs.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -70px 0px', threshold: 0.01 });
+
+    items.forEach(el => {
+      if (el.dataset.revealDelay) el.style.setProperty('--reveal-delay', `${el.dataset.revealDelay}ms`);
+      observer.observe(el);
+    });
+
+    /* siatka bezpieczeństwa: gdyby obserwator się nie odezwał (karta otwarta
+       w tle, nietypowa przeglądarka), po chwili pokazujemy to, co i tak
+       mieści się na ekranie – treść nigdy nie zostaje niewidoczna */
+    setTimeout(() => {
+      items.forEach(el => {
+        if (el.classList.contains('is-revealed')) return;
+        const box = el.getBoundingClientRect();
+        if (box.top < window.innerHeight && box.bottom > 0) el.classList.add('is-revealed');
+      });
+    }, 2500);
+  }
+
+  /* elementy dosłane później (np. karty opinii) też mają wjechać płynnie */
+  function revealLater(root) {
+    root.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach(el => el.classList.add('is-revealed'));
+  }
 
   const navbar = document.getElementById('navbar');
   const scrollToTopBtn = document.getElementById('scrollToTopBtn');
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('nav-links');
 
-  /* ---------- nawigacja: stan po scrollu ---------- */
-  function onScroll() {
-    const y = window.scrollY;
-    navbar.classList.toggle('scrolled', y > 20);
-    scrollToTopBtn.classList.toggle('show', y > 500);
-    updateScrollSpy();
+  /* ---------- nawigacja: cień paska i przycisk „do góry" ---------- */
+  function initScrollState() {
+    let ticking = false;
+    const apply = () => {
+      const y = window.scrollY;
+      navbar.classList.toggle('scrolled', y > 20);
+      scrollToTopBtn.classList.toggle('show', y > 500);
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(apply);
+    }, { passive: true });
+    apply();
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
 
-  window.scrollToTop = function () {
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    closeMobileMenu();
-  };
-  scrollToTopBtn.addEventListener('click', window.scrollToTop);
+  /* ---------- podświetlanie aktywnej sekcji ----------
+     Obserwator zamiast liczenia offsetTop przy każdym pikselu przewijania:
+     ta sama funkcja, ale bez wymuszania przeliczeń układu strony. */
+  function initScrollSpy() {
+    const sections = Array.from(document.querySelectorAll('main section[id], main header[id]'));
+    const links = Array.from(document.querySelectorAll('.nav-links a[href^="#"]'));
+    if (!sections.length || !links.length || !('IntersectionObserver' in window)) return;
+
+    const visible = new Set();
+    const mark = () => {
+      const current = sections.find(section => visible.has(section));
+      const hash = current ? `#${current.id}` : '';
+      links.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+    };
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      });
+      mark();
+    }, { rootMargin: '-90px 0px -55% 0px', threshold: 0 });
+
+    sections.forEach(section => observer.observe(section));
+  }
 
   /* ---------- menu mobilne ---------- */
   function closeMobileMenu() {
+    if (!navLinks.classList.contains('open')) return;
     hamburger.classList.remove('open');
     navLinks.classList.remove('open');
     hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Otwórz menu');
   }
 
-  hamburger.addEventListener('click', () => {
-    const open = navLinks.classList.toggle('open');
-    hamburger.classList.toggle('open', open);
-    hamburger.setAttribute('aria-expanded', String(open));
-  });
+  function initMobileMenu() {
+    hamburger.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      hamburger.classList.toggle('open', open);
+      hamburger.setAttribute('aria-expanded', String(open));
+      hamburger.setAttribute('aria-label', open ? 'Zamknij menu' : 'Otwórz menu');
+      /* menu wjeżdża z visibility:hidden – fokus da się przenieść dopiero
+         po przemalowaniu, inaczej przeglądarka go ignoruje */
+      if (open) {
+        requestAnimationFrame(() => {
+          const first = navLinks.querySelector('a');
+          if (first && navLinks.classList.contains('open')) first.focus();
+        });
+      }
+    });
 
-  document.addEventListener('click', (e) => {
-    if (!navLinks.classList.contains('open')) return;
-    if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
-  });
+    document.addEventListener('click', e => {
+      if (!navLinks.classList.contains('open')) return;
+      if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) closeMobileMenu();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape' || !navLinks.classList.contains('open')) return;
+      closeMobileMenu();
+      hamburger.focus();
+    });
+  }
 
   /* ---------- wybór wersji językowej ---------- */
-  const langToggle = document.getElementById('lang-toggle');
-  const langMenu = document.getElementById('lang-menu');
+  function initLangMenu() {
+    const toggle = document.getElementById('lang-toggle');
+    const menu = document.getElementById('lang-menu');
+    if (!toggle || !menu) return;
 
-  if (langToggle && langMenu) {
-    const closeLangMenu = () => {
-      langMenu.hidden = true;
-      langToggle.setAttribute('aria-expanded', 'false');
+    const close = () => {
+      menu.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
     };
 
-    langToggle.addEventListener('click', (e) => {
+    toggle.addEventListener('click', e => {
       e.stopPropagation();
-      const open = langMenu.hidden;
-      langMenu.hidden = !open;
-      langToggle.setAttribute('aria-expanded', String(open));
+      const open = menu.hidden;
+      menu.hidden = !open;
+      toggle.setAttribute('aria-expanded', String(open));
     });
 
-    document.addEventListener('click', (e) => {
-      if (!langMenu.hidden && !langMenu.contains(e.target)) closeLangMenu();
+    document.addEventListener('click', e => {
+      if (!menu.hidden && !menu.contains(e.target)) close();
     });
 
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !langMenu.hidden) {
-        closeLangMenu();
-        langToggle.focus();
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && !menu.hidden) {
+        close();
+        toggle.focus();
       }
     });
   }
 
   /* ---------- płynne przewijanie do sekcji ---------- */
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function (e) {
-      const targetId = this.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-      const target = document.querySelector(targetId);
-      if (!target) return;
+  function initAnchors() {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (!targetId || targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (!target) return;
 
-      e.preventDefault();
+        e.preventDefault();
+        closeMobileMenu();
+
+        const offset = target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 12;
+        window.scrollTo({ top: Math.max(offset, 0), behavior: scrollBehavior });
+        /* adres w pasku ma odpowiadać temu, co widać – bez skoku strony */
+        if (history.replaceState) history.replaceState(null, '', targetId);
+      });
+    });
+
+    scrollToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: scrollBehavior });
       closeMobileMenu();
-
-      const offset = target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 12;
-      window.scrollTo({ top: Math.max(offset, 0), behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-    });
-  });
-
-  /* ---------- podświetlanie aktywnej sekcji ---------- */
-  const sections = document.querySelectorAll('section[id], header[id]');
-  const navItems = document.querySelectorAll('.nav-links a');
-
-  function updateScrollSpy() {
-    let currentId = '';
-    const scrollY = window.scrollY + navbar.offsetHeight + 100;
-
-    sections.forEach(sec => {
-      if (scrollY >= sec.offsetTop && scrollY < sec.offsetTop + sec.offsetHeight) {
-        currentId = sec.getAttribute('id');
-      }
-    });
-
-    navItems.forEach(link => {
-      link.classList.toggle('active', link.getAttribute('href') === `#${currentId}`);
     });
   }
-  updateScrollSpy();
 
   /* ---------- liczniki w pasku statystyk ---------- */
-  const counters = document.querySelectorAll('.stat-num');
-  if (counters.length) {
-    const runCounter = (el) => {
+  function initCounters() {
+    const counters = document.querySelectorAll('.stat-num');
+    if (!counters.length) return;
+
+    const run = el => {
       const target = parseInt(el.dataset.count, 10) || 0;
       const suffix = el.dataset.suffix || '';
       const duration = 1200;
@@ -131,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       const start = performance.now();
-      const tick = (now) => {
+      const tick = now => {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         el.textContent = `${Math.round(target * eased)}${suffix}`;
@@ -140,75 +228,160 @@ document.addEventListener("DOMContentLoaded", () => {
       requestAnimationFrame(tick);
     };
 
-    const counterObserver = new IntersectionObserver((entries, observer) => {
+    if (!('IntersectionObserver' in window)) {
+      counters.forEach(run);
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          runCounter(entry.target);
-          observer.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        run(entry.target);
+        obs.unobserve(entry.target);
       });
     }, { threshold: 0.5 });
 
-    counters.forEach(el => counterObserver.observe(el));
+    counters.forEach(el => observer.observe(el));
   }
 
   /* ---------- FAQ ---------- */
-  document.querySelectorAll('.faq-item').forEach(item => {
-    const question = item.querySelector('.faq-q');
-    const answer = item.querySelector('.faq-a');
-    if (!question || !answer) return;
+  function initFaq() {
+    const items = Array.from(document.querySelectorAll('.faq-item'));
 
-    question.addEventListener('click', () => {
-      const isOpen = item.classList.contains('open');
+    const collapse = item => {
+      const answer = item.querySelector('.faq-a');
+      item.classList.remove('open');
+      answer.style.maxHeight = null;
+      answer.inert = true;
+      item.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    };
 
-      document.querySelectorAll('.faq-item.open').forEach(other => {
-        other.classList.remove('open');
-        other.querySelector('.faq-a').style.maxHeight = null;
-        other.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-      });
+    items.forEach(item => {
+      const question = item.querySelector('.faq-q');
+      const answer = item.querySelector('.faq-a');
+      if (!question || !answer) return;
 
-      if (!isOpen) {
+      /* zwinięta odpowiedź jest niewidoczna, więc nie może też łapać fokusu */
+      answer.inert = true;
+
+      question.addEventListener('click', () => {
+        const wasOpen = item.classList.contains('open');
+        items.filter(other => other.classList.contains('open')).forEach(collapse);
+        if (wasOpen) return;
+
         item.classList.add('open');
         answer.style.maxHeight = `${answer.scrollHeight}px`;
+        answer.inert = false;
         question.setAttribute('aria-expanded', 'true');
-      }
+      });
     });
-  });
+
+    /* po zmianie szerokości okna tekst zajmuje inną liczbę linii */
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        items.filter(item => item.classList.contains('open')).forEach(item => {
+          const answer = item.querySelector('.faq-a');
+          answer.style.maxHeight = `${answer.scrollHeight}px`;
+        });
+      }, 150);
+    });
+  }
 
   /* ---------- formularz kontaktowy ---------- */
-  const contactForm = document.getElementById('contact-form');
-  const formMessage = document.getElementById('form-message');
+  function initContactForm() {
+    const form = document.getElementById('contact-form');
+    const formMessage = document.getElementById('form-message');
+    if (!form || !formMessage) return;
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', async function (e) {
+    const isSK = document.documentElement.lang === 'sk';
+    const t = isSK
+      ? {
+          sending: 'Odosielanie...',
+          success: 'Ďakujeme! Vaša správa bola odoslaná.',
+          error: 'Vyskytla sa chyba. Skúste to prosím znova alebo zavolajte: +48 574 977 131.',
+          invalid: 'Skontrolujte prosím zvýraznené polia.',
+          required: 'Toto pole je povinné.',
+          email: 'Zadajte platnú e-mailovú adresu.',
+          short: 'Napíšte prosím aspoň pár slov.'
+        }
+      : {
+          sending: 'Wysyłanie...',
+          success: 'Dziękujemy! Twoja wiadomość została wysłana. Odezwiemy się najszybciej, jak to możliwe.',
+          error: 'Wystąpił błąd. Spróbuj ponownie lub zadzwoń: +48 574 977 131.',
+          invalid: 'Sprawdź proszę zaznaczone pola.',
+          required: 'To pole jest wymagane.',
+          email: 'Podaj poprawny adres e-mail.',
+          short: 'Napisz proszę chociaż kilka słów.'
+        };
+
+    const setFieldError = (field, message) => {
+      const group = field.closest('.form-group');
+      const box = group ? group.querySelector('.field-error') : null;
+      group?.classList.toggle('has-error', Boolean(message));
+      field.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (!box) return;
+      box.textContent = message || '';
+      box.hidden = !message;
+    };
+
+    const validateField = field => {
+      const value = field.value.trim();
+      if (field.required && !value) return t.required;
+      if (field.type === 'email' && value && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value)) return t.email;
+      if (field.tagName === 'TEXTAREA' && value && value.length < 5) return t.short;
+      return '';
+    };
+
+    const fields = Array.from(form.querySelectorAll('input[required], textarea[required]'));
+    fields.forEach(field => {
+      /* komunikat znika, gdy tylko pole zostanie poprawione */
+      field.addEventListener('input', () => {
+        if (field.closest('.form-group')?.classList.contains('has-error')) {
+          setFieldError(field, validateField(field));
+        }
+      });
+      field.addEventListener('blur', () => setFieldError(field, validateField(field)));
+    });
+
+    form.addEventListener('submit', async e => {
       e.preventDefault();
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      const formData = new FormData(contactForm);
 
-      const isSK = document.documentElement.lang === 'sk';
-      const sendingText = isSK ? 'Odosielanie...' : 'Wysyłanie...';
-      const successText = isSK ? 'Ďakujeme! Vaša správa bola odoslaná.' : 'Dziękujemy! Twoja wiadomość została wysłana. Odezwiemy się najszybciej, jak to możliwe.';
-      const errorText = isSK ? 'Vyskytla sa chyba. Skúste to prosím znova.' : 'Wystąpił błąd. Spróbuj ponownie lub zadzwoń: +48 574 977 131.';
+      let firstInvalid = null;
+      fields.forEach(field => {
+        const message = validateField(field);
+        setFieldError(field, message);
+        if (message && !firstInvalid) firstInvalid = field;
+      });
 
-      formMessage.textContent = sendingText;
+      if (firstInvalid) {
+        formMessage.textContent = t.invalid;
+        formMessage.className = 'form-message error';
+        firstInvalid.focus();
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      formMessage.textContent = t.sending;
       formMessage.className = 'form-message';
       if (submitBtn) submitBtn.disabled = true;
 
       try {
-        const response = await fetch(contactForm.action, {
+        const response = await fetch(form.action, {
           method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: formData
+          headers: { Accept: 'application/json' },
+          body: new FormData(form)
         });
-
         if (!response.ok) throw new Error('Server error');
 
-        contactForm.reset();
-        formMessage.textContent = successText;
-        formMessage.classList.add('success');
+        form.reset();
+        fields.forEach(field => setFieldError(field, ''));
+        formMessage.textContent = t.success;
+        formMessage.className = 'form-message success';
       } catch (error) {
-        formMessage.textContent = errorText;
-        formMessage.classList.add('error');
+        formMessage.textContent = t.error;
+        formMessage.className = 'form-message error';
       } finally {
         if (submitBtn) submitBtn.disabled = false;
       }
@@ -235,9 +408,7 @@ document.addEventListener("DOMContentLoaded", () => {
     stars.setAttribute('role', 'img');
     stars.setAttribute('aria-label', `Ocena ${rating} na 5`);
     for (let i = 1; i <= 5; i++) {
-      const star = document.createElement('i');
-      star.className = i <= Math.round(rating) ? 'fas fa-star' : 'far fa-star';
-      stars.appendChild(star);
+      stars.appendChild(icon(i <= Math.round(rating) ? 'i-star' : 'i-star-o', i <= Math.round(rating) ? '' : 'is-empty'));
     }
     return stars;
   }
@@ -350,60 +521,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function revealReviewsSection() {
     document.querySelectorAll('#reviews, .js-reviews-link').forEach(el => { el.hidden = false; });
-    if (window.AOS) AOS.refresh();
+    const section = document.getElementById('reviews');
+    if (section) revealLater(section);
   }
 
   /* ---------- karuzela opinii ---------- */
-  function initReviewsCarousel(reviewsTrack) {
-    const reviewCards = Array.from(reviewsTrack.querySelectorAll('.review-card'));
-    const reviewDots = document.getElementById('reviews-dots');
-    const reviewPrev = document.getElementById('reviews-prev');
-    const reviewNext = document.getElementById('reviews-next');
+  function initReviewsCarousel(track) {
+    const cards = Array.from(track.querySelectorAll('.review-card'));
+    const dots = document.getElementById('reviews-dots');
+    const prev = document.getElementById('reviews-prev');
+    const next = document.getElementById('reviews-next');
+    if (!cards.length || !dots || !prev || !next) return;
 
     /* szerokość jednej karty razem z odstępem */
-    const cardStep = () => (reviewCards.length > 1
-      ? reviewCards[1].offsetLeft - reviewCards[0].offsetLeft
-      : reviewsTrack.clientWidth);
-    const perView = () => Math.max(1, Math.round(reviewsTrack.clientWidth / cardStep()));
-    const pageCount = () => Math.max(1, Math.ceil(reviewCards.length / perView()));
+    const cardStep = () => (cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : track.clientWidth);
+    const perView = () => Math.max(1, Math.round(track.clientWidth / cardStep()));
+    const pageCount = () => Math.max(1, Math.ceil(cards.length / perView()));
     const currentPage = () => Math.min(
-      Math.round(reviewsTrack.scrollLeft / (cardStep() * perView())),
+      Math.round(track.scrollLeft / (cardStep() * perView())),
       pageCount() - 1
     );
 
     function scrollToPage(page) {
-      const index = Math.min(Math.max(page, 0) * perView(), reviewCards.length - 1);
-      reviewsTrack.scrollTo({
-        left: reviewCards[index].offsetLeft - reviewCards[0].offsetLeft,
-        behavior: prefersReducedMotion ? 'auto' : 'smooth'
-      });
+      const index = Math.min(Math.max(page, 0) * perView(), cards.length - 1);
+      track.scrollTo({ left: cards[index].offsetLeft - cards[0].offsetLeft, behavior: scrollBehavior });
     }
 
-    function syncReviewControls() {
+    function syncControls() {
       const page = currentPage();
-      Array.from(reviewDots.children).forEach((dot, i) => {
+      Array.from(dots.children).forEach((dot, i) => {
         dot.classList.toggle('is-active', i === page);
         dot.setAttribute('aria-current', i === page ? 'true' : 'false');
       });
-      reviewPrev.disabled = page === 0;
-      reviewNext.disabled = page >= pageCount() - 1;
+      prev.disabled = page === 0;
+      next.disabled = page >= pageCount() - 1;
     }
 
-    function buildReviewDots() {
-      reviewDots.innerHTML = '';
+    function buildDots() {
+      dots.replaceChildren();
       for (let i = 0; i < pageCount(); i++) {
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.setAttribute('aria-label', `Opinie – strona ${i + 1}`);
         dot.addEventListener('click', () => scrollToPage(i));
-        reviewDots.appendChild(dot);
+        dots.appendChild(dot);
       }
-      syncReviewControls();
+      syncControls();
     }
 
     /* „czytaj więcej" pokazujemy tylko tam, gdzie tekst faktycznie się nie mieści */
     function checkClamped() {
-      reviewCards.forEach(card => {
+      cards.forEach(card => {
         if (card.classList.contains('expanded')) return;
         const text = card.querySelector('.rv-text');
         if (!text) return;
@@ -411,7 +579,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    reviewCards.forEach(card => {
+    cards.forEach(card => {
       const moreBtn = card.querySelector('.rv-more');
       if (!moreBtn) return;
       moreBtn.addEventListener('click', () => {
@@ -420,299 +588,390 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    reviewPrev.addEventListener('click', () => scrollToPage(currentPage() - 1));
-    reviewNext.addEventListener('click', () => scrollToPage(currentPage() + 1));
-    reviewsTrack.addEventListener('scroll', syncReviewControls, { passive: true });
+    prev.addEventListener('click', () => scrollToPage(currentPage() - 1));
+    next.addEventListener('click', () => scrollToPage(currentPage() + 1));
+    track.addEventListener('scroll', syncControls, { passive: true });
 
-    let reviewsResizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(reviewsResizeTimer);
-      reviewsResizeTimer = setTimeout(() => {
-        buildReviewDots();
-        checkClamped();
-      }, 200);
-    });
+    const refresh = () => {
+      buildDots();
+      checkClamped();
+    };
 
-    buildReviewDots();
-    checkClamped();
+    /* Liczba kropek zależy od tego, ile kart mieści się w kadrze, a to znamy
+       dopiero po ułożeniu sekcji – którą odsłaniamy przed chwilą. Obserwator
+       przelicza je przy każdej zmianie szerokości toru, więc łapie zarówno
+       pierwsze ułożenie, jak i późniejsze obracanie ekranu. */
+    if ('ResizeObserver' in window) {
+      let lastWidth = 0;
+      new ResizeObserver(() => {
+        const width = Math.round(track.clientWidth);
+        if (width === lastWidth) return;
+        lastWidth = width;
+        refresh();
+      }).observe(track);
+    } else {
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(refresh, 200);
+      });
+    }
+
+    refresh();
     /* po dociągnięciu fontów wysokość tekstu potrafi się zmienić */
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(checkClamped);
   }
 
-  const reviewsTrackEl = document.getElementById('reviews-track');
-  if (reviewsTrackEl) {
-    loadGoogleReviews(reviewsTrackEl).then(hasReviews => {
+  function initReviews() {
+    const track = document.getElementById('reviews-track');
+    if (!track) return;
+    loadGoogleReviews(track).then(hasReviews => {
       if (!hasReviews) return;
       /* karuzelę mierzymy dopiero po odsłonięciu sekcji – ukryta nie ma wymiarów */
       revealReviewsSection();
-      initReviewsCarousel(reviewsTrackEl);
+      initReviewsCarousel(track);
     });
   }
 
-  /* ---------- galeria przed / po ---------- */
-  const galleryCards = document.querySelectorAll('.gallery-card');
+  /* ---------- galeria przed / po ----------
+     Kafelek to jedna budowa, a nie pojedyncze zdjęcie: wszystkie ujęcia
+     z danej realizacji siedzą w jego <template> i przełącza się je
+     miniaturami w powiększeniu. Poniżej spłaszczamy je do jednej listy,
+     żeby strzałki prowadziły przez całą galerię bez przerwy. */
+  const galleryCards = Array.from(document.querySelectorAll('.gallery-card'));
 
-  /* podpis pod zdjęciem budujemy z atrybutów data-* karty;
-     zakres prac idzie na pierwszy plan, reszta jako parametry z ikonami,
-     a puste pola pomijamy, żeby nie zostawiać sierot */
-  const FACT_ICONS = { place: 'fas fa-map-marker-alt', area: 'fas fa-vector-square', time: 'far fa-clock' };
+  const galleryPairs = galleryCards.flatMap(card => {
+    const template = card.querySelector('.gc-pairs');
+    if (!template) return [];
+    /* Opis stoi raz przy budowie; pojedyncze ujęcie może go nadpisać własnym.
+       Szukamy po children, bo :scope nie działa na DocumentFragment. */
+    const shared = Array.from(template.content.children).find(el => el.tagName === 'P');
+    const figures = Array.from(template.content.querySelectorAll('figure'));
 
-  function buildGalleryMeta(card) {
-    const { place, scope, area, time } = card.dataset;
-    if (!place && !scope && !area && !time) return;
-
-    const wrap = card.querySelector('.img-wrap');
-
-    /* miejscowość jako plakietka w rogu zdjęcia */
-    if (place && wrap) {
-      const badge = document.createElement('span');
-      badge.className = 'gm-badge';
-      const pin = document.createElement('i');
-      pin.className = FACT_ICONS.place;
-      pin.setAttribute('aria-hidden', 'true');
-      badge.append(pin, document.createTextNode(place));
-      wrap.appendChild(badge);
-    }
-
-    /* zakres prac na przyciemnionym pasku u dołu zdjęcia */
-    if (scope && wrap) {
-      const strip = document.createElement('p');
-      strip.className = 'gm-strip';
-      strip.textContent = scope;
-      wrap.appendChild(strip);
-    }
-
-    const meta = document.createElement('div');
-    meta.className = 'gallery-meta';
-
-    const facts = [
-      wrap ? null : ['place', place],
-      ['area', area],
-      ['time', time]
-    ].filter(entry => entry && entry[1]);
-
-    if (!facts.length) return;
-
-    const list = document.createElement('ul');
-    list.className = 'gm-facts';
-    facts.forEach(([key, value]) => {
-      const item = document.createElement('li');
-      const icon = document.createElement('i');
-      icon.className = FACT_ICONS[key];
-      icon.setAttribute('aria-hidden', 'true');
-      item.append(icon, document.createTextNode(value));
-      list.appendChild(item);
-    });
-    meta.appendChild(list);
-
-    card.appendChild(meta);
-  }
-
-  galleryCards.forEach(buildGalleryMeta);
-
-  const overlay = document.getElementById('lightbox-overlay');
-  const beforeImg = document.getElementById('lightbox-before');
-  const afterImg = document.getElementById('lightbox-after');
-  let currentIndex = 0;
-  let lastFocused = null;
-
-  /* podmieniamy rozszerzenie na .webp, a przy braku pliku wracamy do .jpg */
-  function setLightboxImage(img, file) {
-    img.onerror = () => { img.onerror = null; img.src = file; };
-    img.src = file.replace(/\.jpe?g$/i, '.webp');
-  }
-
-  const lbPlace = document.getElementById('lightbox-place');
-  const lbTitle = document.getElementById('lightbox-title');
-  const lbCounter = document.getElementById('lightbox-counter');
-  const lbDesc = document.getElementById('lightbox-desc');
-  const lbFacts = document.getElementById('lightbox-facts');
-  const lbLegend = document.getElementById('lightbox-legend');
-  const lbFrames = {
-    before: document.getElementById('lightbox-frame-before'),
-    after: document.getElementById('lightbox-frame-after')
-  };
-
-  /* dymek przy pinezce z brzegu zdjęcia wyjechałby poza ekran – przesuwamy go do środka */
-  function clampPinLabel(pin) {
-    const label = pin.querySelector('.lb-pin-label');
-    if (!label) return;
-    label.style.left = '50%';
-    label.style.setProperty('--shift', '0px');
-    const box = label.getBoundingClientRect();
-    const margin = 12;
-    let shift = 0;
-    if (box.left < margin) shift = margin - box.left;
-    else if (box.right > window.innerWidth - margin) shift = window.innerWidth - margin - box.right;
-    shift = Math.round(shift);
-    if (!shift) return;
-    label.style.left = `calc(50% + ${shift}px)`;
-    /* dziobek zostaje nad kropką */
-    label.style.setProperty('--shift', `${shift}px`);
-  }
-
-  /* pinezki i legenda podświetlają się nawzajem */
-  function linkPinToLegendItem(pin, item) {
-    const on = () => { pin.classList.add('is-active'); item.classList.add('is-active'); };
-    const off = () => { pin.classList.remove('is-active'); item.classList.remove('is-active'); };
-    item.addEventListener('mouseenter', on);
-    item.addEventListener('mouseleave', off);
-    pin.addEventListener('mouseenter', on);
-    pin.addEventListener('mouseleave', off);
-  }
-
-  function buildLightboxPins(card) {
-    Object.values(lbFrames).forEach(frame => {
-      frame.querySelectorAll('.lb-pin').forEach(pin => pin.remove());
-    });
-    lbLegend.replaceChildren();
-
-    const details = card.querySelector('.gm-details');
-    const notes = details ? Array.from(details.content.querySelectorAll('li')) : [];
-    if (!notes.length) {
-      lbLegend.hidden = true;
-      return;
-    }
-
-    notes.forEach((note, i) => {
-      const number = i + 1;
-      const text = note.textContent.trim();
-      const frame = lbFrames[note.dataset.side === 'before' ? 'before' : 'after'];
-
-      const pin = document.createElement('button');
-      pin.type = 'button';
-      pin.className = 'lb-pin';
-      pin.style.left = `${note.dataset.x || 50}%`;
-      pin.style.top = `${note.dataset.y || 50}%`;
-      pin.setAttribute('aria-label', `Szczegół ${number}: ${text}`);
-
-      const dot = document.createElement('span');
-      dot.className = 'lb-pin-dot';
-      dot.textContent = number;
-
-      const label = document.createElement('span');
-      label.className = 'lb-pin-label';
-      label.textContent = text;
-
-      /* na dotyku nie ma najechania, więc kliknięcie przypina dymek */
-      pin.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const open = pin.classList.contains('is-open');
-        overlay.querySelectorAll('.lb-pin.is-open').forEach(p => p.classList.remove('is-open'));
-        pin.classList.toggle('is-open', !open);
-        if (!open) clampPinLabel(pin);
-      });
-      pin.addEventListener('mouseenter', () => clampPinLabel(pin));
-      pin.addEventListener('focus', () => clampPinLabel(pin));
-
-      pin.append(dot, label);
-      frame.appendChild(pin);
-
-      const item = document.createElement('li');
-      const badge = document.createElement('span');
-      badge.className = 'lb-legend-num';
-      badge.textContent = number;
-      item.append(badge, document.createTextNode(text));
-      lbLegend.appendChild(item);
-
-      linkPinToLegendItem(pin, item);
-    });
-
-    lbLegend.hidden = false;
-  }
-
-  function showLightboxPair(index) {
-    const card = galleryCards[index];
-    const { place, scope, area, time } = card.dataset;
-
-    setLightboxImage(beforeImg, card.getAttribute('data-before'));
-    setLightboxImage(afterImg, card.getAttribute('data-after'));
-
-    lbPlace.hidden = !place;
-    if (place) lbPlace.querySelector('span').textContent = place;
-    lbTitle.textContent = scope || place || 'Porównanie przed i po';
-    lbCounter.textContent = `${index + 1} / ${galleryCards.length}`;
-
-    const details = card.querySelector('.gm-details');
-    const desc = details ? details.content.querySelector('p') : null;
-    lbDesc.textContent = desc ? desc.textContent.trim() : '';
-    lbDesc.hidden = !desc;
-
-    /* zakres prac jest już nagłówkiem, więc w parametrach zostają liczby */
-    const facts = [
-      ['fas fa-vector-square', area],
-      ['far fa-clock', time]
-    ].filter(([, value]) => value);
-
-    lbFacts.replaceChildren(...facts.map(([iconClass, value]) => {
-      const item = document.createElement('li');
-      const icon = document.createElement('i');
-      icon.className = iconClass;
-      icon.setAttribute('aria-hidden', 'true');
-      item.append(icon, document.createTextNode(value));
-      return item;
+    return figures.map((figure, index) => ({
+      card,
+      before: figure.dataset.before,
+      after: figure.dataset.after,
+      desc: (figure.querySelector('p') || shared || {}).textContent || '',
+      notes: Array.from(figure.querySelectorAll('li')),
+      index,
+      total: figures.length
     }));
+  });
 
-    buildLightboxPins(card);
+  /* Zdjęcie „przed" waży tyle samo co „po", a widać je dopiero po najechaniu –
+     nie ma powodu ściągać dziewięciu dodatkowych fotografii na wejściu.
+     Podmieniamy źródło przy pierwszym zbliżeniu kursora albo fokusie. */
+  function initBeforePreviews() {
+    galleryCards.forEach(card => {
+      const before = card.querySelector('.gc-before');
+      const trigger = card.querySelector('.gc-open');
+      if (!before || !trigger || !before.dataset.src) return;
 
-    overlay.style.display = 'flex';
-    document.body.classList.add('noscroll');
-    currentIndex = index;
-  }
+      /* Blokada musi być wspólna dla obu zdarzeń: po zamknięciu powiększenia
+         fokus wraca na kafelek, więc drugi nasłuch odpalał się ponownie
+         i podstawiał już usunięty adres, kasując wczytane zdjęcie. */
+      let started = false;
+      const load = () => {
+        if (started) return;
+        started = true;
+        before.addEventListener('load', () => card.classList.add('has-before'), { once: true });
+        before.src = before.dataset.src;
+        delete before.dataset.src;
+      };
 
-  function closeLightbox() {
-    overlay.style.display = 'none';
-    document.body.classList.remove('noscroll');
-    if (lastFocused) lastFocused.focus();
-  }
-
-  galleryCards.forEach((card, index) => {
-    card.setAttribute('tabindex', '0');
-    card.setAttribute('role', 'button');
-    card.addEventListener('click', () => {
-      lastFocused = card;
-      showLightboxPair(index);
+      trigger.addEventListener('pointerenter', load);
+      trigger.addEventListener('focus', load);
     });
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
+  }
+
+  /* ---------- podgląd przed / po ---------- */
+  function initLightbox() {
+    const overlay = document.getElementById('lightbox-overlay');
+    if (!overlay || !galleryPairs.length) return;
+
+    const beforeImg = document.getElementById('lightbox-before');
+    const afterImg = document.getElementById('lightbox-after');
+    const lbPlace = document.getElementById('lightbox-place');
+    const lbTitle = document.getElementById('lightbox-title');
+    const lbCounter = document.getElementById('lightbox-counter');
+    const lbDesc = document.getElementById('lightbox-desc');
+    const lbFacts = document.getElementById('lightbox-facts');
+    const lbThumbs = document.getElementById('lightbox-thumbs');
+    const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+    const frames = {
+      before: document.getElementById('lightbox-frame-before'),
+      after: document.getElementById('lightbox-frame-after')
+    };
+
+    let currentIndex = 0;
+    let lastFocused = null;
+
+    /* dymek przy pinezce z brzegu zdjęcia wyjechałby poza ekran – przesuwamy go do środka */
+    function clampPinLabel(pin) {
+      const label = pin.querySelector('.lb-pin-label');
+      if (!label) return;
+      label.style.left = '50%';
+      label.style.setProperty('--shift', '0px');
+      const box = label.getBoundingClientRect();
+      const margin = 12;
+      let shift = 0;
+      if (box.left < margin) shift = margin - box.left;
+      else if (box.right > window.innerWidth - margin) shift = window.innerWidth - margin - box.right;
+      shift = Math.round(shift);
+      if (!shift) return;
+      label.style.left = `calc(50% + ${shift}px)`;
+      /* dziobek zostaje nad kropką */
+      label.style.setProperty('--shift', `${shift}px`);
+    }
+
+    function buildPins(notes) {
+      Object.values(frames).forEach(frame => {
+        frame.querySelectorAll('.lb-pin').forEach(pin => pin.remove());
+      });
+      if (!notes.length) return;
+
+      notes.forEach((note, i) => {
+        const number = i + 1;
+        const text = note.textContent.trim();
+        const frame = frames[note.dataset.side === 'before' ? 'before' : 'after'];
+
+        const pin = document.createElement('button');
+        pin.type = 'button';
+        pin.className = 'lb-pin';
+        pin.style.left = `${note.dataset.x || 50}%`;
+        pin.style.top = `${note.dataset.y || 50}%`;
+        pin.setAttribute('aria-label', `Szczegół ${number}: ${text}`);
+
+        const dot = document.createElement('span');
+        dot.className = 'lb-pin-dot';
+        dot.textContent = number;
+
+        const label = document.createElement('span');
+        label.className = 'lb-pin-label';
+        label.textContent = text;
+
+        /* na dotyku nie ma najechania, więc kliknięcie przypina dymek */
+        pin.addEventListener('click', e => {
+          e.stopPropagation();
+          const open = pin.classList.contains('is-open');
+          overlay.querySelectorAll('.lb-pin.is-open').forEach(p => p.classList.remove('is-open'));
+          pin.classList.toggle('is-open', !open);
+          if (!open) clampPinLabel(pin);
+        });
+        pin.addEventListener('mouseenter', () => clampPinLabel(pin));
+        pin.addEventListener('focus', () => clampPinLabel(pin));
+
+        pin.append(dot, label);
+        frame.appendChild(pin);
+      });
+    }
+
+    /* sąsiednie ujęcia wczytujemy w tle, żeby strzałki działały od razu */
+    function prefetchNeighbours(index) {
+      [-1, 1].forEach(step => {
+        const pair = galleryPairs[(index + step + galleryPairs.length) % galleryPairs.length];
+        [pair.before, pair.after].forEach(src => { if (src) new Image().src = src; });
+      });
+    }
+
+    /* pasek miniatur prowadzi po ujęciach z tej samej budowy;
+       przy jednym ujęciu nie ma czego przełączać, więc znika */
+    function buildThumbs(index) {
+      const current = galleryPairs[index];
+      if (current.total < 2) {
+        lbThumbs.hidden = true;
+        lbThumbs.replaceChildren();
+        return;
+      }
+
+      const first = index - current.index;
+      const scope = current.card.dataset.scope || '';
+
+      lbThumbs.replaceChildren(...Array.from({ length: current.total }, (unused, i) => {
+        const pair = galleryPairs[first + i];
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'lb-thumb';
+        button.setAttribute('role', 'tab');
+        button.setAttribute('aria-selected', String(i === current.index));
+        button.setAttribute('aria-label', `${scope} – ujęcie ${i + 1} z ${current.total}`);
+
+        const img = document.createElement('img');
+        img.src = pair.after;
+        img.alt = '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+
+        const num = document.createElement('span');
+        num.className = 'lb-thumb-num';
+        num.textContent = i + 1;
+
+        button.append(img, num);
+        button.addEventListener('click', () => show(first + i));
+        return button;
+      }));
+      lbThumbs.hidden = false;
+    }
+
+    /* Ramka musi dokładnie pokrywać się z kadrem: inaczej po bokach zostaje
+       puste tło, a pinezki rozjeżdżają się względem zdjęcia. Sam CSS tego nie
+       policzy – aspect-ratio przycina tylko jedną oś naraz – więc wpisujemy
+       rozmiar wprost, dopasowany do miejsca, jakie zostało w scenie. */
+    function fitFrame(img, frame) {
+      if (!img.naturalWidth) return;
+      const figure = frame.parentElement;
+      const box = figure.getBoundingClientRect();
+      if (!box.width || !box.height) return;
+
+      const ratio = img.naturalWidth / img.naturalHeight;
+      const heightBound = box.width / box.height > ratio;
+      const width = heightBound ? box.height * ratio : box.width;
+      const height = heightBound ? box.height : box.width / ratio;
+
+      frame.style.setProperty('--lb-ar', `${img.naturalWidth} / ${img.naturalHeight}`);
+      frame.style.width = `${Math.floor(width)}px`;
+      frame.style.height = `${Math.floor(height)}px`;
+    }
+
+    function fitFrames() {
+      fitFrame(beforeImg, frames.before);
+      fitFrame(afterImg, frames.after);
+    }
+
+    /* rozmiar liczymy po wczytaniu zdjęcia i przy każdej zmianie sceny */
+    [[beforeImg, frames.before], [afterImg, frames.after]].forEach(([img, frame]) => {
+      img.addEventListener('load', () => fitFrame(img, frame));
+    });
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(() => { if (!overlay.hidden) fitFrames(); })
+        .observe(document.querySelector('.lb-stage'));
+    }
+
+    function show(index) {
+      const pair = galleryPairs[index];
+      const { place, scope, area, time } = pair.card.dataset;
+      const label = scope || place || 'realizacja';
+      const shot = pair.total > 1 ? ` (ujęcie ${pair.index + 1} z ${pair.total})` : '';
+
+      beforeImg.src = pair.before;
+      beforeImg.alt = `${label}${shot} – stan przed pracami`;
+      afterImg.src = pair.after;
+      afterImg.alt = `${label}${shot} – stan po pracach`;
+      fitFrames();
+
+      lbPlace.hidden = !place;
+      if (place) lbPlace.querySelector('span').textContent = place;
+      lbTitle.textContent = scope || place || 'Porównanie przed i po';
+      lbCounter.textContent = `${index + 1} / ${galleryPairs.length}`;
+
+      const desc = pair.desc.trim();
+      lbDesc.textContent = desc;
+      lbDesc.hidden = !desc;
+
+      /* zakres prac jest już nagłówkiem, więc w parametrach zostają liczby */
+      const facts = [['i-vector-square', area], ['i-clock-o', time]].filter(([, value]) => value);
+      lbFacts.replaceChildren(...facts.map(([iconName, value]) => {
+        const item = document.createElement('li');
+        item.append(icon(iconName), document.createTextNode(value));
+        return item;
+      }));
+
+      buildPins(pair.notes);
+      buildThumbs(index);
+
+      overlay.hidden = false;
+      document.body.classList.add('noscroll');
+      currentIndex = index;
+      prefetchNeighbours(index);
+    }
+
+    function open(index, trigger) {
+      lastFocused = trigger || document.activeElement;
+      show(index);
+      closeBtn.focus();
+    }
+
+    function close() {
+      overlay.hidden = true;
+      document.body.classList.remove('noscroll');
+      if (lastFocused) lastFocused.focus();
+    }
+
+    /* fokus nie może uciec poza otwarte okno podglądu */
+    function trapFocus(e) {
+      const focusable = Array.from(
+        overlay.querySelectorAll('button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])')
+      ).filter(el => el.offsetParent !== null);
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
-        lastFocused = card;
-        showLightboxPair(index);
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+
+    /* kafelek jest zwykłym <button>, więc Enter, spacja i czytniki ekranu
+       działają bez dorabiania obsługi klawiatury; otwieramy pierwsze
+       ujęcie danej budowy */
+    galleryCards.forEach(card => {
+      const trigger = card.querySelector('.gc-open');
+      const index = galleryPairs.findIndex(pair => pair.card === card);
+      if (trigger && index !== -1) trigger.addEventListener('click', () => open(index, trigger));
+    });
+
+    closeBtn.addEventListener('click', close);
+    prevBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      show((currentIndex - 1 + galleryPairs.length) % galleryPairs.length);
+    });
+    nextBtn.addEventListener('click', e => {
+      e.stopPropagation();
+      show((currentIndex + 1) % galleryPairs.length);
+    });
+
+    overlay.addEventListener('click', e => {
+      /* kliknięcie w tło zamyka, ale najpierw chowamy otwarty dymek pinezki */
+      const openPin = overlay.querySelector('.lb-pin.is-open');
+      if (openPin && !openPin.contains(e.target)) {
+        openPin.classList.remove('is-open');
+        return;
+      }
+      if (e.target === overlay || e.target.classList.contains('lb-shell') || e.target.classList.contains('lb-stage')) {
+        close();
       }
     });
-  });
 
-  const prevBtn = document.getElementById('lightbox-prev');
-  const nextBtn = document.getElementById('lightbox-next');
+    document.addEventListener('keydown', e => {
+      if (overlay.hidden) return;
+      if (e.key === 'Escape') close();
+      else if (e.key === 'ArrowLeft') prevBtn.click();
+      else if (e.key === 'ArrowRight') nextBtn.click();
+      else if (e.key === 'Tab') trapFocus(e);
+    });
+  }
 
-  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  /* ---------- start ---------- */
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-  prevBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showLightboxPair((currentIndex - 1 + galleryCards.length) % galleryCards.length);
-  });
-
-  nextBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    showLightboxPair((currentIndex + 1) % galleryCards.length);
-  });
-
-  overlay.addEventListener('click', (e) => {
-    /* kliknięcie w tło zamyka, ale najpierw chowamy otwarty dymek pinezki */
-    const openPin = overlay.querySelector('.lb-pin.is-open');
-    if (openPin && !openPin.contains(e.target)) {
-      openPin.classList.remove('is-open');
-      return;
-    }
-    if (e.target === overlay || e.target.classList.contains('lb-shell') || e.target.classList.contains('lb-stage')) {
-      closeLightbox();
-    }
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (overlay.style.display !== 'flex') return;
-    if (e.key === 'Escape') closeLightbox();
-    if (e.key === 'ArrowLeft') prevBtn.click();
-    if (e.key === 'ArrowRight') nextBtn.click();
-  });
-});
+  initReveal();
+  initScrollState();
+  initScrollSpy();
+  initMobileMenu();
+  initLangMenu();
+  initAnchors();
+  initCounters();
+  initFaq();
+  initContactForm();
+  initReviews();
+  initBeforePreviews();
+  initLightbox();
+})();

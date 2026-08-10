@@ -3,75 +3,208 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sykowni Chłopcy – Ocieplenia, elewacje i prace budowlane | Grybów</title>
-  <meta name="description" content="Ocieplenia budynków, tynki zewnętrzne, podbitki, prace blacharskie, parapety i rynny. Własny sprzęt, kompleksowa obsługa materiałów, gwarancja i darmowa wycena z dojazdem. Grybów, Małopolska i Słowacja." />
+  <title>Ocieplenia i elewacje – Grybów, Małopolska i Słowacja | Sykowni Chłopcy</title>
+  <meta name="description" content="Ocieplenia budynków, tynki zewnętrzne, podbitki, prace blacharskie, parapety i rynny. Własne rusztowanie, kompleksowa obsługa materiałów, gwarancja i darmowa wycena z dojazdem. Grybów, Małopolska i Słowacja." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+  <meta name="author" content="Tomasz Grygiel SYKOWNI-CHLOPCY" />
   <meta name="theme-color" content="#0B1F3A" />
+  <meta name="format-detection" content="telephone=no" />
 
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="favicon.ico" sizes="48x48" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <link rel="canonical" href="https://sykowni-chlopcy.pl/" />
   <link rel="alternate" hreflang="pl" href="https://sykowni-chlopcy.pl/" />
   <link rel="alternate" hreflang="sk" href="https://sykowni-chlopcy.sk/" />
+  <link rel="alternate" hreflang="x-default" href="https://sykowni-chlopcy.pl/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="pl_PL" />
+  <meta property="og:locale:alternate" content="sk_SK" />
   <meta property="og:site_name" content="Sykowni Chłopcy" />
-  <meta property="og:title" content="Sykowni Chłopcy – Ocieplenia, elewacje i prace budowlane" />
-  <meta property="og:description" content="Własny sprzęt, kompleksowa obsługa materiałów, gwarancja i darmowa wycena z dojazdem na miejsce." />
-  <meta property="og:image" content="https://sykowni-chlopcy.pl/modern_1.jpg" />
+  <meta property="og:title" content="Ocieplenia i elewacje, które robi się raz | Sykowni Chłopcy" />
+  <meta property="og:description" content="Ocieplenia, tynki i elewacje w Polsce i na Słowacji. Własne rusztowanie, materiały pod dom, gwarancja i darmowa wycena z dojazdem na miejsce." />
+  <meta property="og:image" content="https://sykowni-chlopcy.pl/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Sykowni Chłopcy – dom po ociepleniu i wykonaniu elewacji" />
   <meta property="og:url" content="https://sykowni-chlopcy.pl/" />
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Ocieplenia i elewacje, które robi się raz | Sykowni Chłopcy" />
+  <meta name="twitter:description" content="Ocieplenia, tynki i elewacje w Polsce i na Słowacji. Darmowa wycena z dojazdem na miejsce." />
+  <meta name="twitter:image" content="https://sykowni-chlopcy.pl/og-image.jpg" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-  <link rel="stylesheet" href="style.css?v=30" />
+  <!-- kroje pisma stoją na naszym serwerze, więc warto po nie sięgnąć od razu -->
+  <link rel="preload" href="fonts/jakarta-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- tło hero jest największym elementem pierwszego ekranu (LCP);
+       telefon dostaje lżejszy wariant, bo i tak przykrywa go ciemna nakładka -->
+  <link rel="preload" href="modern_5-800.webp" as="image" type="image/webp" media="(max-width: 700px)" fetchpriority="high" />
+  <link rel="preload" href="modern_5.webp" as="image" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />
+
+  <!-- klasa .js włącza animacje wjazdu; bez skryptów treść zostaje widoczna -->
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="style.css?v=52" />
+  <script src="script.js?v=52" defer></script>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "name": "Sykowni Chłopcy",
-    "legalName": "Tomasz Grygiel SYKOWNI-CHLOPCY",
-    "taxID": "7343620881",
-    "image": "https://sykowni-chlopcy.pl/banner_new.png",
-    "description": "Ocieplenia budynków, tynki zewnętrzne, podbitki dachowe, prace blacharskie, parapety i rynny. Usługi budowlane na terenie Polski i Słowacji.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Biała Wyżna 380",
-      "addressLocality": "Grybów",
-      "postalCode": "33-330",
-      "addressCountry": "PL"
-    },
-    "telephone": "+48 574 977 131",
-    "email": "schlopcy@gmail.com",
-    "url": "https://sykowni-chlopcy.pl/",
-    "priceRange": "$$",
-    "areaServed": ["Małopolska", "Nowy Sącz", "Grybów", "Prešov", "Poprad", "Košice", "Bardejov"],
-    "foundingDate": "2024",
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Usługi budowlane",
-      "itemListElement": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ocieplenie budynków" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tynk zewnętrzny" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Prace blacharskie" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Parapety i rynny" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podbitka dachowa" } }
-      ]
-    }
+    "@graph": [
+      {
+        "@type": "HomeAndConstructionBusiness",
+        "@id": "https://sykowni-chlopcy.pl/#firma",
+        "name": "Sykowni Chłopcy",
+        "legalName": "Tomasz Grygiel SYKOWNI-CHLOPCY",
+        "vatID": "PL7343620881",
+        "taxID": "7343620881",
+        "description": "Ocieplenia budynków, tynki zewnętrzne, podbitki dachowe, prace blacharskie, parapety i rynny. Usługi budowlane na terenie Polski i Słowacji.",
+        "url": "https://sykowni-chlopcy.pl/",
+        "telephone": "+48574977131",
+        "email": "schlopcy@gmail.com",
+        "foundingDate": "2024",
+        "priceRange": "$$",
+        "currenciesAccepted": "PLN, EUR",
+        "paymentAccepted": "Gotówka, przelew",
+        "knowsLanguage": ["pl", "sk"],
+        "image": "https://sykowni-chlopcy.pl/og-image.jpg",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://sykowni-chlopcy.pl/icon-512.png",
+          "width": 512,
+          "height": 512
+        },
+        "hasMap": "https://maps.app.goo.gl/REYcrivsohncNmFw8",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Biała Wyżna 380",
+          "addressLocality": "Grybów",
+          "addressRegion": "małopolskie",
+          "postalCode": "33-330",
+          "addressCountry": "PL"
+        },
+        "areaServed": [
+          { "@type": "AdministrativeArea", "name": "Małopolska" },
+          { "@type": "City", "name": "Grybów" },
+          { "@type": "City", "name": "Nowy Sącz" },
+          { "@type": "City", "name": "Prešov" },
+          { "@type": "City", "name": "Poprad" },
+          { "@type": "City", "name": "Košice" },
+          { "@type": "City", "name": "Bardejov" }
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Usługi budowlane",
+          "itemListElement": [
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ocieplenie budynków", "description": "Ocieplenia domów jednorodzinnych i wielorodzinnych w systemie ETICS – styropian lub wełna." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tynk zewnętrzny", "description": "Tynki elewacyjne silikonowe, akrylowe i mozaikowe." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Prace blacharskie", "description": "Obróbki blacharskie dachu, kominów i attyk." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Parapety i rynny", "description": "Montaż parapetów zewnętrznych i wewnętrznych oraz systemów rynnowych." } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Podbitka dachowa", "description": "Podbitki z PVC, drewna i blachy chroniące konstrukcję dachu." } }
+          ]
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://sykowni-chlopcy.pl/#strona",
+        "url": "https://sykowni-chlopcy.pl/",
+        "name": "Sykowni Chłopcy",
+        "inLanguage": "pl-PL",
+        "publisher": { "@id": "https://sykowni-chlopcy.pl/#firma" }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://sykowni-chlopcy.pl/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Na jakim terenie pracujecie?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Po polskiej stronie działamy w całej Małopolsce, przede wszystkim w okolicach Grybowa i Nowego Sącza. Na Słowacji realizujemy zlecenia w rejonie Preszowa, Popradu, Koszyc i Bardejowa. Dalsze wyjazdy również wchodzą w grę – wystarczy zapytać." }
+          },
+          {
+            "@type": "Question",
+            "name": "Czy pomagacie dobrać kolor i rodzaj tynku?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Tak. Podpowiadamy, jaka faktura i kolorystyka sprawdzi się przy danym budynku oraz które rozwiązania są trwalsze w naszym klimacie. Decyzja zawsze należy do klienta." }
+          },
+          {
+            "@type": "Question",
+            "name": "Czy dajecie gwarancję na wykonane prace?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Tak. Na wykonane przez nas prace udzielamy gwarancji – szczegóły i zakres ustalamy indywidualnie przy ustaleniach dotyczących zlecenia." }
+          },
+          {
+            "@type": "Question",
+            "name": "Co dzieje się z parapetami, rynnami i lampami przy ociepleniu?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Demontujemy je przed rozpoczęciem prac i montujemy ponownie po ociepleniu, z uwzględnieniem nowej grubości ściany. Jeśli coś kwalifikuje się do wymiany, mówimy o tym na etapie wyceny, a nie w trakcie robót." }
+          },
+          {
+            "@type": "Question",
+            "name": "Jak wygląda rozliczenie?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Zakres, cenę i harmonogram płatności ustalamy przed wejściem na budowę i omawiamy przy przedstawianiu wyceny. Koszty nie dopowiadają się w trakcie robót." }
+          },
+          {
+            "@type": "Question",
+            "name": "Ile kosztuje wycena i czy dojeżdżacie na miejsce?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wycena wraz z dojazdem i obmiarem na miejscu jest bezpłatna i nie zobowiązuje do zlecenia prac." }
+          },
+          {
+            "@type": "Question",
+            "name": "Czy mogę zobaczyć więcej Waszych realizacji?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Część zdjęć przed i po znajduje się w galerii realizacji na stronie. Więcej zdjęć podobnych budynków podsyłamy na życzenie po kontakcie telefonicznym." }
+          }
+        ]
+      }
+    ]
   }
   </script>
 </head>
 <body id="top">
+
+<!-- Zestaw ikon: Font Awesome Free 5.15.4 (CC BY 4.0), wycięte tylko te,
+     których strona faktycznie używa. Wklejone w HTML, żeby ikony były
+     widoczne od pierwszej klatki i bez zapytania do zewnętrznego serwera. -->
+<svg xmlns="http://www.w3.org/2000/svg" class="icon-sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-images" viewBox="0 0 576 512"><path d="M480 416v16c0 26.51-21.49 48-48 48H48c-26.51 0-48-21.49-48-48V176c0-26.51 21.49-48 48-48h16v208c0 44.112 35.888 80 80 80h336zm96-80V80c0-26.51-21.49-48-48-48H144c-26.51 0-48 21.49-48 48v256c0 26.51 21.49 48 48 48h384c26.51 0 48-21.49 48-48zM256 128c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-96 144l55.515-55.515c4.686-4.686 12.284-4.686 16.971 0L272 256l135.515-135.515c4.686-4.686 12.284-4.686 16.971 0L512 208v112H160v-48z"/></symbol>
+  <symbol id="i-search-plus" viewBox="0 0 512 512"><path d="M304 192v32c0 6.6-5.4 12-12 12h-56v56c0 6.6-5.4 12-12 12h-32c-6.6 0-12-5.4-12-12v-56h-56c-6.6 0-12-5.4-12-12v-32c0-6.6 5.4-12 12-12h56v-56c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v56h56c6.6 0 12 5.4 12 12zm201 284.7L476.7 505c-9.4 9.4-24.6 9.4-33.9 0L343 405.3c-4.5-4.5-7-10.6-7-17V372c-35.3 27.6-79.7 44-128 44C93.1 416 0 322.9 0 208S93.1 0 208 0s208 93.1 208 208c0 48.3-16.4 92.7-44 128h16.3c6.4 0 12.5 2.5 17 7l99.7 99.7c9.3 9.4 9.3 24.6 0 34zM344 208c0-75.2-60.8-136-136-136S72 132.8 72 208s60.8 136 136 136 136-60.8 136-136z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 576 512"><path d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 448 512"><path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/></symbol>
+  <symbol id="i-phone-alt" viewBox="0 0 512 512"><path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"/></symbol>
+  <symbol id="i-map-marker-alt" viewBox="0 0 384 512"><path d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67-9.535 13.774-29.93 13.773-39.464 0zM192 272c44.183 0 80-35.817 80-80s-35.817-80-80-80-80 35.817-80 80 35.817 80 80 80z"/></symbol>
+  <symbol id="i-envelope" viewBox="0 0 512 512"><path d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 448 512"><path d="M190.5 66.9l22.2-22.2c9.4-9.4 24.6-9.4 33.9 0L441 239c9.4 9.4 9.4 24.6 0 33.9L246.6 467.3c-9.4 9.4-24.6 9.4-33.9 0l-22.2-22.2c-9.5-9.5-9.3-25 .4-34.3L311.4 296H24c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h287.4L190.9 101.2c-9.8-9.3-10-24.8-.4-34.3z"/></symbol>
+  <symbol id="i-vector-square" viewBox="0 0 512 512"><path d="M512 128V32c0-17.67-14.33-32-32-32h-96c-17.67 0-32 14.33-32 32H160c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v96c0 17.67 14.33 32 32 32v192c-17.67 0-32 14.33-32 32v96c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32h192c0 17.67 14.33 32 32 32h96c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32V160c17.67 0 32-14.33 32-32zm-96-64h32v32h-32V64zM64 64h32v32H64V64zm32 384H64v-32h32v32zm352 0h-32v-32h32v32zm-32-96h-32c-17.67 0-32 14.33-32 32v32H160v-32c0-17.67-14.33-32-32-32H96V160h32c17.67 0 32-14.33 32-32V96h192v32c0 17.67 14.33 32 32 32h32v192z"/></symbol>
+  <symbol id="i-shield-alt" viewBox="0 0 512 512"><path d="M466.5 83.7l-192-80a48.15 48.15 0 0 0-36.9 0l-192 80C27.7 91.1 16 108.6 16 128c0 198.5 114.5 335.7 221.5 380.3 11.8 4.9 25.1 4.9 36.9 0C360.1 472.6 496 349.3 496 128c0-19.4-11.7-36.9-29.5-44.3zM256.1 446.3l-.1-381 175.9 73.3c-3.3 151.4-82.1 261.1-175.8 307.7z"/></symbol>
+  <symbol id="i-ruler-combined" viewBox="0 0 512 512"><path d="M160 288h-56c-4.42 0-8-3.58-8-8v-16c0-4.42 3.58-8 8-8h56v-64h-56c-4.42 0-8-3.58-8-8v-16c0-4.42 3.58-8 8-8h56V96h-56c-4.42 0-8-3.58-8-8V72c0-4.42 3.58-8 8-8h56V32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v448c0 2.77.91 5.24 1.57 7.8L160 329.38V288zm320 64h-32v56c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-56h-64v56c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-56h-64v56c0 4.42-3.58 8-8 8h-16c-4.42 0-8-3.58-8-8v-56h-41.37L24.2 510.43c2.56.66 5.04 1.57 7.8 1.57h448c17.67 0 32-14.33 32-32v-96c0-17.67-14.33-32-32-32z"/></symbol>
+  <symbol id="i-globe-europe" viewBox="0 0 496 512"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm200 248c0 22.5-3.9 44.2-10.8 64.4h-20.3c-4.3 0-8.4-1.7-11.4-4.8l-32-32.6c-4.5-4.6-4.5-12.1.1-16.7l12.5-12.5v-8.7c0-3-1.2-5.9-3.3-8l-9.4-9.4c-2.1-2.1-5-3.3-8-3.3h-16c-6.2 0-11.3-5.1-11.3-11.3 0-3 1.2-5.9 3.3-8l9.4-9.4c2.1-2.1 5-3.3 8-3.3h32c6.2 0 11.3-5.1 11.3-11.3v-9.4c0-6.2-5.1-11.3-11.3-11.3h-36.7c-8.8 0-16 7.2-16 16v4.5c0 6.9-4.4 13-10.9 15.2l-31.6 10.5c-3.3 1.1-5.5 4.1-5.5 7.6v2.2c0 4.4-3.6 8-8 8h-16c-4.4 0-8-3.6-8-8s-3.6-8-8-8H247c-3 0-5.8 1.7-7.2 4.4l-9.4 18.7c-2.7 5.4-8.2 8.8-14.3 8.8H194c-8.8 0-16-7.2-16-16V199c0-4.2 1.7-8.3 4.7-11.3l20.1-20.1c4.6-4.6 7.2-10.9 7.2-17.5 0-3.4 2.2-6.5 5.5-7.6l40-13.3c1.7-.6 3.2-1.5 4.4-2.7l26.8-26.8c2.1-2.1 3.3-5 3.3-8 0-6.2-5.1-11.3-11.3-11.3H258l-16 16v8c0 4.4-3.6 8-8 8h-16c-4.4 0-8-3.6-8-8v-20c0-2.5 1.2-4.9 3.2-6.4l28.9-21.7c1.9-.1 3.8-.3 5.7-.3C358.3 56 448 145.7 448 256zM130.1 149.1c0-3 1.2-5.9 3.3-8l25.4-25.4c2.1-2.1 5-3.3 8-3.3 6.2 0 11.3 5.1 11.3 11.3v16c0 3-1.2 5.9-3.3 8l-9.4 9.4c-2.1 2.1-5 3.3-8 3.3h-16c-6.2 0-11.3-5.1-11.3-11.3zm128 306.4v-7.1c0-8.8-7.2-16-16-16h-20.2c-10.8 0-26.7-5.3-35.4-11.8l-22.2-16.7c-11.5-8.6-18.2-22.1-18.2-36.4v-23.9c0-16 8.4-30.8 22.1-39l42.9-25.7c7.1-4.2 15.2-6.5 23.4-6.5h31.2c10.9 0 21.4 3.9 29.6 10.9l43.2 37.1h18.3c8.5 0 16.6 3.4 22.6 9.4l17.3 17.3c3.4 3.4 8.1 5.3 12.9 5.3H423c-32.4 58.9-93.8 99.5-164.9 103.1z"/></symbol>
+  <symbol id="i-cubes" viewBox="0 0 512 512"><path d="M488.6 250.2L392 214V105.5c0-15-9.3-28.4-23.4-33.7l-100-37.5c-8.1-3.1-17.1-3.1-25.3 0l-100 37.5c-14.1 5.3-23.4 18.7-23.4 33.7V214l-96.6 36.2C9.3 255.5 0 268.9 0 283.9V394c0 13.6 7.7 26.1 19.9 32.2l100 50c10.1 5.1 22.1 5.1 32.2 0l103.9-52 103.9 52c10.1 5.1 22.1 5.1 32.2 0l100-50c12.2-6.1 19.9-18.6 19.9-32.2V283.9c0-15-9.3-28.4-23.4-33.7zM358 214.8l-85 31.9v-68.2l85-37v73.3zM154 104.1l102-38.2 102 38.2v.6l-102 41.4-102-41.4v-.6zm84 291.1l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6zm240 112l-85 42.5v-79.1l85-38.8v75.4zm0-112l-102 41.4-102-41.4v-.6l102-38.2 102 38.2v.6z"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 512 512"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 320 512"><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 320 512"><path d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"/></symbol>
+  <symbol id="i-broom" viewBox="0 0 640 512"><path d="M256.47 216.77l86.73 109.18s-16.6 102.36-76.57 150.12C206.66 523.85 0 510.19 0 510.19s3.8-23.14 11-55.43l94.62-112.17c3.97-4.7-.87-11.62-6.65-9.5l-60.4 22.09c14.44-41.66 32.72-80.04 54.6-97.47 59.97-47.76 163.3-40.94 163.3-40.94zM636.53 31.03l-19.86-25c-5.49-6.9-15.52-8.05-22.41-2.56l-232.48 177.8-34.14-42.97c-5.09-6.41-15.14-5.21-18.59 2.21l-25.33 54.55 86.73 109.18 58.8-12.45c8-1.69 11.42-11.2 6.34-17.6l-34.09-42.92 232.48-177.8c6.89-5.48 8.04-15.53 2.55-22.44z"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 640 512"><path d="M624 352h-16V243.9c0-12.7-5.1-24.9-14.1-33.9L494 110.1c-9-9-21.2-14.1-33.9-14.1H416V48c0-26.5-21.5-48-48-48H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h16c0 53 43 96 96 96s96-43 96-96h128c0 53 43 96 96 96s96-43 96-96h48c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zM160 464c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm320 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48zm80-208H416V144h44.1l99.9 99.9V256z"/></symbol>
+  <symbol id="i-tools" viewBox="0 0 512 512"><path d="M501.1 395.7L384 278.6c-23.1-23.1-57.6-27.6-85.4-13.9L192 158.1V96L64 0 0 64l96 128h62.1l106.6 106.6c-13.6 27.8-9.2 62.3 13.9 85.4l117.1 117.1c14.6 14.6 38.2 14.6 52.7 0l52.7-52.7c14.5-14.6 14.5-38.2 0-52.7zM331.7 225c28.3 0 54.9 11 74.9 31l19.4 19.4c15.8-6.9 30.8-16.5 43.8-29.5 37.1-37.1 49.7-89.3 37.9-136.7-2.2-9-13.5-12.1-20.1-5.5l-74.4 74.4-67.9-11.3L334 98.9l74.4-74.4c6.6-6.6 3.4-17.9-5.7-20.2-47.4-11.7-99.6.9-136.6 37.9-28.5 28.5-41.9 66.1-41.2 103.6l82.1 82.1c8.1-1.9 16.5-2.9 24.7-2.9zm-103.9 82l-56.7-56.7L18.7 402.8c-25 25-25 65.5 0 90.5s65.5 25 90.5 0l123.6-123.6c-7.6-19.9-9.9-41.6-5-62.7zM64 472c-13.2 0-24-10.8-24-24 0-13.3 10.7-24 24-24s24 10.7 24 24c0 13.2-10.7 24-24 24z"/></symbol>
+  <symbol id="i-times" viewBox="0 0 352 512"><path d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"/></symbol>
+  <symbol id="i-thermometer-half" viewBox="0 0 256 512"><path d="M192 384c0 35.346-28.654 64-64 64s-64-28.654-64-64c0-23.685 12.876-44.349 32-55.417V224c0-17.673 14.327-32 32-32s32 14.327 32 32v104.583c19.124 11.068 32 31.732 32 55.417zm32-84.653c19.912 22.563 32 52.194 32 84.653 0 70.696-57.303 128-128 128-.299 0-.609-.001-.909-.003C56.789 511.509-.357 453.636.002 383.333.166 351.135 12.225 321.755 32 299.347V96c0-53.019 42.981-96 96-96s96 42.981 96 96v203.347zM208 384c0-34.339-19.37-52.19-32-66.502V96c0-26.467-21.533-48-48-48S80 69.533 80 96v221.498c-12.732 14.428-31.825 32.1-31.999 66.08-.224 43.876 35.563 80.116 79.423 80.42L128 464c44.112 0 80-35.888 80-80z"/></symbol>
+  <symbol id="i-question" viewBox="0 0 384 512"><path d="M202.021 0C122.202 0 70.503 32.703 29.914 91.026c-7.363 10.58-5.093 25.086 5.178 32.874l43.138 32.709c10.373 7.865 25.132 6.026 33.253-4.148 25.049-31.381 43.63-49.449 82.757-49.449 30.764 0 68.816 19.799 68.816 49.631 0 22.552-18.617 34.134-48.993 51.164-35.423 19.86-82.299 44.576-82.299 106.405V320c0 13.255 10.745 24 24 24h72.471c13.255 0 24-10.745 24-24v-5.773c0-42.86 125.268-44.645 125.268-160.627C377.504 66.256 286.902 0 202.021 0zM192 373.459c-38.196 0-69.271 31.075-69.271 69.271 0 38.195 31.075 69.27 69.271 69.27s69.271-31.075 69.271-69.271-31.075-69.27-69.271-69.27z"/></symbol>
+  <symbol id="i-paper-plane" viewBox="0 0 512 512"><path d="M476 3.2L12.5 270.6c-18.1 10.4-15.8 35.6 2.2 43.2L121 358.4l287.3-253.2c5.5-4.9 13.3 2.6 8.6 8.3L176 407v80.5c0 23.6 28.5 32.9 42.5 15.8L282 426l124.6 52.2c14.2 6 30.4-2.9 33-18.2l72-432C515 7.8 493.3-6.8 476 3.2z"/></symbol>
+  <symbol id="i-paint-roller" viewBox="0 0 512 512"><path d="M416 128V32c0-17.67-14.33-32-32-32H32C14.33 0 0 14.33 0 32v96c0 17.67 14.33 32 32 32h352c17.67 0 32-14.33 32-32zm32-64v128c0 17.67-14.33 32-32 32H256c-35.35 0-64 28.65-64 64v32c-17.67 0-32 14.33-32 32v128c0 17.67 14.33 32 32 32h64c17.67 0 32-14.33 32-32V352c0-17.67-14.33-32-32-32v-32h160c53.02 0 96-42.98 96-96v-64c0-35.35-28.65-64-64-64z"/></symbol>
+  <symbol id="i-layer-group" viewBox="0 0 512 512"><path d="M12.41 148.02l232.94 105.67c6.8 3.09 14.49 3.09 21.29 0l232.94-105.67c16.55-7.51 16.55-32.52 0-40.03L266.65 2.31a25.607 25.607 0 0 0-21.29 0L12.41 107.98c-16.55 7.51-16.55 32.53 0 40.04zm487.18 88.28l-58.09-26.33-161.64 73.27c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.51 209.97l-58.1 26.33c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 276.3c16.55-7.5 16.55-32.5 0-40zm0 127.8l-57.87-26.23-161.86 73.37c-7.56 3.43-15.59 5.17-23.86 5.17s-16.29-1.74-23.86-5.17L70.29 337.87 12.41 364.1c-16.55 7.5-16.55 32.5 0 40l232.94 105.59c6.8 3.08 14.49 3.08 21.29 0L499.59 404.1c16.55-7.5 16.55-32.5 0-40z"/></symbol>
+  <symbol id="i-hard-hat" viewBox="0 0 512 512"><path d="M480 288c0-80.25-49.28-148.92-119.19-177.62L320 192V80a16 16 0 0 0-16-16h-96a16 16 0 0 0-16 16v112l-40.81-81.62C81.28 139.08 32 207.75 32 288v64h448zm16 96H16a16 16 0 0 0-16 16v32a16 16 0 0 0 16 16h480a16 16 0 0 0 16-16v-32a16 16 0 0 0-16-16z"/></symbol>
+  <symbol id="i-hammer" viewBox="0 0 576 512"><path d="M571.31 193.94l-22.63-22.63c-6.25-6.25-16.38-6.25-22.63 0l-11.31 11.31-28.9-28.9c5.63-21.31.36-44.9-16.35-61.61l-45.25-45.25c-62.48-62.48-163.79-62.48-226.28 0l90.51 45.25v18.75c0 16.97 6.74 33.25 18.75 45.25l49.14 49.14c16.71 16.71 40.3 21.98 61.61 16.35l28.9 28.9-11.31 11.31c-6.25 6.25-6.25 16.38 0 22.63l22.63 22.63c6.25 6.25 16.38 6.25 22.63 0l90.51-90.51c6.23-6.24 6.23-16.37-.02-22.62zm-286.72-15.2c-3.7-3.7-6.84-7.79-9.85-11.95L19.64 404.96c-25.57 23.88-26.26 64.19-1.53 88.93s65.05 24.05 88.93-1.53l238.13-255.07c-3.96-2.91-7.9-5.87-11.44-9.41l-49.14-49.14z"/></symbol>
+  <symbol id="i-external-link-alt" viewBox="0 0 512 512"><path d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"/></symbol>
+  <symbol id="i-columns" viewBox="0 0 512 512"><path d="M464 32H48C21.49 32 0 53.49 0 80v352c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V80c0-26.51-21.49-48-48-48zM224 416H64V160h160v256zm224 0H288V160h160v256z"/></symbol>
+  <symbol id="i-chevron-up" viewBox="0 0 448 512"><path d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 448 512"><path d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"/></symbol>
+  <symbol id="i-check" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"/></symbol>
+  <symbol id="i-clock-o" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></symbol>
+  <symbol id="i-star-o" viewBox="0 0 576 512"><path d="M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"/></symbol>
+</svg>
 
 <a class="skip-link" href="#main">Przejdź do treści</a>
 
 <nav class="navbar" id="navbar">
   <div class="wrap nav-container">
     <a href="#top" class="nav-logo" aria-label="Sykowni Chłopcy – strona główna">
-      <img src="banner_new.png" alt="Sykowni Chłopcy" class="hero-logo" />
+      <img src="banner_new.png" alt="Sykowni Chłopcy" class="hero-logo" width="607" height="180" />
     </a>
 
     <ul class="nav-center nav-links" id="nav-links">
@@ -82,33 +215,37 @@
       <li class="js-reviews-link" hidden><a href="#reviews">Opinie</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="#contact-section">Kontakt</a></li>
+      <li class="nav-cta-mobile"><a href="tel:+48574977131">+48 574 977 131</a></li>
     </ul>
 
     <div class="nav-right">
       <div class="lang-select">
         <button type="button" class="lang-toggle" id="lang-toggle" aria-expanded="false" aria-haspopup="true" aria-controls="lang-menu">
-          <i class="fas fa-globe-europe" aria-hidden="true"></i>
+          <i class="ico" aria-hidden="true"><svg><use href="#i-globe-europe"></use></svg></i>
           <span class="lang-current">PL</span>
-          <i class="fas fa-chevron-down lang-caret" aria-hidden="true"></i>
+          <i class="ico lang-caret" aria-hidden="true"><svg><use href="#i-chevron-down"></use></svg></i>
         </button>
         <ul class="lang-menu" id="lang-menu" hidden>
           <li>
             <a href="https://sykowni-chlopcy.pl/" hreflang="pl" class="is-active" aria-current="true">
               <span class="lang-code">PL</span>
               <span class="lang-name">Polska wersja<small>sykowni-chlopcy.pl</small></span>
-              <i class="fas fa-check" aria-hidden="true"></i>
+              <i class="ico" aria-hidden="true"><svg><use href="#i-check"></use></svg></i>
             </a>
           </li>
           <li>
             <a href="https://sykowni-chlopcy.sk/" hreflang="sk">
               <span class="lang-code">SK</span>
               <span class="lang-name">Slovenská verzia<small>sykowni-chlopcy.sk</small></span>
-              <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+              <i class="ico" aria-hidden="true"><svg><use href="#i-external-link-alt"></use></svg></i>
             </a>
           </li>
         </ul>
       </div>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+
+      <a href="#contact-section" class="btn btn-accent btn-sm nav-cta">Darmowa wycena</a>
+
+      <button class="hamburger" id="hamburger" aria-label="Otwórz menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -121,60 +258,60 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
-    <h1 data-aos="fade-up">Ocieplenia i elewacje,<br /><span class="grad">które robi się raz</span></h1>
-    <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">
+    <h1 data-reveal>Ocieplenia i elewacje,<br /><span class="grad">które robi się raz</span></h1>
+    <p class="hero-subtitle" data-reveal data-reveal-delay="100">
       Profesjonalne usługi remontowo-budowlane w Polsce i na Słowacji.
     </p>
-    <div class="hero-actions" data-aos="fade-up" data-aos-delay="180">
-      <a href="#contact-section" class="btn btn-accent btn-lg">Zamów darmową wycenę <i class="fas fa-arrow-right"></i></a>
-      <a href="tel:+48574977131" class="btn btn-ghost btn-lg"><i class="fas fa-phone-alt"></i> +48 574 977 131</a>
+    <div class="hero-actions" data-reveal data-reveal-delay="180">
+      <a href="#contact-section" class="btn btn-accent btn-lg">Zamów darmową wycenę <i class="ico ico-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"></use></svg></i></a>
+      <a href="tel:+48574977131" class="btn btn-ghost btn-lg"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> +48 574 977 131</a>
     </div>
-    <ul class="hero-chips" data-aos="fade-up" data-aos-delay="260">
-      <li><i class="fas fa-clock"></i> Szybka realizacja</li>
-      <li><i class="fas fa-shield-alt"></i> Gwarancja jakości</li>
-      <li><i class="fas fa-tools"></i> Własne narzędzia</li>
-      <li><i class="fas fa-truck"></i> Dowozimy materiały</li>
+    <ul class="hero-chips" data-reveal data-reveal-delay="260">
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-clock"></use></svg></i> Szybka realizacja</li>
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-shield-alt"></use></svg></i> Gwarancja jakości</li>
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-tools"></use></svg></i> Własne narzędzia</li>
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-truck"></use></svg></i> Dowozimy materiały</li>
     </ul>
   </div>
   <a href="#stats" class="hero-scroll" aria-label="Przewiń w dół"><span></span></a>
 </header>
 
-<section id="stats" class="stats-band">
+<section id="stats" class="stats-band" aria-label="Firma w liczbach">
   <div class="wrap stats-grid">
-    <div class="stat" data-aos="fade-up">
+    <div class="stat" data-reveal>
       <span class="stat-num" data-count="3" data-suffix="">3</span>
       <span class="stat-label">lata na rynku</span>
     </div>
-    <div class="stat" data-aos="fade-up" data-aos-delay="80">
+    <div class="stat" data-reveal data-reveal-delay="80">
       <span class="stat-num" data-count="30" data-suffix="+">30+</span>
       <span class="stat-label">zadowolonych klientów</span>
     </div>
-    <div class="stat" data-aos="fade-up" data-aos-delay="160">
+    <div class="stat" data-reveal data-reveal-delay="160">
       <span class="stat-num" data-count="100" data-suffix="%">100%</span>
       <span class="stat-label">własny sprzęt i rusztowanie</span>
     </div>
-    <div class="stat" data-aos="fade-up" data-aos-delay="240">
+    <div class="stat" data-reveal data-reveal-delay="240">
       <span class="stat-num" data-count="0" data-suffix=" zł">0 zł</span>
       <span class="stat-label">koszt wyceny i dojazdu</span>
     </div>
   </div>
 </section>
 
-<section id="about">
+<section id="about" aria-labelledby="about-title">
   <div class="wrap section-container">
     <div class="about-grid">
-      <div class="about-media" data-aos="fade-right">
+      <div class="about-media" data-reveal="right">
         <div class="about-img-main">
-          <picture>
-            <source type="image/webp" srcset="galery_13-800.webp 800w, galery_13.webp 1400w" sizes="(max-width: 992px) 90vw, 490px" />
-            <img src="galery_13.jpg" alt="Sykowni Chłopcy podczas prac elewacyjnych przy budynku jednorodzinnym" loading="lazy" width="1400" height="1050" />
-          </picture>
+          <img src="galery_13-800.webp" srcset="galery_13-800.webp 800w, galery_13.webp 1400w"
+               sizes="(max-width: 992px) 90vw, 490px"
+               alt="Ekipa Sykowni Chłopcy podczas prac elewacyjnych przy domu jednorodzinnym"
+               loading="lazy" decoding="async" width="1400" height="1050" />
         </div>
         <div class="about-img-sub">
-          <picture>
-            <source type="image/webp" srcset="galery_14-800.webp 800w, galery_14.webp 1400w" sizes="(max-width: 992px) 45vw, 240px" />
-            <img src="galery_14.jpg" alt="Gotowa elewacja domu jednorodzinnego" loading="lazy" width="1400" height="1050" />
-          </picture>
+          <img src="galery_14-800.webp" srcset="galery_14-800.webp 800w, galery_14.webp 1400w"
+               sizes="(max-width: 992px) 45vw, 240px"
+               alt="Gotowa biała elewacja domu jednorodzinnego po ociepleniu"
+               loading="lazy" decoding="async" width="1400" height="1050" />
         </div>
         <div class="about-badge">
           <span class="about-badge-num">3</span>
@@ -182,9 +319,9 @@
         </div>
       </div>
 
-      <div class="about-text" data-aos="fade-left">
+      <div class="about-text" data-reveal="left">
         <span class="section-tag">O firmie</span>
-        <h2>Elewacja na lata, nie na jedną zimę</h2>
+        <h2 id="about-title">Elewacja na lata, nie na jedną zimę</h2>
         <p class="lead">
           Sykowni Chłopcy to firma budowlana z Małopolski. Od trzech lat wykonujemy ocieplenia,
           tynki i elewacje dla klientów w Polsce i na Słowacji.
@@ -197,69 +334,69 @@
         </p>
 
         <ul class="about-list">
-          <li><i class="fas fa-layer-group"></i><div><strong>Własne rusztowanie</strong><span>Nie doliczamy wynajmu, zaczynamy od razu.</span></div></li>
-          <li><i class="fas fa-cubes"></i><div><strong>Kompleksowa obsługa materiałów</strong><span>Doradzimy, kupimy i dowieziemy pod dom.</span></div></li>
-          <li><i class="fas fa-globe-europe"></i><div><strong>Polska i Słowacja</strong><span>Realizujemy zlecenia po obu stronach granicy.</span></div></li>
-          <li><i class="fas fa-shield-alt"></i><div><strong>Gwarancja</strong><span>Odpowiadamy za jakość wykonanych prac.</span></div></li>
-          <li><i class="fas fa-clock"></i><div><strong>Terminowość</strong><span>Ustalamy termin i się go trzymamy.</span></div></li>
-          <li><i class="fas fa-broom"></i><div><strong>Czystość</strong><span>Zostawiamy po sobie porządek, nie gruzowisko.</span></div></li>
+          <li><i class="ico" aria-hidden="true"><svg><use href="#i-layer-group"></use></svg></i><div><strong>Własne rusztowanie</strong><span>Nie doliczamy wynajmu, zaczynamy od razu.</span></div></li>
+          <li><i class="ico" aria-hidden="true"><svg><use href="#i-cubes"></use></svg></i><div><strong>Kompleksowa obsługa materiałów</strong><span>Doradzimy, kupimy i dowieziemy pod dom.</span></div></li>
+          <li><i class="ico" aria-hidden="true"><svg><use href="#i-globe-europe"></use></svg></i><div><strong>Polska i Słowacja</strong><span>Realizujemy zlecenia po obu stronach granicy.</span></div></li>
+          <li><i class="ico" aria-hidden="true"><svg><use href="#i-shield-alt"></use></svg></i><div><strong>Gwarancja</strong><span>Odpowiadamy za jakość wykonanych prac.</span></div></li>
+          <li><i class="ico" aria-hidden="true"><svg><use href="#i-clock"></use></svg></i><div><strong>Terminowość</strong><span>Ustalamy termin i się go trzymamy.</span></div></li>
+          <li><i class="ico" aria-hidden="true"><svg><use href="#i-broom"></use></svg></i><div><strong>Czystość</strong><span>Zostawiamy po sobie porządek, nie gruzowisko.</span></div></li>
         </ul>
 
         <div class="about-actions">
           <a href="#gallery" class="btn btn-primary">Zobacz nasze realizacje</a>
-          <a href="#process" class="btn btn-link">Jak wygląda współpraca <i class="fas fa-arrow-right"></i></a>
+          <a href="#process" class="btn btn-link">Jak wygląda współpraca <i class="ico ico-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"></use></svg></i></a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="services" class="bg-light">
+<section id="services" class="bg-light" aria-labelledby="services-title">
   <div class="wrap section-container">
-    <header class="section-head" data-aos="fade-up">
+    <header class="section-head" data-reveal>
       <span class="section-tag">Zakres prac</span>
-      <h2>Nasze usługi</h2>
+      <h2 id="services-title">Nasze usługi</h2>
       <p class="section-sub">Kompleksowo zajmujemy się elewacją i tym, co ją otacza – od izolacji po ostatnią rynnę.</p>
     </header>
 
     <div class="services-grid">
-      <article class="service-item" data-aos="fade-up">
-        <div class="service-icon"><i class="fas fa-thermometer-half"></i></div>
+      <article class="service-item" data-reveal>
+        <div class="service-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-thermometer-half"></use></svg></i></div>
         <h3>Ocieplenie budynków</h3>
         <p>Nowoczesne ocieplenia domów jednorodzinnych i wielorodzinnych w systemie ETICS – styropian lub wełna, z dbałością o detale i mostki termiczne.</p>
         <ul class="service-tags"><li>styropian</li><li>wełna</li><li>siatka i klej</li></ul>
       </article>
 
-      <article class="service-item" data-aos="fade-up" data-aos-delay="80">
-        <div class="service-icon"><i class="fas fa-paint-roller"></i></div>
+      <article class="service-item" data-reveal data-reveal-delay="80">
+        <div class="service-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-paint-roller"></use></svg></i></div>
         <h3>Tynk zewnętrzny</h3>
         <p>Tynki elewacyjne, które chronią fasadę przed wilgocią i pogodą, a przy okazji nadają budynkowi nowoczesny, równy wygląd na lata.</p>
         <ul class="service-tags"><li>silikonowy</li><li>akrylowy</li><li>mozaika</li></ul>
       </article>
 
-      <article class="service-item" data-aos="fade-up" data-aos-delay="160">
-        <div class="service-icon"><i class="fas fa-hammer"></i></div>
+      <article class="service-item" data-reveal data-reveal-delay="160">
+        <div class="service-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-hammer"></use></svg></i></div>
         <h3>Prace blacharskie</h3>
         <p>Obróbki blacharskie dachu i elementów budynku – szczelnie, estetycznie i tak, żeby woda nie miała gdzie się zatrzymać.</p>
         <ul class="service-tags"><li>obróbki</li><li>kominy</li><li>attyki</li></ul>
       </article>
 
-      <article class="service-item" data-aos="fade-up" data-aos-delay="240">
-        <div class="service-icon"><i class="fas fa-ruler-combined"></i></div>
+      <article class="service-item" data-reveal data-reveal-delay="240">
+        <div class="service-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-ruler-combined"></use></svg></i></div>
         <h3>Parapety i rynny</h3>
         <p>Montaż parapetów zewnętrznych i wewnętrznych oraz kompletnych systemów rynnowych – z zachowaniem spadków i porządnym uszczelnieniem.</p>
         <ul class="service-tags"><li>parapety</li><li>rynny</li><li>rury spustowe</li></ul>
       </article>
 
-      <article class="service-item" data-aos="fade-up" data-aos-delay="320">
-        <div class="service-icon"><i class="fas fa-columns"></i></div>
+      <article class="service-item" data-reveal data-reveal-delay="320">
+        <div class="service-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-columns"></use></svg></i></div>
         <h3>Podbitka dachowa</h3>
         <p>Trwałe podbitki chroniące konstrukcję drewnianą przed wilgocią i ptakami, jednocześnie domykające wygląd całej elewacji.</p>
         <ul class="service-tags"><li>PVC</li><li>drewno</li><li>blacha</li></ul>
       </article>
 
-      <article class="service-item service-cta" data-aos="fade-up" data-aos-delay="400">
-        <div class="service-icon"><i class="fas fa-question"></i></div>
+      <article class="service-item service-cta" data-reveal data-reveal-delay="400">
+        <div class="service-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-question"></use></svg></i></div>
         <h3>Nie ma tego na liście?</h3>
         <p>Napisz lub zadzwoń i opisz, co potrzebujesz zrobić. Jeśli dany zakres nie jest w naszej specjalizacji, powiemy o tym wprost i podpowiemy, kto się tym zajmie.</p>
         <a href="#contact-section" class="btn btn-accent btn-sm">Zapytaj o wycenę</a>
@@ -268,42 +405,42 @@
   </div>
 </section>
 
-<section id="process">
+<section id="process" aria-labelledby="process-title">
   <div class="wrap section-container">
-    <header class="section-head" data-aos="fade-up">
+    <header class="section-head" data-reveal>
       <span class="section-tag">Jak pracujemy</span>
-      <h2>Cztery kroki do gotowej elewacji</h2>
+      <h2 id="process-title">Cztery kroki do gotowej elewacji</h2>
       <p class="section-sub">Wiesz, co się dzieje na każdym etapie – i ile to kosztuje, zanim zaczniemy.</p>
     </header>
 
     <ol class="process-grid">
-      <li class="process-step" data-aos="fade-up">
+      <li class="process-step" data-reveal>
         <div class="process-node">
-          <div class="process-icon"><i class="fas fa-ruler-combined"></i></div>
+          <div class="process-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-ruler-combined"></use></svg></i></div>
           <span class="process-num">01</span>
         </div>
         <h3>Darmowa wycena i obmiar</h3>
         <p>Przyjeżdżamy na miejsce, oceniamy stan budynku i wykonujemy obmiar – wyliczamy, ile i jakiego materiału będzie potrzeba.</p>
       </li>
-      <li class="process-step" data-aos="fade-up" data-aos-delay="100">
+      <li class="process-step" data-reveal data-reveal-delay="100">
         <div class="process-node">
-          <div class="process-icon"><i class="fas fa-cubes"></i></div>
+          <div class="process-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-cubes"></use></svg></i></div>
           <span class="process-num">02</span>
         </div>
         <h3>Dobór materiałów</h3>
         <p>Doradzamy najlepsze rozwiązania pod Twój budynek i budżet. Na życzenie sami kupujemy materiał i dowozimy go na miejsce – nie musisz się tym zajmować.</p>
       </li>
-      <li class="process-step" data-aos="fade-up" data-aos-delay="200">
+      <li class="process-step" data-reveal data-reveal-delay="200">
         <div class="process-node">
-          <div class="process-icon"><i class="fas fa-hard-hat"></i></div>
+          <div class="process-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-hard-hat"></use></svg></i></div>
           <span class="process-num">03</span>
         </div>
         <h3>Realizacja</h3>
         <p>Wchodzimy na budowę w ustalonym terminie i pracujemy systematycznie. Jesteś na bieżąco informowany o postępach.</p>
       </li>
-      <li class="process-step" data-aos="fade-up" data-aos-delay="300">
+      <li class="process-step" data-reveal data-reveal-delay="300">
         <div class="process-node">
-          <div class="process-icon"><i class="fas fa-broom"></i></div>
+          <div class="process-icon"><i class="ico" aria-hidden="true"><svg><use href="#i-broom"></use></svg></i></div>
           <span class="process-num">04</span>
         </div>
         <h3>Odbiór prac</h3>
@@ -313,161 +450,210 @@
   </div>
 </section>
 
-<section id="gallery" class="bg-dark">
+<section id="gallery" class="bg-dark" aria-labelledby="gallery-title">
   <div class="wrap section-container">
-    <header class="section-head section-head-light" data-aos="fade-up">
+    <header class="section-head section-head-light section-head-wide" data-reveal>
       <span class="section-tag">Realizacje</span>
-      <h2>Zobacz efekt przed i po</h2>
-      <p class="section-sub">Kliknij zdjęcie, żeby zobaczyć stan przed rozpoczęciem prac i po ich zakończeniu.</p>
+      <h2 id="gallery-title">Zobacz efekt przed i po</h2>
+      <p class="section-sub">Kliknij kafelek, żeby obejrzeć zdjęcia sprzed prac i po ich zakończeniu</p>
     </header>
 
+    <!-- podsumowanie dotyczy budów pokazanych niżej, nie całej historii firmy -->
+    <ul class="gallery-stats" data-reveal data-reveal-delay="80">
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-vector-square"></use></svg></i><strong>1480 m²</strong> elewacji</li>
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-hard-hat"></use></svg></i><strong>5</strong> zakończonych budów</li>
+      <li><i class="ico" aria-hidden="true"><svg><use href="#i-globe-europe"></use></svg></i>Polska i Słowacja</li>
+    </ul>
+
     <div class="gallery-grid">
-      <div class="gallery-card" data-aos="fade-up" data-before="modern_6.jpg" data-after="background.jpg"
-           data-place="Osikov" data-scope="Ocieplenie komplet cz.1" data-area="500m²" data-time="4 tygodnie">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="background-800.webp 800w, background.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="background.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-        <template class="gm-details">
-          <p>Budynek został ocieplony styropianem 20cm, zazbrojony siatką oraz została położona na to struktura.</p>
-          <ul>
-            <li data-side="after" data-x="17" data-y="75">Montaż parapetów</li>
-          </ul>
+      <article class="gallery-card" data-reveal
+               data-place="Osikov" data-scope="Ocieplenie komplet"
+               data-area="500 m²" data-time="4 tygodnie">
+        <button type="button" class="gc-open" aria-label="Osikov, ocieplenie komplet – otwórz 3 porównania przed i po">
+          <span class="gc-media">
+            <img class="gc-after" src="background-800.webp" srcset="background-800.webp 800w, background.webp 1400w"
+                 sizes="(max-width: 660px) 92vw, (max-width: 1000px) 46vw, 370px"
+                 alt="Osikov – budynek po ociepleniu styropianem i wykonaniu tynku strukturalnego"
+                 loading="lazy" decoding="async" width="1400" height="1050" />
+            <img class="gc-before" data-src="modern_6.webp" alt="" aria-hidden="true" decoding="async" width="1400" height="1050" />
+            <span class="gc-tags">
+              <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Osikov</span>
+            </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-body">
+              <span class="gc-title">Ocieplenie komplet</span>
+              <span class="gc-meta">
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-vector-square"></use></svg></i>500 m²</span>
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i>4 tygodnie</span>
+              </span>
+            </span>
+            <span class="gc-cue"><i class="ico" aria-hidden="true"><svg><use href="#i-search-plus"></use></svg></i></span>
+          </span>
+        </button>
+
+        <template class="gc-pairs">
+          <p>Budynek został ocieplony styropianem 20 cm, zazbrojony siatką, a na to położyliśmy tynk strukturalny.</p>
+          <figure data-before="modern_6.webp" data-after="background.webp">
+            <ul>
+              <li data-side="after" data-x="17" data-y="75">Montaż parapetów</li>
+            </ul>
+          </figure>
+          <figure data-before="modern_7.webp" data-after="modern_5.webp"></figure>
+          <figure data-before="modern_8.webp" data-after="modern_2.webp"></figure>
         </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="modern_7.jpg" data-after="modern_5.jpg"
-           data-place="Osikov" data-scope="Ocieplenie komplet cz.2" data-area="500m²" data-time="4 tygodnie">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="modern_5-800.webp 800w, modern_5.webp 1600w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="modern_5.jpg" alt="" loading="lazy" width="1600" height="1200" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-        <template class="gm-details">
-          <p>Budynek został ocieplony styropianem 20cm, zazbrojony siatką oraz została położona na to struktura</p>
-          <ul>
-          </ul>
+      </article>
+
+      <article class="gallery-card" data-reveal data-reveal-delay="60"
+               data-place="Honce" data-scope="Termomodernizacja budynku"
+               data-area="330 m²" data-time="11 dni">
+        <button type="button" class="gc-open" aria-label="Honce, termomodernizacja budynku – otwórz 2 porównania przed i po">
+          <span class="gc-media">
+            <img class="gc-after" src="galery_1-800.webp" srcset="galery_1-800.webp 800w, galery_1.webp 1400w"
+                 sizes="(max-width: 660px) 92vw, (max-width: 1000px) 46vw, 370px"
+                 alt="Honce – budynek ocieplony wełną szklaną z tynkiem silikonowym i cokołem z mozaiki"
+                 loading="lazy" decoding="async" width="1400" height="1050" />
+            <img class="gc-before" data-src="galery_11.webp" alt="" aria-hidden="true" decoding="async" width="1400" height="1050" />
+            <span class="gc-tags">
+              <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Honce</span>
+            </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-body">
+              <span class="gc-title">Termomodernizacja budynku</span>
+              <span class="gc-meta">
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-vector-square"></use></svg></i>330 m²</span>
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i>11 dni</span>
+              </span>
+            </span>
+            <span class="gc-cue"><i class="ico" aria-hidden="true"><svg><use href="#i-search-plus"></use></svg></i></span>
+          </span>
+        </button>
+
+        <template class="gc-pairs">
+          <p>Została zastosowana izolacja wełną szklaną o grubości 10 cm. Naniesiony został tynk silikonowy z cokołem z mozaiki.</p>
+          <figure data-before="galery_11.webp" data-after="galery_1.webp">
+            <ul>
+              <li data-side="before" data-x="37" data-y="90">Zabezpieczenie podłoża przed uszkodzeniami</li>
+            </ul>
+          </figure>
+          <figure data-before="galery_3.webp" data-after="galery_12.webp"></figure>
         </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="modern_8.jpg" data-after="modern_2.jpg"
-           data-place="Osikov" data-scope="Ocieplenie komplet cz.3" data-area="500m²" data-time="4 tygodnie">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="modern_2-800.webp 800w, modern_2.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="modern_2.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-		<template class="gm-details">
-          <p>Budynek został ocieplony styropianem 20cm, zazbrojony siatką oraz została położona na to struktura</p>
-          <ul>
-          </ul>
-        </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-before="galery_9.jpg" data-after="galery_2.jpg"
-           data-place="Dulova Ves" data-scope="Termomodernizacja" data-area="220m²" data-time="7 dni">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="galery_2-800.webp 800w, galery_2.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="galery_2.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-		<template class="gm-details">
-          <p>Zastosowanie różnych grubości styropianu w celu wyrównania ścian.</p>
-          <ul>
-            <li data-side="before" data-x="62" data-y="45">Zagruntowana powieżchnia</li>
-            <li data-side="after" data-x="69" data-y="48">Intensywny kolor premium</li>
-          </ul>
-        </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_11.jpg" data-after="galery_1.jpg"
-           data-place="Honce" data-scope="Termomodernizacja budynku cz.1" data-area="330m²" data-time="11 dni">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="galery_1-800.webp 800w, galery_1.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="galery_1.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-        <template class="gm-details">
-          <p>Została zastosowana izolacja wełną szklaną o grubości 10cm. Naniesony został tynk silikonowy z cokołem z mozaiki</p>
-          <ul>
-		  <li data-side="before" data-x="37" data-y="90">Zabezpieczenie podłoża przed uszkodzeniami</li>
-          </ul>
-        </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_3.jpg" data-after="galery_12.jpg"
-           data-place="Honce" data-scope="Termomodernizacja budynku cz.2" data-area="330m²" data-time="11 dni">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="galery_12-800.webp 800w, galery_12.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="galery_12.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-		<template class="gm-details">
-          <p>Została zastosowana izolacja wełną szklaną o grubości 10cm. Naniesony został tynk silikonowy z cokołem z mozaiki</p>
-          <ul>
-          </ul>
-        </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-before="galery_13.jpg" data-after="galery_14.jpg"
-           data-place="Slovinky" data-scope="Kompleksowy system elewacyjny" data-area="250m²" data-time="9 dni">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="galery_14-800.webp 800w, galery_14.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="galery_14.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-		<template class="gm-details">
-          <p>Zostało zastosowane połączenie izolacji wełną i styropianem</p>
-          <ul>
-		  <li data-side="before" data-x="37" data-y="57">Z powodu chłdniejszych temperatur jesienią, praca została przerwana na etapie siatki z klejem</li>
-		  <li data-side="after" data-x="37" data-y="63">Po rozpoczęciu sezonu wiosną projekt został dokończony </li>
-          </ul>
-        </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="60" data-before="galery_15.jpg" data-after="galery_16.jpg"
-           data-place="Grybów" data-scope="Wykonanie warstwy wykończeniowej elewacji cz.1" data-area="180m²" data-time="3 dni">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="galery_16-800.webp 800w, galery_16.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="galery_16.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-		<template class="gm-details">
-          <p>Wykonaliśmy poprawki po wcześniejszych wykonawcach. </p>
-          <ul>
-		  <li data-side="before" data-x="27" data-y="57">Przygowanie podłoża i szpachlowanie</li>
-		  <li data-side="after" data-x="17" data-y="63">Finalnie został położony biały tynk na zagruntowaną powieżchnię</li>
-          </ul>
-        </template>
-      </div>
-      <div class="gallery-card" data-aos="fade-up" data-aos-delay="120" data-before="galery_17.jpg" data-after="galery_18.jpg"
-           data-place="Grybów" data-scope="Wykonanie warstwy wykończeniowej elewacji cz.2" data-area="180m²" data-time="3 dni">
-        <div class="img-wrap">
-          <picture>
-            <source type="image/webp" srcset="galery_18-800.webp 800w, galery_18.webp 1400w" sizes="(max-width: 768px) 50vw, 380px" />
-            <img src="galery_18.jpg" alt="" loading="lazy" width="1400" height="1050" />
-          </picture>
-          <div class="hover-overlay"><span class="more-btn"><i class="fas fa-search-plus"></i><span class="btn-label">Zobacz porównanie</span></span></div>
-        </div>
-		<template class="gm-details">
+      </article>
+
+      <article class="gallery-card" data-reveal data-reveal-delay="120"
+               data-place="Grybów" data-scope="Warstwa wykończeniowa elewacji"
+               data-area="180 m²" data-time="3 dni">
+        <button type="button" class="gc-open" aria-label="Grybów, warstwa wykończeniowa elewacji – otwórz 2 porównania przed i po">
+          <span class="gc-media">
+            <img class="gc-after" src="galery_16-800.webp" srcset="galery_16-800.webp 800w, galery_16.webp 1400w"
+                 sizes="(max-width: 660px) 92vw, (max-width: 1000px) 46vw, 370px"
+                 alt="Grybów – biały tynk na elewacji po poprawkach szpachlowania i gruntowaniu"
+                 loading="lazy" decoding="async" width="1400" height="1050" />
+            <img class="gc-before" data-src="galery_15.webp" alt="" aria-hidden="true" decoding="async" width="1400" height="1050" />
+            <span class="gc-tags">
+              <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Grybów</span>
+            </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-body">
+              <span class="gc-title">Warstwa wykończeniowa elewacji</span>
+              <span class="gc-meta">
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-vector-square"></use></svg></i>180 m²</span>
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i>3 dni</span>
+              </span>
+            </span>
+            <span class="gc-cue"><i class="ico" aria-hidden="true"><svg><use href="#i-search-plus"></use></svg></i></span>
+          </span>
+        </button>
+
+        <template class="gc-pairs">
           <p>Wykonaliśmy poprawki po wcześniejszych wykonawcach.</p>
-          <ul>
-		  <li data-side="before" data-x="27" data-y="57">Przygowanie podłoża i szpachlowanie</li>
-		  <li data-side="after" data-x="17" data-y="63">Finalnie został położony biały tynk na zagruntowaną powieżchnię</li>
-          </ul>
+          <figure data-before="galery_15.webp" data-after="galery_16.webp">
+            <ul>
+              <li data-side="before" data-x="27" data-y="57">Przygotowanie podłoża i szpachlowanie</li>
+              <li data-side="after" data-x="17" data-y="63">Finalnie został położony biały tynk na zagruntowaną powierzchnię</li>
+            </ul>
+          </figure>
+          <figure data-before="galery_17.webp" data-after="galery_18.webp">
+            <ul>
+              <li data-side="before" data-x="27" data-y="57">Przygotowanie podłoża i szpachlowanie</li>
+              <li data-side="after" data-x="17" data-y="63">Finalnie został położony biały tynk na zagruntowaną powierzchnię</li>
+            </ul>
+          </figure>
         </template>
-      </div>
+      </article>
+
+      <article class="gallery-card" data-reveal
+               data-place="Dulova Ves" data-scope="Termomodernizacja"
+               data-area="220 m²" data-time="7 dni">
+        <button type="button" class="gc-open" aria-label="Dulova Ves, termomodernizacja – otwórz porównanie przed i po">
+          <span class="gc-media">
+            <img class="gc-after" src="galery_2-800.webp" srcset="galery_2-800.webp 800w, galery_2.webp 1400w"
+                 sizes="(max-width: 660px) 92vw, (max-width: 1000px) 46vw, 370px"
+                 alt="Dulova Ves – dom po termomodernizacji z elewacją w intensywnym kolorze"
+                 loading="lazy" decoding="async" width="1400" height="1050" />
+            <img class="gc-before" data-src="galery_9.webp" alt="" aria-hidden="true" decoding="async" width="1400" height="1050" />
+            <span class="gc-tags">
+              <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Dulova Ves</span>
+            </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-body">
+              <span class="gc-title">Termomodernizacja</span>
+              <span class="gc-meta">
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-vector-square"></use></svg></i>220 m²</span>
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i>7 dni</span>
+              </span>
+            </span>
+            <span class="gc-cue"><i class="ico" aria-hidden="true"><svg><use href="#i-search-plus"></use></svg></i></span>
+          </span>
+        </button>
+
+        <template class="gc-pairs">
+          <p>Zastosowanie różnych grubości styropianu w celu wyrównania ścian.</p>
+          <figure data-before="galery_9.webp" data-after="galery_2.webp">
+            <ul>
+              <li data-side="before" data-x="62" data-y="45">Zagruntowana powierzchnia</li>
+              <li data-side="after" data-x="69" data-y="48">Intensywny kolor premium</li>
+            </ul>
+          </figure>
+        </template>
+      </article>
+
+      <article class="gallery-card" data-reveal data-reveal-delay="60"
+               data-place="Slovinky" data-scope="Kompleksowy system elewacyjny"
+               data-area="250 m²" data-time="9 dni">
+        <button type="button" class="gc-open" aria-label="Slovinky, kompleksowy system elewacyjny – otwórz porównanie przed i po">
+          <span class="gc-media">
+            <img class="gc-after" src="galery_14-800.webp" srcset="galery_14-800.webp 800w, galery_14.webp 1400w"
+                 sizes="(max-width: 660px) 92vw, (max-width: 1000px) 46vw, 370px"
+                 alt="Slovinky – dom z gotową białą elewacją po połączeniu wełny i styropianu"
+                 loading="lazy" decoding="async" width="1400" height="1050" />
+            <img class="gc-before" data-src="galery_13.webp" alt="" aria-hidden="true" decoding="async" width="1400" height="1050" />
+            <span class="gc-tags">
+              <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Slovinky</span>
+            </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-body">
+              <span class="gc-title">Kompleksowy system elewacyjny</span>
+              <span class="gc-meta">
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-vector-square"></use></svg></i>250 m²</span>
+                <span><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i>9 dni</span>
+              </span>
+            </span>
+            <span class="gc-cue"><i class="ico" aria-hidden="true"><svg><use href="#i-search-plus"></use></svg></i></span>
+          </span>
+        </button>
+
+        <template class="gc-pairs">
+          <p>Zostało zastosowane połączenie izolacji wełną i styropianem.</p>
+          <figure data-before="galery_13.webp" data-after="galery_14.webp">
+            <ul>
+              <li data-side="before" data-x="37" data-y="57">Z powodu chłodniejszych temperatur jesienią praca została przerwana na etapie siatki z klejem</li>
+              <li data-side="after" data-x="37" data-y="63">Po rozpoczęciu sezonu wiosną projekt został dokończony</li>
+            </ul>
+          </figure>
+        </template>
+      </article>
     </div>
+
   </div>
 </section>
 
@@ -480,16 +666,16 @@
      ocenę i licznik buduje script.js. Próg zmienia się w stałej
      MIN_REVIEWS w script.js.
      ===================================================================== -->
-<section id="reviews" hidden>
+<section id="reviews" hidden aria-labelledby="reviews-title">
   <div class="wrap section-container">
-    <header class="section-head" data-aos="fade-up">
+    <header class="section-head" data-reveal>
       <span class="section-tag">Opinie</span>
-      <h2>Co mówią o nas klienci</h2>
+      <h2 id="reviews-title">Co mówią o nas klienci</h2>
       <p class="section-sub">Kilka słów od osób, u których robota jest już skończona i odebrana.</p>
     </header>
 
     <div class="reviews-layout">
-      <aside class="google-card" data-aos="fade-up">
+      <aside class="google-card" data-reveal>
         <div class="gc-top">
           <span class="gc-logo" aria-hidden="true">
             <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
@@ -509,7 +695,7 @@
           <span class="gc-num">5,0</span>
           <div>
             <div class="rv-stars" role="img" aria-label="Średnia ocena 5 na 5">
-              <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+              <i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i><i class="ico" aria-hidden="true"><svg><use href="#i-star"></use></svg></i>
             </div>
             <span class="gc-count">na podstawie 8 opinii</span>
           </div>
@@ -525,22 +711,21 @@
 
         <!-- link podmienia się automatycznie na ten z reviews.json, gdy workflow pobierze dane -->
         <a href="https://www.google.com/maps?cid=18325216394418417962" target="_blank" rel="noopener" class="btn btn-primary btn-sm btn-block">
-          Zobacz nas w Google <i class="fas fa-arrow-right"></i>
+          Zobacz nas w Google <i class="ico ico-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"></use></svg></i>
         </a>
         <p class="gc-note">Wizytówka firmy w Google Maps.</p>
       </aside>
 
-      <div class="reviews-col" data-aos="fade-up" data-aos-delay="100">
+      <div class="reviews-col" data-reveal data-reveal-delay="100">
         <div class="reviews-track" id="reviews-track" role="group" aria-label="Opinie klientów">
           <!-- karty wstawia skrypt na podstawie reviews.json -->
-
         </div>
 
         <div class="reviews-controls">
           <div class="reviews-dots" id="reviews-dots"></div>
           <div class="reviews-arrows">
-            <button type="button" class="rv-arrow" id="reviews-prev" aria-label="Poprzednie opinie"><i class="fas fa-chevron-left"></i></button>
-            <button type="button" class="rv-arrow" id="reviews-next" aria-label="Następne opinie"><i class="fas fa-chevron-right"></i></button>
+            <button type="button" class="rv-arrow" id="reviews-prev" aria-label="Poprzednie opinie"><i class="ico" aria-hidden="true"><svg><use href="#i-chevron-left"></use></svg></i></button>
+            <button type="button" class="rv-arrow" id="reviews-next" aria-label="Następne opinie"><i class="ico" aria-hidden="true"><svg><use href="#i-chevron-right"></use></svg></i></button>
           </div>
         </div>
       </div>
@@ -548,83 +733,95 @@
   </div>
 </section>
 
-<section class="cta-band">
-  <div class="wrap cta-inner" data-aos="fade-up">
+<section class="cta-band" aria-labelledby="cta-title">
+  <div class="wrap cta-inner" data-reveal>
     <div class="cta-text">
-      <h2>Darmowa wycena i obmiar – przyjeżdżamy na miejsce</h2>
+      <h2 id="cta-title">Darmowa wycena i obmiar – przyjeżdżamy na miejsce</h2>
       <p>Powiedz, co planujesz zrobić. Umówimy się na oględziny, wykonamy obmiar, wyliczymy zapotrzebowanie na materiały i przygotujemy konkretną wycenę – bez opłat i bez zobowiązań.</p>
     </div>
     <div class="cta-actions">
-      <a href="tel:+48574977131" class="btn btn-accent btn-lg"><i class="fas fa-phone-alt"></i> Zadzwoń teraz</a>
+      <a href="tel:+48574977131" class="btn btn-accent btn-lg"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> Zadzwoń teraz</a>
       <a href="#contact-section" class="btn btn-outline-light btn-lg">Napisz wiadomość</a>
     </div>
   </div>
 </section>
 
-<section id="faq">
+<section id="faq" aria-labelledby="faq-title">
   <div class="wrap section-container">
-    <header class="section-head" data-aos="fade-up">
+    <header class="section-head" data-reveal>
       <span class="section-tag">FAQ</span>
-      <h2>Najczęstsze pytania</h2>
-      <p class="section-sub">Nie znalazłeś odpowiedzi? Zadzwoń – wytłumaczymy wszystko po ludzku.</p>
+      <h2 id="faq-title">Najczęstsze pytania</h2>
     </header>
 
-    <div class="faq-list" data-aos="fade-up">
+    <div class="faq-list" data-reveal>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Na jakim terenie pracujecie?<i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Po polskiej stronie działamy w całej Małopolsce, przede wszystkim w okolicach Grybowa i Nowego Sącza. Na Słowacji realizujemy zlecenia w rejonie Preszowa, Popradu, Koszyc i Bardejowa. Dalsze wyjazdy również wchodzą w grę – wystarczy zapytać, chętnie sprawdzimy, czy da się to pogodzić z terminami.</p></div>
+        <h3 class="faq-h"><button class="faq-q" id="faq-q1" aria-expanded="false" aria-controls="faq-a1">Na jakim terenie pracujecie?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a1" role="region" aria-labelledby="faq-q1"><p>Po polskiej stronie działamy w całej Małopolsce, przede wszystkim w okolicach Grybowa i Nowego Sącza. Na Słowacji realizujemy zlecenia w rejonie Preszowa, Popradu, Koszyc i Bardejowa. Dalsze wyjazdy również wchodzą w grę – wystarczy zapytać, chętnie sprawdzimy, czy da się to pogodzić z terminami.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Czy pomagacie dobrać kolor i rodzaj tynku?<i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Tak. Podpowiadamy, jaka faktura i kolorystyka sprawdzi się przy Twoim budynku oraz które rozwiązania są trwalsze w naszym klimacie. Decyzja zawsze należy do Ciebie.</p></div>
+        <h3 class="faq-h"><button class="faq-q" id="faq-q2" aria-expanded="false" aria-controls="faq-a2">Czy pomagacie dobrać kolor i rodzaj tynku?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a2" role="region" aria-labelledby="faq-q2"><p>Tak. Podpowiadamy, jaka faktura i kolorystyka sprawdzi się przy Twoim budynku oraz które rozwiązania są trwalsze w naszym klimacie. Decyzja zawsze należy do Ciebie.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Czy dajecie gwarancję na wykonane prace?<i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Tak. Na wykonane przez nas prace udzielamy gwarancji – szczegóły i zakres ustalamy indywidualnie przy ustaleniach dotyczących zlecenia.</p></div>
+        <h3 class="faq-h"><button class="faq-q" id="faq-q3" aria-expanded="false" aria-controls="faq-a3">Czy dajecie gwarancję na wykonane prace?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a3" role="region" aria-labelledby="faq-q3"><p>Tak. Na wykonane przez nas prace udzielamy gwarancji – szczegóły i zakres ustalamy indywidualnie przy ustaleniach dotyczących zlecenia.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Co dzieje się z parapetami, rynnami i lampami przy ociepleniu?<i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Demontujemy je przed rozpoczęciem prac i montujemy ponownie po ociepleniu – z uwzględnieniem nowej grubości ściany. Jeśli coś kwalifikuje się do wymiany, mówimy o tym na etapie wyceny, a nie w trakcie robót.</p></div>
+        <h3 class="faq-h"><button class="faq-q" id="faq-q4" aria-expanded="false" aria-controls="faq-a4">Co dzieje się z parapetami, rynnami i lampami przy ociepleniu?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a4" role="region" aria-labelledby="faq-q4"><p>Demontujemy je przed rozpoczęciem prac i montujemy ponownie po ociepleniu – z uwzględnieniem nowej grubości ściany. Jeśli coś kwalifikuje się do wymiany, mówimy o tym na etapie wyceny, a nie w trakcie robót.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Jak wygląda rozliczenie?<i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Zakres, cenę i harmonogram płatności ustalamy przed wejściem na budowę i omawiamy przy przedstawianiu wyceny. Koszty nie „dopowiadają się" w trakcie robót.</p></div>
+        <h3 class="faq-h"><button class="faq-q" id="faq-q5" aria-expanded="false" aria-controls="faq-a5">Jak wygląda rozliczenie?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a5" role="region" aria-labelledby="faq-q5"><p>Zakres, cenę i harmonogram płatności ustalamy przed wejściem na budowę i omawiamy przy przedstawianiu wyceny. Koszty nie „dopowiadają się” w trakcie robót.</p></div>
       </div>
       <div class="faq-item">
-        <button class="faq-q" aria-expanded="false">Czy mogę zobaczyć więcej Waszych realizacji?<i class="fas fa-plus"></i></button>
-        <div class="faq-a"><p>Jasne – część zdjęć „przed i po" znajdziesz w <a href="#gallery">galerii realizacji</a>. Jeśli chcesz zobaczyć coś podobnego do swojego budynku, zadzwoń, a podeślemy więcej zdjęć.</p></div>
+        <h3 class="faq-h"><button class="faq-q" id="faq-q6" aria-expanded="false" aria-controls="faq-a6">Ile kosztuje wycena i czy dojeżdżacie na miejsce?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a6" role="region" aria-labelledby="faq-q6"><p>Wycena razem z dojazdem i obmiarem jest bezpłatna i do niczego nie zobowiązuje. Przyjeżdżamy, oglądamy budynek, mierzymy i dopiero na tej podstawie podajemy cenę – nie wyceniamy „na oko” przez telefon.</p></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" id="faq-q7" aria-expanded="false" aria-controls="faq-a7">Czy mogę zobaczyć więcej Waszych realizacji?<i class="ico" aria-hidden="true"><svg><use href="#i-plus"></use></svg></i></button></h3>
+        <div class="faq-a" id="faq-a7" role="region" aria-labelledby="faq-q7"><p>Jasne – część zdjęć „przed i po” znajdziesz w <a href="#gallery">galerii realizacji</a>. Jeśli chcesz zobaczyć coś podobnego do swojego budynku, zadzwoń, a podeślemy więcej zdjęć.</p></div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="contact-section" class="bg-light">
+<section id="contact-section" class="bg-light" aria-labelledby="contact-title">
   <div class="wrap section-container">
-    <header class="section-head" data-aos="fade-up">
+    <header class="section-head" data-reveal>
       <span class="section-tag">Kontakt</span>
-      <h2>Porozmawiajmy o Twojej inwestycji</h2>
-      <p class="section-sub">Zadzwoń albo napisz – oddzwonimy.</p>
+      <h2 id="contact-title">Porozmawiajmy o Twojej inwestycji</h2>
     </header>
 
     <div class="contact-wrapper">
-      <div class="contact-box" data-aos="fade-right">
+      <div class="contact-box" data-reveal="right">
         <h3 class="contact-header">Wyślij zapytanie</h3>
-        <form id="contact-form" action="https://formspree.io/f/xoeavjnl" method="POST">
+        <form id="contact-form" action="https://formspree.io/f/xoeavjnl" method="POST" novalidate>
           <input type="hidden" name="_subject" value="Sykowni Chłopcy – nowa wiadomość" />
+          <!-- pułapka na boty: człowiek tego pola nie zobaczy i nie wypełni -->
+          <div class="form-gotcha" aria-hidden="true">
+            <label for="company">Nazwa firmy</label>
+            <input type="text" id="company" name="_gotcha" tabindex="-1" autocomplete="off" />
+          </div>
+
           <div class="form-row">
             <div class="form-group">
               <label for="name">Imię i nazwisko</label>
-              <input type="text" id="name" name="name" placeholder="np. Jan Kowalski" required />
+              <input type="text" id="name" name="name" placeholder="np. Jan Kowalski" autocomplete="name"
+                     required aria-describedby="name-error" />
+              <p class="field-error" id="name-error" hidden></p>
             </div>
             <div class="form-group">
               <label for="email">Adres e-mail</label>
-              <input type="email" id="email" name="email" placeholder="jan@example.com" required />
+              <input type="email" id="email" name="email" placeholder="jan@example.com" autocomplete="email"
+                     inputmode="email" required aria-describedby="email-error" />
+              <p class="field-error" id="email-error" hidden></p>
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="phone">Telefon <span class="opt">(opcjonalnie)</span></label>
-              <input type="tel" id="phone" name="phone" placeholder="np. 500 600 700" />
+              <input type="tel" id="phone" name="phone" placeholder="np. 500 600 700" autocomplete="tel" inputmode="tel" />
             </div>
             <div class="form-group">
               <label for="scope">Zakres prac</label>
@@ -640,10 +837,12 @@
           </div>
           <div class="form-group">
             <label for="message">Wiadomość</label>
-            <textarea id="message" name="message" placeholder="Napisz krótko o budynku: metraż, lokalizacja, planowany termin..." required></textarea>
+            <textarea id="message" name="message" placeholder="Napisz krótko o budynku: metraż, lokalizacja, planowany termin..."
+                      required aria-describedby="message-error"></textarea>
+            <p class="field-error" id="message-error" hidden></p>
           </div>
-          <button type="submit" class="btn btn-accent btn-block">Wyślij zapytanie <i class="fas fa-paper-plane"></i></button>
-          <p id="form-message" class="form-message"></p>
+          <button type="submit" class="btn btn-accent btn-block">Wyślij zapytanie <i class="ico" aria-hidden="true"><svg><use href="#i-paper-plane"></use></svg></i></button>
+          <p id="form-message" class="form-message" role="status" aria-live="polite"></p>
           <p class="form-note">
             Wysyłając wiadomość zgadzasz się na kontakt zwrotny w sprawie zapytania. Administratorem danych
             jest Tomasz Grygiel SYKOWNI-CHLOPCY, NIP 7343620881 – szczegóły znajdziesz w
@@ -652,26 +851,28 @@
         </form>
       </div>
 
-      <div class="contact-side" data-aos="fade-left">
+      <div class="contact-side" data-reveal="left">
         <div class="contact-box contact-info">
           <h3 class="contact-header">Dane kontaktowe</h3>
           <a href="tel:+48574977131" class="info-item">
-            <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+            <div class="icon-circle"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i></div>
             <div><span class="info-label">Telefon</span><p>+48 574 977 131</p></div>
           </a>
           <a href="mailto:schlopcy@gmail.com" class="info-item">
-            <div class="icon-circle"><i class="fas fa-envelope"></i></div>
+            <div class="icon-circle"><i class="ico" aria-hidden="true"><svg><use href="#i-envelope"></use></svg></i></div>
             <div><span class="info-label">E-mail</span><p>schlopcy@gmail.com</p></div>
           </a>
           <a href="https://maps.app.goo.gl/REYcrivsohncNmFw8" target="_blank" rel="noopener" class="info-item">
-            <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-            <div><span class="info-label">Siedziba</span><p>Biała Wyżna 380<br />33‑330 Grybów</p></div>
+            <div class="icon-circle"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i></div>
+            <div><span class="info-label">Siedziba</span><p>Biała Wyżna 380<br />33-330 Grybów</p></div>
           </a>
         </div>
 
+        <!-- loading="lazy" odkłada pobranie mapy do momentu, w którym
+             odwiedzający dochodzi do sekcji kontaktu – bez klikania -->
         <div class="map-box">
           <iframe
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzqmAF9WhqwhBbT2axfeLAfQRKVEEEwBk&q=place_id:ChIJqxYxlZgfcAoRKnF5NTg_UP4&language=pl&zoom=8"
+            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCzqmAF9WhqwhBbT2axfeLAfQRKVEEEwBk&amp;q=place_id:ChIJqxYxlZgfcAoRKnF5NTg_UP4&amp;language=pl&amp;zoom=8"
             title="Sykowni Chłopcy w Mapach Google"
             loading="lazy"
             allowfullscreen
@@ -687,7 +888,7 @@
 <footer class="footer">
   <div class="wrap footer-grid">
     <div class="footer-col footer-brand">
-      <img src="banner_new.png" alt="Sykowni Chłopcy" class="footer-logo" />
+      <img src="banner_new.png" alt="Sykowni Chłopcy" class="footer-logo" width="607" height="180" loading="lazy" />
       <p>Firma budowlana z Grybowa. Ocieplenia, tynki i elewacje w Polsce i na Słowacji – własny sprzęt, doradztwo i gwarancja na wykonane prace.</p>
     </div>
     <div class="footer-col">
@@ -708,76 +909,80 @@
         <li><a href="#gallery">Realizacje</a></li>
         <li class="js-reviews-link" hidden><a href="#reviews">Opinie klientów</a></li>
         <li><a href="#faq">Najczęstsze pytania</a></li>
-        <li><a href="https://sykowni-chlopcy.sk/">Slovenská verzia</a></li>
+        <li><a href="https://sykowni-chlopcy.sk/" hreflang="sk">Slovenská verzia</a></li>
         <li><a href="polityka-prywatnosci.html">Polityka prywatności</a></li>
       </ul>
     </div>
     <div class="footer-col">
       <h4>Kontakt</h4>
       <ul class="footer-contact">
-        <li><a href="tel:+48574977131"><i class="fas fa-phone-alt"></i> +48 574 977 131</a></li>
-        <li><a href="mailto:schlopcy@gmail.com"><i class="fas fa-envelope"></i> schlopcy@gmail.com</a></li>
-        <li><i class="fas fa-map-marker-alt"></i> Biała Wyżna 380, 33‑330 Grybów</li>
+        <li><a href="tel:+48574977131"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> +48 574 977 131</a></li>
+        <li><a href="mailto:schlopcy@gmail.com"><i class="ico" aria-hidden="true"><svg><use href="#i-envelope"></use></svg></i> schlopcy@gmail.com</a></li>
+        <li><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i> Biała Wyżna 380, 33-330 Grybów</li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <div class="wrap footer-bottom-inner">
-      <p>&copy; <span id="year"></span> Tomasz Grygiel SYKOWNI-CHLOPCY · NIP 7343620881</p>
+      <p>&copy; <span id="year">2026</span> Tomasz Grygiel SYKOWNI-CHLOPCY · NIP 7343620881</p>
       <p class="footer-area">Grybów · Nowy Sącz · Małopolska · Preszów · Poprad · Koszyce · Bardejów</p>
     </div>
   </div>
 </footer>
 
 <div class="mobile-bar">
-  <a href="tel:+48574977131" class="mobile-bar-btn primary"><i class="fas fa-phone-alt"></i> Zadzwoń</a>
-  <a href="#contact-section" class="mobile-bar-btn"><i class="fas fa-envelope"></i> Wycena</a>
+  <a href="tel:+48574977131" class="mobile-bar-btn primary"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> Zadzwoń</a>
+  <a href="#contact-section" class="mobile-bar-btn"><i class="ico" aria-hidden="true"><svg><use href="#i-envelope"></use></svg></i> Wycena</a>
 </div>
 
-<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-labelledby="lightbox-title">
+<div id="lightbox-overlay" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
   <div class="lb-shell">
     <header class="lb-head">
       <div class="lb-heading">
-        <p class="lb-place" id="lightbox-place" hidden><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span></span></p>
+        <p class="lb-place" id="lightbox-place" hidden><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i><span></span></p>
         <h3 class="lb-title" id="lightbox-title">Porównanie przed i po</h3>
       </div>
       <div class="lb-head-actions">
         <span class="lb-counter" id="lightbox-counter"></span>
-        <button id="lightbox-close" aria-label="Zamknij"><i class="fas fa-times" aria-hidden="true"></i></button>
+        <button id="lightbox-close" type="button" aria-label="Zamknij"><i class="ico" aria-hidden="true"><svg><use href="#i-times"></use></svg></i></button>
       </div>
     </header>
 
-    <div class="lb-stage">
-      <figure class="lb-figure">
-        <div class="lb-frame" id="lightbox-frame-before">
-          <img id="lightbox-before" src="" alt="Stan przed pracami" />
-          <span class="lb-tag">Przed</span>
-        </div>
-      </figure>
-      <figure class="lb-figure">
-        <div class="lb-frame" id="lightbox-frame-after">
-          <img id="lightbox-after" src="" alt="Stan po pracach" />
-          <span class="lb-tag lb-tag-after">Po</span>
-        </div>
-      </figure>
+    <!-- strzałki siedzą w tej samej ramce co zdjęcia: na dużym ekranie po ich
+         bokach, na telefonie w przerwie między ujęciem „przed" i „po" -->
+    <div class="lb-viewer">
+      <div class="lb-stage">
+        <figure class="lb-figure">
+          <div class="lb-frame" id="lightbox-frame-before">
+            <img id="lightbox-before" alt="Stan przed pracami" decoding="async" />
+            <span class="lb-tag">Przed</span>
+          </div>
+        </figure>
+        <figure class="lb-figure">
+          <div class="lb-frame" id="lightbox-frame-after">
+            <img id="lightbox-after" alt="Stan po pracach" decoding="async" />
+            <span class="lb-tag lb-tag-after">Po</span>
+          </div>
+        </figure>
+      </div>
+
+      <button id="lightbox-prev" type="button" class="lightbox-arrow" aria-label="Poprzednia realizacja"><i class="ico" aria-hidden="true"><svg><use href="#i-chevron-left"></use></svg></i></button>
+      <button id="lightbox-next" type="button" class="lightbox-arrow" aria-label="Następna realizacja"><i class="ico" aria-hidden="true"><svg><use href="#i-chevron-right"></use></svg></i></button>
     </div>
+
+    <!-- miniatury pojawiają się tylko przy budowach z kilkoma ujęciami -->
+    <div class="lb-thumbs" id="lightbox-thumbs" role="tablist" aria-label="Ujęcia z tej budowy" hidden></div>
 
     <div class="lb-info" id="lightbox-info">
       <p class="lb-desc" id="lightbox-desc" hidden></p>
       <ul class="lb-facts" id="lightbox-facts"></ul>
-      <ol class="lb-legend" id="lightbox-legend" hidden></ol>
     </div>
   </div>
-
-  <button id="lightbox-prev" class="lightbox-arrow" aria-label="Poprzednia realizacja"><i class="fas fa-chevron-left" aria-hidden="true"></i></button>
-  <button id="lightbox-next" class="lightbox-arrow" aria-label="Następna realizacja"><i class="fas fa-chevron-right" aria-hidden="true"></i></button>
 </div>
 
-<button id="scrollToTopBtn" title="Wróć do góry" aria-label="Wróć do góry">
-  <i class="fas fa-chevron-up"></i>
+<button id="scrollToTopBtn" type="button" title="Wróć do góry" aria-label="Wróć do góry">
+  <i class="ico" aria-hidden="true"><svg><use href="#i-chevron-up"></use></svg></i>
 </button>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script src="script.js?v=30"></script>
 </body>
 </html>
