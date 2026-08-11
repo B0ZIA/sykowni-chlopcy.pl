@@ -447,7 +447,7 @@
      false – sekcja i wszystkie odnośniki do niej znikają.
      Przy false sekcja mignie na ułamek sekundy, zanim skrypt zdąży ją schować –
      skrypt jest wczytywany z defer. */
-  const SHOW_PROCESS = true;
+  const SHOW_PROCESS = false;
 
   const GOOGLE_G_SVG = `
     <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
