@@ -278,9 +278,12 @@
       const target = parseInt(el.dataset.count, 10) || 0;
       const suffix = el.dataset.suffix || '';
       const duration = 1200;
+      /* tysiace rozdzielone spacja nierozdzielajaca, zeby "15 000 m²"
+         nie zlamalo sie w pol liczby na waskim ekranie */
+      const format = value => String(value).replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
 
       if (prefersReducedMotion || target === 0) {
-        el.textContent = `${target}${suffix}`;
+        el.textContent = `${format(target)}${suffix}`;
         return;
       }
 
@@ -288,7 +291,7 @@
       const tick = now => {
         const progress = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = `${Math.round(target * eased)}${suffix}`;
+        el.textContent = `${format(Math.round(target * eased))}${suffix}`;
         if (progress < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
