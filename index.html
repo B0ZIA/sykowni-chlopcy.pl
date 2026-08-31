@@ -7,7 +7,7 @@
   <meta name="description" content="Ocieplenia, tynki i elewacje w Grybowie, Nowym Sączu i całej Małopolsce. Własne rusztowanie, materiał pod dom, gwarancja. Darmowa wycena z dojazdem." />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
   <meta name="author" content="Tomasz Grygiel SYKOWNI-CHLOPCY" />
-  <meta name="theme-color" content="#0B1F3A" />
+  <meta name="theme-color" content="#0B101C" />
   <meta name="format-detection" content="telephone=no" />
 
   <link rel="icon" href="favicon.ico" sizes="48x48" />
@@ -39,13 +39,13 @@
   <link rel="preload" href="fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin />
   <!-- tło hero jest największym elementem pierwszego ekranu (LCP);
        telefon dostaje lżejszy wariant, bo i tak przykrywa go ciemna nakładka -->
-  <link rel="preload" href="modern_5-800.webp" as="image" type="image/webp" media="(max-width: 700px)" fetchpriority="high" />
-  <link rel="preload" href="modern_1.webp" as="image" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />
+  <link rel="preload" href="background-800.webp" as="image" type="image/webp" media="(max-width: 700px)" fetchpriority="high" />
+  <link rel="preload" href="background.webp" as="image" type="image/webp" media="(min-width: 701px)" fetchpriority="high" />
 
   <!-- klasa .js włącza animacje wjazdu; bez skryptów treść zostaje widoczna -->
   <script>document.documentElement.classList.add('js');</script>
-  <link rel="stylesheet" href="style.css?v=74" />
-  <script src="script.js?v=74" defer></script>
+  <link rel="stylesheet" href="style.css?v=78" />
+  <script src="script.js?v=78" defer></script>
 
   <script type="application/ld+json">
   {
@@ -271,14 +271,34 @@
   <div class="hero-bg"></div>
   <div class="hero-overlay"></div>
   <div class="wrap hero-content">
+    <p class="hero-kicker" data-reveal>Ocieplenia · Tynki · Elewacje</p>
     <h1 data-reveal>Ocieplenia i elewacje,<br /><span class="grad">które robi się raz</span></h1>
     <p class="hero-subtitle" data-reveal data-reveal-delay="100">
-      Profesjonalne usługi remontowo-budowlane w Polsce i na Słowacji.
+      Ponad 15&nbsp;000&nbsp;m² wykonanych elewacji w Polsce i na Słowacji.
+      Własne rusztowanie, materiał pod dom i bezpłatna wycena na miejscu.
     </p>
     <div class="hero-actions" data-reveal data-reveal-delay="180">
       <a href="#contact-section" class="btn btn-accent btn-lg">Zamów darmową wycenę <i class="ico ico-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"></use></svg></i></a>
       <a href="tel:+48574977131" class="btn btn-ghost btn-lg"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> +48 574 977 131</a>
     </div>
+
+    <!-- plakietkę wypełnia i odsłania script.js, gdy reviews.json ma komplet opinii -->
+    <a href="#reviews" class="hero-rating" id="hero-rating" hidden>
+      <span class="hero-rating-g" aria-hidden="true">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+          <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+          <path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/>
+          <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+        </svg>
+      </span>
+      <span class="rv-stars" aria-hidden="true"></span>
+      <span class="hero-rating-txt">
+        <strong id="hero-rating-num"></strong>
+        <small id="hero-rating-count"></small>
+      </span>
+    </a>
+
     <ul class="hero-chips" data-reveal data-reveal-delay="260">
       <li><i class="ico" aria-hidden="true"><svg><use href="#i-shield-alt"></use></svg></i> Gwarancja jakości</li>
       <li><i class="ico" aria-hidden="true"><svg><use href="#i-clock"></use></svg></i> Szybka realizacja</li>
@@ -476,6 +496,8 @@
             <span class="gc-tags">
               <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Osikov</span>
             </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-cue" aria-hidden="true"><i class="ico"><svg><use href="#i-search-plus"></use></svg></i></span>
             <span class="gc-body">
               <span class="gc-title">Ocieplenie komplet</span>
               <span class="gc-meta">
@@ -520,6 +542,8 @@
             <span class="gc-tags">
               <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Honce</span>
             </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-cue" aria-hidden="true"><i class="ico"><svg><use href="#i-search-plus"></use></svg></i></span>
             <span class="gc-body">
               <span class="gc-title">Termomodernizacja budynku</span>
               <span class="gc-meta">
@@ -555,6 +579,8 @@
             <span class="gc-tags">
               <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Grybów</span>
             </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-cue" aria-hidden="true"><i class="ico"><svg><use href="#i-search-plus"></use></svg></i></span>
             <span class="gc-body">
               <span class="gc-title">Warstwa wykończeniowa elewacji</span>
               <span class="gc-meta">
@@ -595,6 +621,8 @@
             <span class="gc-tags">
               <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Dulova Ves</span>
             </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-cue" aria-hidden="true"><i class="ico"><svg><use href="#i-search-plus"></use></svg></i></span>
             <span class="gc-body">
               <span class="gc-title">Termomodernizacja</span>
               <span class="gc-meta">
@@ -629,6 +657,8 @@
             <span class="gc-tags">
               <span class="gc-place"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i>Slovinky</span>
             </span>
+            <span class="gc-switch" aria-hidden="true"><span>Przed</span><span>Po</span></span>
+            <span class="gc-cue" aria-hidden="true"><i class="ico"><svg><use href="#i-search-plus"></use></svg></i></span>
             <span class="gc-body">
               <span class="gc-title">Kompleksowy system elewacyjny</span>
               <span class="gc-meta">
@@ -649,6 +679,13 @@
           </figure>
         </template>
       </article>
+
+      <!-- szósty kafel domyka siatkę 3×2 i zaprasza do wyceny -->
+      <a class="gallery-more" href="#contact-section" data-reveal data-reveal-delay="120">
+        <h3>Twój dom może być następny</h3>
+        <p>Darmowa wycena z dojazdem i obmiarem na miejscu – bez zobowiązań.</p>
+        <span class="btn btn-accent btn-sm">Zamów wycenę <i class="ico ico-arrow" aria-hidden="true"><svg><use href="#i-arrow-right"></use></svg></i></span>
+      </a>
     </div>
 
   </div>
@@ -869,6 +906,7 @@
     <div class="cta-actions">
       <a href="tel:+48574977131" class="btn btn-accent btn-lg"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> Zadzwoń teraz</a>
       <a href="#contact-section" class="btn btn-outline-light btn-lg">Napisz wiadomość</a>
+      <p class="cta-note"><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i> Pon.–Pt. 6:00–21:00 · Sob.–Niedz. 8:00–21:00</p>
     </div>
   </div>
 </section>
@@ -990,6 +1028,10 @@
             <div class="icon-circle"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i></div>
             <div><span class="info-label">Siedziba</span><p>Biała Wyżna 380<br />33-330 Grybów</p></div>
           </a>
+          <div class="info-item">
+            <div class="icon-circle"><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i></div>
+            <div><span class="info-label">Godziny pracy</span><p>Pon.–Pt. 6:00–21:00<br />Sob.–Niedz. 8:00–21:00</p></div>
+          </div>
         </div>
 
         <!-- loading="lazy" odkłada pobranie mapy do momentu, w którym
@@ -1043,6 +1085,7 @@
         <li><a href="tel:+48574977131"><i class="ico" aria-hidden="true"><svg><use href="#i-phone-alt"></use></svg></i> +48 574 977 131</a></li>
         <li><a href="mailto:schlopcy@gmail.com"><i class="ico" aria-hidden="true"><svg><use href="#i-envelope"></use></svg></i> schlopcy@gmail.com</a></li>
         <li><a href="https://maps.app.goo.gl/REYcrivsohncNmFw8" target="_blank" rel="noopener"><i class="ico" aria-hidden="true"><svg><use href="#i-map-marker-alt"></use></svg></i> Biała Wyżna 380, 33-330 Grybów</a></li>
+        <li><i class="ico" aria-hidden="true"><svg><use href="#i-clock-o"></use></svg></i> Pon.–Pt. 6–21 · Sob.–Niedz. 8–21</li>
       </ul>
     </div>
   </div>
@@ -1094,12 +1137,15 @@
       <button id="lightbox-next" type="button" class="lightbox-arrow" aria-label="Następna realizacja"><i class="ico" aria-hidden="true"><svg><use href="#i-chevron-right"></use></svg></i></button>
     </div>
 
-    <!-- miniatury pojawiają się tylko przy budowach z kilkoma ujęciami -->
-    <div class="lb-thumbs" id="lightbox-thumbs" role="tablist" aria-label="Ujęcia z tej budowy" hidden></div>
+    <!-- stopka podglądu: pasek z miniaturami, opisem i metrykami budowy -->
+    <div class="lb-foot">
+      <!-- miniatury pojawiają się tylko przy budowach z kilkoma ujęciami -->
+      <div class="lb-thumbs" id="lightbox-thumbs" role="tablist" aria-label="Ujęcia z tej budowy" hidden></div>
 
-    <div class="lb-info" id="lightbox-info">
-      <p class="lb-desc" id="lightbox-desc" hidden></p>
-      <ul class="lb-facts" id="lightbox-facts"></ul>
+      <div class="lb-info" id="lightbox-info">
+        <p class="lb-desc" id="lightbox-desc" hidden></p>
+        <ul class="lb-facts" id="lightbox-facts"></ul>
+      </div>
     </div>
   </div>
 </div>
